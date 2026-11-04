@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 11 * * *"        # 08:00 em Brasilia (UTC-3)
   workflow_dispatch:
+    inputs:
+      teste_email:
+        description: "Enviar apenas um e-mail de teste"
+        type: boolean
+        default: false
   push:                         # editar alertas/anuncios pelo app tambem dispara a busca
     paths:
       - "docs/data/alerts.json"
@@ -28,7 +33,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Buscar anuncios e enviar resumo
-        run: python enjoei_alert.py
+        run: python enjoei_alert.py ${{ inputs.teste_email && '--test-email' || '' }}
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
