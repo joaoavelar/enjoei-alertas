@@ -89,8 +89,9 @@ def send(assunto, texto, corpo):
     msg["Subject"], msg["From"], msg["To"] = assunto, user, os.environ.get("EMAIL_TO") or user
     msg.set_content(texto or assunto)
     msg.add_alternative(corpo, subtype="html")
-    with smtplib.SMTP(os.environ.get("SMTP_HOST", "smtp-mail.outlook.com"), int(os.environ.get("SMTP_PORT", 587)),
-                      timeout=30) as s:
+    # No GitHub, secrets não definidos chegam como texto vazio: usa "or" em vez de default do get().
+    with smtplib.SMTP(os.environ.get("SMTP_HOST") or "smtp-mail.outlook.com",
+                      int(os.environ.get("SMTP_PORT") or 587), timeout=30) as s:
         s.starttls()
         s.login(user, os.environ["SMTP_PASSWORD"])
         s.send_message(msg)
