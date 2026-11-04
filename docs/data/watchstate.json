@@ -1,0 +1,38 @@
+{
+ "154162412": {
+  "path": "mochila-jansport-preta-grande-154162412",
+  "title": "mochila jansport preta grande",
+  "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80NTY4MjE1Lzg1ZGFlZDhlZWRlN2ZiNTdjMjdkYzQxYTU5NTMzYzQxLmpwZw",
+  "price": 97,
+  "prev_price": 97,
+  "first_price": 97,
+  "state": "published",
+  "history": [
+   [
+    "2026-11-04T16:36:42-03:00",
+    97
+   ]
+  ],
+  "alvo_notificado": false,
+  "erro": null,
+  "checked": "2026-11-04T16:43:01-03:00"
+ },
+ "152182943": {
+  "path": "mochila-galapagos-google-preta-152182943",
+  "title": "mochila galápagos google preta",
+  "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85MDYxODg3LzJjNmVjZjA0NzZiOTMwN2VhMTA4MDYzOTFmNWQyNDZmLmpwZw",
+  "price": 490,
+  "prev_price": 490,
+  "first_price": 490,
+  "state": "published",
+  "history": [
+   [
+    "2026-11-04T16:36:42-03:00",
+    490
+   ]
+  ],
+  "alvo_notificado": false,
+  "erro": null,
+  "checked": "2026-11-04T16:43:01-03:00"
+ }
+}

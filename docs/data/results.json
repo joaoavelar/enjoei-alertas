@@ -1,0 +1,328 @@
+{
+ "atualizado": "2026-11-04T16:42:59-03:00",
+ "alertas": {
+  "teste": {
+   "items": [
+    {
+     "id": "152676504",
+     "path": "mochila-galapagos-15l-colorida-152676504",
+     "title": "mochila galapagos 15l colorida",
+     "brand": "galapagos",
+     "price": 250,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn"
+    },
+    {
+     "id": "153768429",
+     "path": "mochila-galapagos-pelican-30l-azul-e-amarela-153768429",
+     "title": "mochila galapagos pelican 30l azul e amarela",
+     "brand": "galapagos",
+     "price": 358,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzUyMDk2NC9iZDZkNWU1MDg4YWRlZjllZmI4YTNmOWU5OGJjMWRiZi5qcGc"
+    },
+    {
+     "id": "152182943",
+     "path": "mochila-galapagos-google-preta-152182943",
+     "title": "mochila galápagos google preta",
+     "brand": "galapagos",
+     "price": 460,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85MDYxODg3LzJjNmVjZjA0NzZiOTMwN2VhMTA4MDYzOTFmNWQyNDZmLmpwZw"
+    },
+    {
+     "id": "152565589",
+     "path": "mochila-galapagos-snoopy-preta-15l-152565589",
+     "title": "mochila galapagos snoopy preta 15l",
+     "brand": "galapagos",
+     "price": 1200,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvZWYyM2RiNGViZjQ0YjNhMzdiZDc3YTFkY2IyMmY1MTIuanBn"
+    },
+    {
+     "id": "149385000",
+     "path": "mochila-galapagos-snoopy-preta-149385000",
+     "title": "mochila galapagos snoopy preta",
+     "brand": "galapagos",
+     "price": 1500,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvYjFjYTFkMDVjZTM4OGNhNTQzOWIwOTRiMzA3YmM4NjguanBn"
+    }
+   ],
+   "new_ids": [],
+   "primeira_execucao": false
+  },
+  "asics": {
+   "items": [
+    {
+     "id": "153984511",
+     "path": "tenis-asics-gel-1130-cinza-40-153984511",
+     "title": "tênis asics gel 1130 cinza 40",
+     "brand": "asics",
+     "price": 332,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
+    },
+    {
+     "id": "147298110",
+     "path": "tenis-asics-gel-1130-cinza-39-147298110",
+     "title": "tênis asics gel 1130 cinza 39",
+     "brand": "asics",
+     "price": 365,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
+    }
+   ],
+   "new_ids": [],
+   "primeira_execucao": false
+  },
+  "asics 2": {
+   "items": [
+    {
+     "id": "152586220",
+     "path": "asics-gel-nyc-azul-41-152586220",
+     "title": "asics gel nyc azul 41",
+     "brand": "asics",
+     "price": 204,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDMxMDg2MC82NjZlYzFhNmQwMDA2YmRkYTJkNTI3YjUwNGZiNDEzZC5qcGc"
+    },
+    {
+     "id": "153680388",
+     "path": "tenis-asics-gel-nyc-preto-tam-40-153680388",
+     "title": "tênis asics gel nyc preto, tam 40",
+     "brand": "asics",
+     "price": 223,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTY2NDg0Ny8yMzNiYTYzZWNkYWJiZGVhYzJjNjE1MjVlMzQxNzY2Ny5qcGc"
+    },
+    {
+     "id": "153138003",
+     "path": "tenis-asics-gel-nyc-preto-e-cinza-41-153138003",
+     "title": "tênis asics gel-nyc preto e cinza 41",
+     "brand": "asics",
+     "price": 250,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzYzMjE2MS9iYTk1ZmI2YzU3ZDY0MzU0Y2VhM2NmYzc3MjlhMjQ4ZC5qcGc"
+    },
+    {
+     "id": "148659160",
+     "path": "tenis-asics-gel-nyc-preto-148659160",
+     "title": "tenis asics gel-nyc preto",
+     "brand": "asics",
+     "price": 250,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTAyNTkwNC9mODFkN2IyMjMwMzdjZTJkZDc3NzYxOTllYmQ4MTg4NC5qcGc"
+    },
+    {
+     "id": "152175664",
+     "path": "asics-gel-nyc-41-152175664",
+     "title": "asics gel nyc 41",
+     "brand": "asics",
+     "price": 300,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc"
+    },
+    {
+     "id": "152625909",
+     "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
+     "title": "tênis asics gel nyc azul celeste 39",
+     "brand": "asics",
+     "price": 325,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
+    },
+    {
+     "id": "146070195",
+     "path": "tenis-asics-gel-nyc-41-146070195",
+     "title": "tênis asics gel nyc 41",
+     "brand": "asics",
+     "price": 333,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc"
+    },
+    {
+     "id": "153216501",
+     "path": "tenis-asics-gel-nyc-preto-e-prata-39-153216501",
+     "title": "tênis asics gel-nyc preto e prata 39",
+     "brand": "asics",
+     "price": 349,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDQ5ODUzMS83MzIyYTQxZGE3ODg2NWIzMWMyYzI5MTVjYWVkYzllZS5qcGc"
+    },
+    {
+     "id": "153577420",
+     "path": "asics-gel-nyc-41-153577420",
+     "title": "asics gel nyc 41",
+     "brand": "asics",
+     "price": 350,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjUxNTI5OC8zMjlhNzk4NDkwYTQ0YzgzZWFmYjM4OTI3MzhlOTA4Mi5qcGc"
+    },
+    {
+     "id": "152471318",
+     "path": "asics-gel-nyc-azul-39-novo-152471318",
+     "title": "asics gel nyc azul 39 ( novo )",
+     "brand": "asics",
+     "price": 383,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc"
+    },
+    {
+     "id": "150491227",
+     "path": "tenis-asics-gel-nyc-azul-40-150491227",
+     "title": "tênis asics gel nyc azul 40",
+     "brand": "asics",
+     "price": 388,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc"
+    },
+    {
+     "id": "153953782",
+     "path": "tenis-asics-gel-nyc-azul-42-153953782",
+     "title": "tênis asics gel-nyc azul 42",
+     "brand": "asics",
+     "price": 390,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzY2MDQzNy8yMWU0MWIzM2UwOTA1NmE1NWUxZDUwYzQwNzBjNzg1Ni5qcGc"
+    },
+    {
+     "id": "150488711",
+     "path": "tenis-asics-gel-nyc-azul-40-5-150488711",
+     "title": "tênis asics gel nyc azul 40,5",
+     "brand": "asics",
+     "price": 395,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi8xMDI2ZTY4YzgwZTQ4ZDdmODQ1ZDQ4OTUzMzU5NzhmNi5qcGc"
+    },
+    {
+     "id": "151092850",
+     "path": "tenis-asics-nyc-gel-original-azul-151092850",
+     "title": "tênis asics nyc gel original azul",
+     "brand": "asics",
+     "price": 398,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc"
+    },
+    {
+     "id": "152472803",
+     "path": "asics-gel-nyc-graphite-grey-black-152472803",
+     "title": "asics gel-nyc graphite grey black",
+     "brand": "asics",
+     "price": 400,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
+    },
+    {
+     "id": "149732924",
+     "path": "tenis-asics-gel-nyc-azul-40-149732924",
+     "title": "tênis asics gel nyc azul 40",
+     "brand": "asics",
+     "price": 400,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
+    }
+   ],
+   "new_ids": [],
+   "primeira_execucao": false
+  },
+  "artengo ping": {
+   "items": [
+    {
+     "id": "138403733",
+     "path": "kit-raquetes-de-pingue-pongue-artengo-pongori-138403733",
+     "title": "kit raquetes de pingue-pongue artengo pongori",
+     "brand": "artengo",
+     "price": 40,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDk3OTQyMC9iMTdlYjM5NWNhMmI4MjkwNmJiMDlhOWY2NzRkNGI1YS5qcGc"
+    },
+    {
+     "id": "107727533",
+     "path": "bolsa-para-raquete-ping-pong-107727533",
+     "title": "bolsa para raquete ping pong",
+     "brand": "artengo",
+     "price": 42,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzYwNjQ2MS9hMzNjYjI0MjJjNTdkMzQ3YWQzOTQ1ZjU1ZDhhMTZiNy5qcGc"
+    },
+    {
+     "id": "137103113",
+     "path": "rede-ping-pong-137103113",
+     "title": "rede- ping pong",
+     "brand": "artengo",
+     "price": 60,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDA2NjY2OC81YTI2MjJhNDYwNmNiNjU3NTYxZDZhZGRjZjcyMzlkMi5qcGc"
+    },
+    {
+     "id": "132647049",
+     "path": "kit-de-raquetes-de-ping-pong-artengo-132647049",
+     "title": "kit de raquetes de ping pong artengo",
+     "brand": "artengo",
+     "price": 70,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDkyMzkwMy9mNjI5YmYzYzg4YWJlZWRmZmU5YzY4MzRiYTkxMTAyNy5qcGc"
+    },
+    {
+     "id": "128594736",
+     "path": "rede-de-ping-pong-profissional-retratil-tenis-de-mesa-artengo-128594736",
+     "title": "rede de ping pong profissional retrátil tênis de mesa artengo",
+     "brand": "artengo",
+     "price": 70,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yODg4ODU1NS82YzI0OGVkZWEwODQ3MWZjMTYwOTQxZjRhN2UyNDFhOS5qcGc"
+    },
+    {
+     "id": "151162941",
+     "path": "kit-ping-pong-artengo-rollnet-151162941",
+     "title": "kit ping pong artengo rollnet",
+     "brand": "artengo",
+     "price": 72,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDM1NjMyNi8yNTI2M2FiYTMyODY5ZDk5OGU2M2EyZDcyNjNmZWQ4NS5qcGc"
+    },
+    {
+     "id": "154017755",
+     "path": "rede-de-ping-pong-artengo-rollnet-154017755",
+     "title": "rede de ping pong artengo rollnet",
+     "brand": "artengo",
+     "price": 97,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzA5MTIzMy9lZWRlNGMyNTc4OTM5MjczMjRiNTI0ODI1OWZhMDNlMi5qcGc"
+    },
+    {
+     "id": "153693896",
+     "path": "kit-2-raquetes-ping-pong-artengo-fr-620-com-bolinhas-153693896",
+     "title": "kit 2 raquetes ping pong artengo fr 620 com bolinhas",
+     "brand": "artengo",
+     "price": 99,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDY2Njc3MS9iNTc5ODIxMmE1MjQxNGI2Y2FmZDA3NjAxZDZjZTQwOS5qcGc"
+    },
+    {
+     "id": "91006805",
+     "path": "raquete-kit-pingpong-artengo-91006805",
+     "title": "raquete kit pingpong artengo",
+     "brand": "artengo",
+     "price": 120,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDYxOTg3My80N2ZjMDNhYjVlNGQ5NmY3ZjNmNzUzZDk2NTBiNDljYS5qcGc"
+    },
+    {
+     "id": "151516824",
+     "path": "kit-ping-pong-artengo-151516824",
+     "title": "kit ping pong artengo",
+     "brand": "artengo",
+     "price": 150,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDQzMzA1OS80MDdhNGYyNGQ1MjBmMGIxNWM3ZmQwZGQ3NzZlZDI5NS5qcGc"
+    }
+   ],
+   "new_ids": [],
+   "primeira_execucao": false
+  }
+ },
+ "erros": {},
+ "eventos": []
+}

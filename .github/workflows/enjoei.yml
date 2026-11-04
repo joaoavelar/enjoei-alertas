@@ -1,0 +1,50 @@
+﻿name: Verificar Enjoei
+
+on:
+  schedule:
+    - cron: "0 11 * * *"        # 08:00 em Brasilia (UTC-3)
+  workflow_dispatch:
+  push:                         # editar alertas/anuncios pelo app tambem dispara a busca
+    paths:
+      - "docs/data/alerts.json"
+      - "docs/data/watch.json"
+      - "docs/data/discarded.json"
+      - "docs/data/run.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: enjoei
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Buscar anuncios e enviar resumo
+        run: python enjoei_alert.py
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          APP_URL: ${{ vars.APP_URL }}
+      - name: Salvar resultados
+        run: |
+          git config user.name "enjoei-bot"
+          git config user.email "enjoei-bot@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "dados: atualizacao automatica"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 3
+          done
+          exit 1

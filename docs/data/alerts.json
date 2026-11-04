@@ -1,0 +1,42 @@
+[
+ {
+  "nome": "teste",
+  "item": "mochila",
+  "marca": "galapagos",
+  "cor": null,
+  "preco_min": null,
+  "preco_max": null,
+  "ativo": true,
+  "tamanho": null
+ },
+ {
+  "nome": "asics",
+  "item": "asics 1130",
+  "marca": "asics",
+  "cor": null,
+  "tamanho": "39, 40, 41",
+  "preco_min": null,
+  "preco_max": 400,
+  "ativo": true
+ },
+ {
+  "nome": "asics 2",
+  "item": "asics gel nyc",
+  "marca": "asics",
+  "cor": null,
+  "tamanho": "39, 40, 41",
+  "preco_min": null,
+  "preco_max": 400,
+  "ativo": true
+ },
+ {
+  "nome": "artengo ping",
+  "item": "artengo ping",
+  "marca": null,
+  "cor": null,
+  "tamanho": null,
+  "preco_min": 30,
+  "preco_max": 150,
+  "ativo": true
+ }
+]

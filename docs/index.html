@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alertas Enjoei</title>
+<meta name="theme-color" content="#e6007e">
+<meta name="description" content="Alertas de anúncios novos, quedas de preço e vendidos no Enjoei">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Enjoei">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topo">
+  <div class="topo-in">
+    <div class="marca"><span class="logo" aria-hidden="true"></span><h1>Alertas Enjoei</h1></div>
+    <div class="topo-dir">
+      <span id="status" class="status" role="status"></span>
+      <button id="btn-rodar" class="icone" title="Verificar agora" aria-label="Verificar agora"></button>
+    </div>
+  </div>
+  <div id="faixa" class="faixa" hidden></div>
+</header>
+
+<main id="conteudo"></main>
+
+<nav class="abas" id="abas" aria-label="Seções"></nav>
+
+<dialog id="folha"><form method="dialog" class="folha-in" id="folha-form"></form></dialog>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
