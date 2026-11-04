@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-04T17:22:36-03:00",
+ "atualizado": "2026-11-04T17:23:50-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -238,15 +238,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDk3OTQyMC9iMTdlYjM5NWNhMmI4MjkwNmJiMDlhOWY2NzRkNGI1YS5qcGc"
     },
     {
-     "id": "107727533",
-     "path": "bolsa-para-raquete-ping-pong-107727533",
-     "title": "bolsa para raquete ping pong",
-     "brand": "artengo",
-     "price": 42,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzYwNjQ2MS9hMzNjYjI0MjJjNTdkMzQ3YWQzOTQ1ZjU1ZDhhMTZiNy5qcGc"
-    },
-    {
      "id": "137103113",
      "path": "rede-ping-pong-137103113",
      "title": "rede- ping pong",
@@ -281,15 +272,6 @@
      "price": 72,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDM1NjMyNi8yNTI2M2FiYTMyODY5ZDk5OGU2M2EyZDcyNjNmZWQ4NS5qcGc"
-    },
-    {
-     "id": "154017755",
-     "path": "rede-de-ping-pong-artengo-rollnet-154017755",
-     "title": "rede de ping pong artengo rollnet",
-     "brand": "artengo",
-     "price": 97,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzA5MTIzMy9lZWRlNGMyNTc4OTM5MjczMjRiNTI0ODI1OWZhMDNlMi5qcGc"
     },
     {
      "id": "153693896",
