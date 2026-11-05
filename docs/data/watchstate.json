@@ -6,7 +6,7 @@
   "price": 97,
   "prev_price": 97,
   "first_price": 97,
-  "state": "published",
+  "state": "sold",
   "history": [
    [
     "2026-11-04T16:36:42-03:00",
@@ -15,7 +15,7 @@
   ],
   "alvo_notificado": false,
   "erro": null,
-  "checked": "2026-11-04T17:23:51-03:00"
+  "checked": "2026-11-05T15:32:12-03:00"
  },
  "152182943": {
   "path": "mochila-galapagos-google-preta-152182943",
@@ -33,6 +33,6 @@
   ],
   "alvo_notificado": false,
   "erro": null,
-  "checked": "2026-11-04T17:23:51-03:00"
+  "checked": "2026-11-05T15:32:12-03:00"
  }
 }

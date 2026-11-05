@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-04T17:23:50-03:00",
+ "atualizado": "2026-11-05T15:32:11-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -169,6 +169,15 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc"
     },
     {
+     "id": "150488711",
+     "path": "tenis-asics-gel-nyc-azul-40-5-150488711",
+     "title": "tênis asics gel nyc azul 40,5",
+     "brand": "asics",
+     "price": 383,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi8xMDI2ZTY4YzgwZTQ4ZDdmODQ1ZDQ4OTUzMzU5NzhmNi5qcGc"
+    },
+    {
      "id": "150491227",
      "path": "tenis-asics-gel-nyc-azul-40-150491227",
      "title": "tênis asics gel nyc azul 40",
@@ -185,15 +194,6 @@
      "price": 390,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzY2MDQzNy8yMWU0MWIzM2UwOTA1NmE1NWUxZDUwYzQwNzBjNzg1Ni5qcGc"
-    },
-    {
-     "id": "150488711",
-     "path": "tenis-asics-gel-nyc-azul-40-5-150488711",
-     "title": "tênis asics gel nyc azul 40,5",
-     "brand": "asics",
-     "price": 395,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi8xMDI2ZTY4YzgwZTQ4ZDdmODQ1ZDQ4OTUzMzU5NzhmNi5qcGc"
     },
     {
      "id": "151092850",
@@ -306,5 +306,15 @@
   }
  },
  "erros": {},
- "eventos": []
+ "eventos": [
+  {
+   "id": "154162412",
+   "titulo": "mochila jansport preta grande",
+   "path": "mochila-jansport-preta-grande-154162412",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80NTY4MjE1Lzg1ZGFlZDhlZWRlN2ZiNTdjMjdkYzQxYTU5NTMzYzQxLmpwZw",
+   "quando": "2026-11-05T15:32:12-03:00",
+   "tipo": "vendido",
+   "detalhe": "O anúncio foi vendido."
+  }
+ ]
 }
