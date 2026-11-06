@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-05T15:32:11-03:00",
+ "atualizado": "2026-11-06T12:36:20-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -88,11 +88,20 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDMxMDg2MC82NjZlYzFhNmQwMDA2YmRkYTJkNTI3YjUwNGZiNDEzZC5qcGc"
     },
     {
+     "id": "154314794",
+     "path": "tenis-asics-gel-nyc-cinza-154314794",
+     "title": "tênis asics gel-nyc cinza",
+     "brand": "asics",
+     "price": 215,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI0NzQwOS85MzdhZTFjMzQ4MjEwYmRjMGI2MzAyMTNiMTc4ZjhkMS5qcGc"
+    },
+    {
      "id": "153680388",
      "path": "tenis-asics-gel-nyc-preto-tam-40-153680388",
      "title": "tênis asics gel nyc preto, tam 40",
      "brand": "asics",
-     "price": 223,
+     "price": 216,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTY2NDg0Ny8yMzNiYTYzZWNkYWJiZGVhYzJjNjE1MjVlMzQxNzY2Ny5qcGc"
     },
@@ -128,7 +137,7 @@
      "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
      "title": "tênis asics gel nyc azul celeste 39",
      "brand": "asics",
-     "price": 325,
+     "price": 319,
      "size": "39",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
     },
@@ -205,15 +214,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc"
     },
     {
-     "id": "152472803",
-     "path": "asics-gel-nyc-graphite-grey-black-152472803",
-     "title": "asics gel-nyc graphite grey black",
-     "brand": "asics",
-     "price": 400,
-     "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
-    },
-    {
      "id": "149732924",
      "path": "tenis-asics-gel-nyc-azul-40-149732924",
      "title": "tênis asics gel nyc azul 40",
@@ -221,9 +221,20 @@
      "price": 400,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
+    },
+    {
+     "id": "152472803",
+     "path": "asics-gel-nyc-graphite-grey-black-152472803",
+     "title": "asics gel-nyc graphite grey black",
+     "brand": "asics",
+     "price": 400,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154314794"
+   ],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -303,10 +314,24 @@
    ],
    "new_ids": [],
    "primeira_execucao": false
+  },
+  "rtm": {
+   "items": [],
+   "new_ids": [],
+   "primeira_execucao": true
   }
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154314794",
+   "tipo": "novo",
+   "titulo": "tênis asics gel-nyc cinza",
+   "path": "tenis-asics-gel-nyc-cinza-154314794",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI0NzQwOS85MzdhZTFjMzQ4MjEwYmRjMGI2MzAyMTNiMTc4ZjhkMS5qcGc",
+   "quando": "2026-11-06T12:36:20-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 215"
+  },
   {
    "id": "154162412",
    "titulo": "mochila jansport preta grande",
