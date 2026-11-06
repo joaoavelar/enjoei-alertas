@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-06T12:46:31-03:00",
+ "atualizado": "2026-11-06T12:47:25-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -316,78 +316,6 @@
   "rtm": {
    "items": [
     {
-     "id": "146827672",
-     "path": "bone-rock-the-mountain-rosa-146827672",
-     "title": "boné rock the mountain rosa",
-     "brand": "urban hearts",
-     "price": 25,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84OTQ5OTQwLzE4MzA3OTY0NmQzZTY5OGU5OTljOTZkM2UxNGU0MTY5LmpwZw"
-    },
-    {
-     "id": "147313218",
-     "path": "a-ladys-life-in-the-rocky-mountains-isabella-l-bird-livro-em-ingles-147313218",
-     "title": "a ladys life in the rocky mountains - isabella l. bird livro em ingles",
-     "brand": "sem  marca",
-     "price": 30,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzM2MTc4NS8wODdjNDRmNDhmZmYwNWY4MTdkYjQ3MGM2NmY5YjJkOC5qcGc"
-    },
-    {
-     "id": "143671625",
-     "path": "shoulder-bag-sprite-rock-the-mountain-143671625",
-     "title": "shoulder bag sprite rock the mountain",
-     "brand": "sprite",
-     "price": 33,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNjYwMjM0MC9iNTA5MjkzZWY0ZTMwYzUxODcwNjFjNjEyMzhjYTQxNy5qcGc"
-    },
-    {
-     "id": "134276936",
-     "path": "sacochila-mochila-rock-the-mountain-134276936",
-     "title": "sacochila mochila rock the mountain",
-     "brand": "rock the mountain",
-     "price": 34,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTU3NjIyOS82ZmFiMDQzYzdiNDdjZWM0MmU2NzZkM2FkOGVjZWQ0Ny5qcGc"
-    },
-    {
-     "id": "153636187",
-     "path": "mochila-saco-rock-the-mountain-azul-153636187",
-     "title": "mochila saco rock the mountain azul",
-     "brand": "sem  marca",
-     "price": 41,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODQ0NTkxLzg3NWRhMzAxYTAxMjgwOWEyNGQwNGVmNDA2NjQ4YjU5LmpwZw"
-    },
-    {
-     "id": "140232197",
-     "path": "combo-2-copos-rock-the-mountain-140232197",
-     "title": "combo 2 copos rock the mountain",
-     "brand": "rock the mountain",
-     "price": 50,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNjEyOTg3My8xNWYyOWNjYWIzNWM2NGMyNWMwMDdjZTE5NjM5YmJjMy5qcGc"
-    },
-    {
-     "id": "140009395",
-     "path": "blusao-de-la-cinza-the-rocky-mountains-140009395",
-     "title": "blusão de lã cinza the rocky mountains",
-     "brand": "gueulatex",
-     "price": 56,
-     "size": "Único",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzQwNTM0MC9lZTgxMjcxMzIxMzllYjk4ZTkyMzllY2UxNTljYzVkOC5qcGc"
-    },
-    {
-     "id": "152863942",
-     "path": "camiseta-rock-the-mountain-otimista-branca-g-152863942",
-     "title": "camiseta rock the mountain otimista branca g",
-     "brand": "rock the mountain",
-     "price": 60,
-     "size": "M",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODg1ODE4MC9iZDYwMGMxOTAxNmY5NDNhYjI3MmVmYjYyYzMzOGQxMy5qcGc"
-    },
-    {
      "id": "145108335",
      "path": "camisa-palco-coreto-rock-the-mountain-2025-g-145108335",
      "title": "camisa palco coreto rock the mountain 2025 g",
@@ -395,24 +323,6 @@
      "price": 98,
      "size": "G",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDYwMDU0My8yY2VkYjcwNGY4ODRmMWI1MGY3NTJkMDgyOWY4ODM5Ni5qcGc"
-    },
-    {
-     "id": "152872875",
-     "path": "shoulder-bag-sprite-rock-the-mountain-oficial-raro-152872875",
-     "title": "shoulder bag sprite rock the mountain - oficial raro",
-     "brand": "sprite",
-     "price": 140,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODk5MzA0L2Q5ZmU2Y2I3ZTYwNjE3OGFmMmU1Yjk1MjA0ZDJkMzUzLmpwZw"
-    },
-    {
-     "id": "151478956",
-     "path": "tenis-redley-cano-alto-preto-especial-rock-the-mountain-151478956",
-     "title": "tênis redley cano alto preto especial rock the mountain",
-     "brand": "redley",
-     "price": 150,
-     "size": "42",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NDQ1Njc3LzY0YWRlZWIyMjQwNzBiMTk0MmUzYTNkM2JhYWRmYjRhLmpwZw"
     },
     {
      "id": "153737444",
@@ -461,7 +371,7 @@
     }
    ],
    "new_ids": [],
-   "primeira_execucao": true
+   "primeira_execucao": false
   }
  },
  "erros": {},
