@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-06T12:47:25-03:00",
+ "atualizado": "2026-11-06T14:48:19-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -341,33 +341,6 @@
      "price": 320,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
-    },
-    {
-     "id": "153832461",
-     "path": "camiseta-rock-the-mountain-rtm-preta-153832461",
-     "title": "camiseta rock the mountain rtm preta",
-     "brand": "sem  marca",
-     "price": 450,
-     "size": "XGG",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzcwMDQ3MC8zODRjNDcyYTM1Y2UzZDE3YmJjZWRhZGVhMjljMzk1YS5qcGc"
-    },
-    {
-     "id": "150814175",
-     "path": "cartaz-rock-the-mountain-2026-150814175",
-     "title": "cartaz rock the mountain 2026",
-     "brand": "sem  marca",
-     "price": 814,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzM5MjQ4My84YTQ4ZGE2OGE2YjNkYTRkZDk2YTljNWNmYjVkY2RmMS5qcGc"
-    },
-    {
-     "id": "131511034",
-     "path": "rock-the-mountain-2025-2-passaportes-meia-solidaria-131511034",
-     "title": "rock the mountain 2025 - 2 passaportes meia solidária",
-     "brand": "sympla",
-     "price": 1040,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMTQ5ODU1Ny82YmZjMWM0NTc1NjNlNDExODcxOGEwYTRiYmM3MGM1Ni5qcGc"
     }
    ],
    "new_ids": [],
