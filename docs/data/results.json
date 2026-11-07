@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-06T14:48:19-03:00",
+ "atualizado": "2026-11-07T13:44:18-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -17,7 +17,7 @@
      "path": "mochila-galapagos-pelican-30l-azul-e-amarela-153768429",
      "title": "mochila galapagos pelican 30l azul e amarela",
      "brand": "galapagos",
-     "price": 358,
+     "price": 347,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzUyMDk2NC9iZDZkNWU1MDg4YWRlZjllZmI4YTNmOWU5OGJjMWRiZi5qcGc"
     },
@@ -83,9 +83,18 @@
      "path": "asics-gel-nyc-azul-41-152586220",
      "title": "asics gel nyc azul 41",
      "brand": "asics",
-     "price": 204,
+     "price": 193,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDMxMDg2MC82NjZlYzFhNmQwMDA2YmRkYTJkNTI3YjUwNGZiNDEzZC5qcGc"
+    },
+    {
+     "id": "153138003",
+     "path": "tenis-asics-gel-nyc-preto-e-cinza-41-153138003",
+     "title": "tênis asics gel-nyc preto e cinza 41",
+     "brand": "asics",
+     "price": 200,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzYzMjE2MS9iYTk1ZmI2YzU3ZDY0MzU0Y2VhM2NmYzc3MjlhMjQ4ZC5qcGc"
     },
     {
      "id": "154314794",
@@ -106,13 +115,13 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTY2NDg0Ny8yMzNiYTYzZWNkYWJiZGVhYzJjNjE1MjVlMzQxNzY2Ny5qcGc"
     },
     {
-     "id": "153138003",
-     "path": "tenis-asics-gel-nyc-preto-e-cinza-41-153138003",
-     "title": "tênis asics gel-nyc preto e cinza 41",
+     "id": "154364144",
+     "path": "tenis-asics-gel-nyc-preto-41-vai-com-2-cadarco-sacola-e-chaveiro-154364144",
+     "title": "tênis asics gel nyc preto 41 vai com 2 cadarço, sacola e chaveiro",
      "brand": "asics",
-     "price": 250,
+     "price": 235,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzYzMjE2MS9iYTk1ZmI2YzU3ZDY0MzU0Y2VhM2NmYzc3MjlhMjQ4ZC5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc"
     },
     {
      "id": "148659160",
@@ -214,15 +223,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc"
     },
     {
-     "id": "149732924",
-     "path": "tenis-asics-gel-nyc-azul-40-149732924",
-     "title": "tênis asics gel nyc azul 40",
-     "brand": "asics",
-     "price": 400,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
-    },
-    {
      "id": "152472803",
      "path": "asics-gel-nyc-graphite-grey-black-152472803",
      "title": "asics gel-nyc graphite grey black",
@@ -230,9 +230,20 @@
      "price": 400,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
+    },
+    {
+     "id": "149732924",
+     "path": "tenis-asics-gel-nyc-azul-40-149732924",
+     "title": "tênis asics gel nyc azul 40",
+     "brand": "asics",
+     "price": 400,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154364144"
+   ],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -338,7 +349,7 @@
      "path": "mala-de-viagem-rock-the-mountain-x-prado-rio-x-trechy-etc-152975639",
      "title": "mala de viagem rock the mountain × prado.rio x trechy.etc",
      "brand": "prado.rio",
-     "price": 320,
+     "price": 299,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
     }
@@ -349,6 +360,15 @@
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154364144",
+   "tipo": "novo",
+   "titulo": "tênis asics gel nyc preto 41 vai com 2 cadarço, sacola e chaveiro",
+   "path": "tenis-asics-gel-nyc-preto-41-vai-com-2-cadarco-sacola-e-chaveiro-154364144",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc",
+   "quando": "2026-11-07T13:44:18-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 235"
+  },
   {
    "id": "154314794",
    "tipo": "novo",
