@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-07T13:44:18-03:00",
+ "atualizado": "2026-11-08T13:54:48-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -79,15 +79,6 @@
   "asics 2": {
    "items": [
     {
-     "id": "152586220",
-     "path": "asics-gel-nyc-azul-41-152586220",
-     "title": "asics gel nyc azul 41",
-     "brand": "asics",
-     "price": 193,
-     "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDMxMDg2MC82NjZlYzFhNmQwMDA2YmRkYTJkNTI3YjUwNGZiNDEzZC5qcGc"
-    },
-    {
      "id": "153138003",
      "path": "tenis-asics-gel-nyc-preto-e-cinza-41-153138003",
      "title": "tênis asics gel-nyc preto e cinza 41",
@@ -146,7 +137,7 @@
      "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
      "title": "tênis asics gel nyc azul celeste 39",
      "brand": "asics",
-     "price": 319,
+     "price": 305,
      "size": "39",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
     },
@@ -241,9 +232,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [
-    "154364144"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -283,15 +272,6 @@
      "price": 70,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yODg4ODU1NS82YzI0OGVkZWEwODQ3MWZjMTYwOTQxZjRhN2UyNDFhOS5qcGc"
-    },
-    {
-     "id": "151162941",
-     "path": "kit-ping-pong-artengo-rollnet-151162941",
-     "title": "kit ping pong artengo rollnet",
-     "brand": "artengo",
-     "price": 72,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDM1NjMyNi8yNTI2M2FiYTMyODY5ZDk5OGU2M2EyZDcyNjNmZWQ4NS5qcGc"
     },
     {
      "id": "153693896",
