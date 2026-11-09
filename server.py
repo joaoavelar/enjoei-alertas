@@ -1,6 +1,6 @@
 """Servidor local (opcional): serve o app e executa a verificação no seu PC.
 
-Uso:  python server.py     e abra  http://127.0.0.1:8765
+Uso:  python server.py     e abra  http://127.0.0.1:8770
 Só escuta em 127.0.0.1. O app online (GitHub Pages) funciona sem isto.
 """
 import json
@@ -10,7 +10,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import enjoei_alert as core
 
-PORT = 8765
+PORT = 8770  # a 8765 é usada pelo Garimpo
 SITE = core.BASE / "docs"
 USER_FILES = {"alerts.json", "watch.json", "discarded.json", "run.json"}  # o app pode gravar estes
 mimetypes.add_type("application/manifest+json", ".webmanifest")

@@ -488,7 +488,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '4';
+const APP_VERSAO = '5';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
@@ -587,8 +587,10 @@ document.addEventListener('visibilitychange', () => {
 });
 setInterval(() => { if (!document.hidden) { $('#status').textContent = S.results.atualizado ? `Atualizado ${ago(S.results.atualizado)}` : ''; } }, 60_000);
 
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+// Só registra no site publicado: em endereços locais o service worker ocuparia a porta de outros apps.
+if ('serviceWorker' in navigator) {
+  if (location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+  else navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
 }
 
 (async () => {

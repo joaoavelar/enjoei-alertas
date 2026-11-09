@@ -57,4 +57,4 @@ Depois: Android (Chrome) menu ⋮ → **Instalar app**; iPhone (Safari) Comparti
 ```bash
 python server.py
 ```
-Abra `http://127.0.0.1:8765`. Edita os mesmos arquivos em `docs/data/`; depois é só enviar ao GitHub.
+Abra `http://127.0.0.1:8770`. Edita os mesmos arquivos em `docs/data/`; depois é só enviar ao GitHub.
