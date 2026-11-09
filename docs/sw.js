@@ -1,5 +1,5 @@
 // Service worker: app abre offline; dados sempre tentam a rede primeiro.
-const VERSION = 'enjoei-v1';
+const VERSION = 'enjoei-v2';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/favicon-32.png'];
 
 self.addEventListener('install', e => {

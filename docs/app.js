@@ -155,7 +155,8 @@ async function gravar(nome, dados, {esperar = true} = {}) {
     if (esperar) aguardarResultado();
     return true;
   } catch (e) {
-    toast(e.message, {erro: true, ms: 7000});
+    toast(Store.mode === 'readonly' ? 'Não salvou: este aparelho ainda não está conectado ao GitHub.' : e.message,
+      {erro: true, ms: 12000, acao: Store.mode === 'readonly' ? {label: 'Conectar', fn: () => { location.hash = 'ajustes'; }} : null});
     await carregar(true);
     return false;
   }
@@ -537,7 +538,7 @@ function desenhar() {
     window.scrollTo(0, y);
   }
   const at = S.results.atualizado;
-  $('#status').textContent = at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '');
+  $('#status').textContent = (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) + (carregado && Store.mode === 'readonly' ? ' · só leitura' : '');
 }
 
 function rota() {

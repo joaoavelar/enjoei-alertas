@@ -29,6 +29,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -45,11 +48,17 @@ jobs:
         run: |
           git config user.name "enjoei-bot"
           git config user.email "enjoei-bot@users.noreply.github.com"
-          git add docs/data
-          git diff --cached --quiet && exit 0
-          git commit -m "dados: atualizacao automatica"
-          for i in 1 2 3; do
-            git pull --rebase && git push && exit 0
+          # So grava os arquivos gerados pelo robo, sempre sobre a versao mais recente
+          mkdir -p /tmp/dados
+          cp docs/data/seen.json docs/data/watchstate.json docs/data/results.json /tmp/dados/
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dados/*.json docs/data/
+            git add docs/data/seen.json docs/data/watchstate.json docs/data/results.json
+            git diff --cached --quiet && exit 0
+            git commit -m "dados: atualizacao automatica"
+            git push origin HEAD:main && exit 0
             sleep 3
           done
           exit 1
