@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-08T13:54:48-03:00",
+ "atualizado": "2026-11-09T16:04:35-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -11,15 +11,6 @@
      "price": 250,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn"
-    },
-    {
-     "id": "153768429",
-     "path": "mochila-galapagos-pelican-30l-azul-e-amarela-153768429",
-     "title": "mochila galapagos pelican 30l azul e amarela",
-     "brand": "galapagos",
-     "price": 347,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzUyMDk2NC9iZDZkNWU1MDg4YWRlZjllZmI4YTNmOWU5OGJjMWRiZi5qcGc"
     },
     {
      "id": "152182943",
@@ -178,33 +169,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc"
     },
     {
-     "id": "150488711",
-     "path": "tenis-asics-gel-nyc-azul-40-5-150488711",
-     "title": "tênis asics gel nyc azul 40,5",
-     "brand": "asics",
-     "price": 383,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi8xMDI2ZTY4YzgwZTQ4ZDdmODQ1ZDQ4OTUzMzU5NzhmNi5qcGc"
-    },
-    {
-     "id": "150491227",
-     "path": "tenis-asics-gel-nyc-azul-40-150491227",
-     "title": "tênis asics gel nyc azul 40",
-     "brand": "asics",
-     "price": 388,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc"
-    },
-    {
-     "id": "153953782",
-     "path": "tenis-asics-gel-nyc-azul-42-153953782",
-     "title": "tênis asics gel-nyc azul 42",
-     "brand": "asics",
-     "price": 390,
-     "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNzY2MDQzNy8yMWU0MWIzM2UwOTA1NmE1NWUxZDUwYzQwNzBjNzg1Ni5qcGc"
-    },
-    {
      "id": "151092850",
      "path": "tenis-asics-nyc-gel-original-azul-151092850",
      "title": "tênis asics nyc gel original azul",
@@ -307,6 +271,15 @@
   "rtm": {
    "items": [
     {
+     "id": "154467157",
+     "path": "copo-rock-the-mountain-festival-154467157",
+     "title": "copo rock the mountain festival",
+     "brand": "sem  marca",
+     "price": 39,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NjQwOS8xNWM3N2M5NDUyZWE0MDM1MThhOTQ3NWEwOTVjZGE1Mi5qcGc"
+    },
+    {
      "id": "145108335",
      "path": "camisa-palco-coreto-rock-the-mountain-2025-g-145108335",
      "title": "camisa palco coreto rock the mountain 2025 g",
@@ -334,12 +307,23 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154467157"
+   ],
    "primeira_execucao": false
   }
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154467157",
+   "tipo": "novo",
+   "titulo": "copo rock the mountain festival",
+   "path": "copo-rock-the-mountain-festival-154467157",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NjQwOS8xNWM3N2M5NDUyZWE0MDM1MThhOTQ3NWEwOTVjZGE1Mi5qcGc",
+   "quando": "2026-11-09T16:04:35-03:00",
+   "detalhe": "Novo em “rtm”: R$ 39"
+  },
   {
    "id": "154364144",
    "tipo": "novo",
