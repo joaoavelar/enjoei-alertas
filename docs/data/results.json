@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-09T16:04:35-03:00",
+ "atualizado": "2026-11-09T16:04:56-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -307,9 +307,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
     }
    ],
-   "new_ids": [
-    "154467157"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   }
  },
