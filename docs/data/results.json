@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-09T16:04:56-03:00",
+ "atualizado": "2026-11-09T18:17:03-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -115,6 +115,15 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTAyNTkwNC9mODFkN2IyMjMwMzdjZTJkZDc3NzYxOTllYmQ4MTg4NC5qcGc"
     },
     {
+     "id": "154539627",
+     "path": "tenis-asics-gel-nyc-preto-41-154539627",
+     "title": "tênis asics gel-nyc preto 41",
+     "brand": "asics",
+     "price": 270,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc"
+    },
+    {
      "id": "152175664",
      "path": "asics-gel-nyc-41-152175664",
      "title": "asics gel nyc 41",
@@ -196,7 +205,9 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154539627"
+   ],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -313,6 +324,15 @@
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154539627",
+   "tipo": "novo",
+   "titulo": "tênis asics gel-nyc preto 41",
+   "path": "tenis-asics-gel-nyc-preto-41-154539627",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc",
+   "quando": "2026-11-09T18:17:03-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 270"
+  },
   {
    "id": "154467157",
    "tipo": "novo",
