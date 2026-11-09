@@ -82,10 +82,17 @@ const Store = {
   async read(name, def) {
     if (this.mode === 'github') {
       const c = ghCfg();
-      const r = await this.gh(`${name}?ref=${encodeURIComponent(c.branch || 'main')}`, {headers: {Accept: 'application/vnd.github.raw+json'}});
-      if (r.status === 404) return def;
-      if (!r.ok) throw new Error(`GitHub: ${r.status}`);
-      return JSON.parse(await r.text());
+      try {
+        const r = await this.gh(`${name}?ref=${encodeURIComponent(c.branch || 'main')}`, {headers: {Accept: 'application/vnd.github.raw+json'}});
+        this.ghFalhou = false;
+        if (r.status === 404) return def;
+        if (r.status === 401) throw new Error('Token do GitHub inválido ou expirado. Atualize em Ajustes.');
+        if (!r.ok) throw new Error(`GitHub: ${r.status}`);
+        return JSON.parse(await r.text());
+      } catch (e) {
+        if (!(e instanceof TypeError)) throw e;
+        this.ghFalhou = true;       // falha de rede: segue para a cópia publicada no site
+      }
     }
     const r = await fetch(`data/${name}?t=${Date.now()}`, {cache: 'no-store'});
     if (r.status === 404) return def;
@@ -481,6 +488,27 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
+const APP_VERSAO = '4';
+
+async function diagnostico(box) {
+  const c = ghCfg(), linhas = [
+    `Versão do app: ${APP_VERSAO}`, `Modo: ${Store.mode}`, `Endereço: ${location.href}`,
+    `Repositório: ${c?.repo || '(não configurado)'}`,
+    `Token salvo: ${c?.token ? `sim, ${c.token.length} caracteres${/^[\x21-\x7e]+$/.test(c.token) ? '' : ', COM CARACTERES INVÁLIDOS'}` : 'não'}`];
+  const mostra = () => { box.textContent = linhas.join('\n'); };
+  mostra();
+  const testa = async (nome, url, opts = {}) => {
+    try { const r = await fetch(url, {cache: 'no-store', ...opts}); linhas.push(`${nome}: HTTP ${r.status}`); }
+    catch (e) { linhas.push(`${nome}: FALHOU (${e.message})`); }
+    mostra();
+  };
+  await testa('Site', `data/results.json?t=${Date.now()}`);
+  await testa('GitHub sem token', 'https://api.github.com/zen');
+  if (c?.token) await testa('GitHub com token', `https://api.github.com/repos/${c.repo}/contents/docs/data/alerts.json?ref=${encodeURIComponent(c.branch || 'main')}`,
+    {headers: {Authorization: `Bearer ${c.token}`, 'X-GitHub-Api-Version': '2022-11-28', Accept: 'application/vnd.github.raw+json'}});
+  linhas.push('Fim do teste.'); mostra();
+}
+
 let conviteInstalar = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); conviteInstalar = e; if (tab === 'ajustes') desenhar(); });
 
@@ -520,7 +548,9 @@ function telaAjustes() {
     h('div', {class: 'cartao'}, h('h3', {}, 'Dados'),
       h('div', {class: 'folha-bt', style: 'justify-content:flex-start;margin:0'},
         h('button', {class: 'btn', onclick: () => { marcarVistos(); toast('Tudo marcado como visto.'); }}, 'Marcar tudo como visto'),
-        h('button', {class: 'btn', onclick: () => carregar()}, 'Recarregar dados'))));
+        h('button', {class: 'btn', onclick: () => carregar()}, 'Recarregar dados'),
+        h('button', {class: 'btn', onclick: () => diagnostico($('#diag'))}, 'Testar conexão')),
+      h('pre', {id: 'diag', style: 'white-space:pre-wrap;word-break:break-word;font-size:13px;margin:12px 0 0;color:var(--mut)'})));
 }
 
 // ---------- desenho ----------
@@ -538,7 +568,7 @@ function desenhar() {
     window.scrollTo(0, y);
   }
   const at = S.results.atualizado;
-  $('#status').textContent = (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) + (carregado && Store.mode === 'readonly' ? ' · só leitura' : '');
+  $('#status').textContent = (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) + (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '');
 }
 
 function rota() {

@@ -1,5 +1,5 @@
 // Service worker: sempre tenta a versão mais nova; a cópia salva só é usada sem internet.
-const VERSION = 'enjoei-v3';
+const VERSION = 'enjoei-v4';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/favicon-32.png'];
 
 self.addEventListener('install', e => {
@@ -16,7 +16,7 @@ self.addEventListener('fetch', e => {
   const req = e.request, url = new URL(req.url);
   if (req.method !== 'GET' || url.origin !== location.origin || url.pathname.includes('/api/')) return;
   e.respondWith(
-    fetch(req, {cache: 'no-cache'})
+    fetch(req.mode === 'navigate' ? req.url : req, {cache: 'no-cache'})
       .then(r => {
         if (r.ok) { const c = r.clone(); caches.open(VERSION).then(x => x.put(req, c)); }
         return r;
