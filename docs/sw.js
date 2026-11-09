@@ -1,9 +1,10 @@
-// Service worker: app abre offline; dados sempre tentam a rede primeiro.
-const VERSION = 'enjoei-v2';
+// Service worker: sempre tenta a versão mais nova; a cópia salva só é usada sem internet.
+const VERSION = 'enjoei-v3';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/favicon-32.png'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  // cache: 'reload' ignora o cache HTTP, para não guardar arquivos antigos
+  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL.map(u => new Request(u, {cache: 'reload'})))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
@@ -13,17 +14,13 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const req = e.request, url = new URL(req.url);
-  if (req.method !== 'GET') return;
-  if (url.origin !== location.origin) return;           // GitHub API, fotos: sem interferência
-  if (url.pathname.includes('/api/')) return;
-  const dados = url.pathname.includes('/data/');
+  if (req.method !== 'GET' || url.origin !== location.origin || url.pathname.includes('/api/')) return;
   e.respondWith(
-    dados
-      ? fetch(req).then(r => { const c = r.clone(); caches.open(VERSION).then(x => x.put(req, c)); return r; })
-          .catch(() => caches.match(req))               // rede primeiro; offline = última cópia
-      : caches.match(req).then(hit => {                 // app: cache primeiro, atualiza em segundo plano
-          const rede = fetch(req).then(r => { const c = r.clone(); caches.open(VERSION).then(x => x.put(req, c)); return r; });
-          return hit || rede;
-        }).catch(() => caches.match('index.html'))
+    fetch(req, {cache: 'no-cache'})
+      .then(r => {
+        if (r.ok) { const c = r.clone(); caches.open(VERSION).then(x => x.put(req, c)); }
+        return r;
+      })
+      .catch(() => caches.match(req, {ignoreSearch: true}).then(hit => hit || caches.match('index.html')))
   );
 });
