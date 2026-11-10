@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-10T15:28:22-03:00",
+ "atualizado": "2026-11-10T18:31:34-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -11,6 +11,15 @@
      "price": 250,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn"
+    },
+    {
+     "id": "154612990",
+     "path": "mochila-galapagos-pelican-2-0-30l-laranja-e-preta-154612990",
+     "title": "mochila galapagos pelican 2.0 30l laranja e preta",
+     "brand": "galapagos",
+     "price": 299,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMjUxMTY3OS83Y2YyMzcxYjA5MTNmYjIzYTdiZWQwMzRlMzQxNjEwMi5qcGc"
     },
     {
      "id": "152182943",
@@ -40,7 +49,9 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvYjFjYTFkMDVjZTM4OGNhNTQzOWIwOTRiMzA3YmM4NjguanBn"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154612990"
+   ],
    "primeira_execucao": false
   },
   "asics": {
@@ -73,9 +84,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
     }
    ],
-   "new_ids": [
-    "154575333"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "asics 2": {
@@ -225,9 +234,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [
-    "154566358"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -302,15 +309,6 @@
   "rtm": {
    "items": [
     {
-     "id": "154582555",
-     "path": "bone-rock-the-mountain-154582555",
-     "title": "boné rock the mountain",
-     "brand": "rock the mountain",
-     "price": 35,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMDY1NTY1My8wZDE0ODE4NTM5MGRjNDlmYWYwODQ4M2YzNmFkMWI0MS5qcGc"
-    },
-    {
      "id": "154467157",
      "path": "copo-rock-the-mountain-festival-154467157",
      "title": "copo rock the mountain festival",
@@ -347,14 +345,21 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
     }
    ],
-   "new_ids": [
-    "154582555"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   }
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154612990",
+   "tipo": "novo",
+   "titulo": "mochila galapagos pelican 2.0 30l laranja e preta",
+   "path": "mochila-galapagos-pelican-2-0-30l-laranja-e-preta-154612990",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMjUxMTY3OS83Y2YyMzcxYjA5MTNmYjIzYTdiZWQwMzRlMzQxNjEwMi5qcGc",
+   "quando": "2026-11-10T18:31:34-03:00",
+   "detalhe": "Novo em “teste”: R$ 299"
+  },
   {
    "id": "154575333",
    "tipo": "novo",
