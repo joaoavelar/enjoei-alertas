@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-09T18:17:03-03:00",
+ "atualizado": "2026-11-10T15:28:22-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -46,6 +46,15 @@
   "asics": {
    "items": [
     {
+     "id": "154575333",
+     "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
+     "title": "tênis asics gel-1130 bege e cinza 40",
+     "brand": "asics",
+     "price": 332,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
+    },
+    {
      "id": "153984511",
      "path": "tenis-asics-gel-1130-cinza-40-153984511",
      "title": "tênis asics gel 1130 cinza 40",
@@ -64,7 +73,9 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154575333"
+   ],
    "primeira_execucao": false
   },
   "asics 2": {
@@ -124,6 +135,15 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc"
     },
     {
+     "id": "152625909",
+     "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
+     "title": "tênis asics gel nyc azul celeste 39",
+     "brand": "asics",
+     "price": 300,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
+    },
+    {
      "id": "152175664",
      "path": "asics-gel-nyc-41-152175664",
      "title": "asics gel nyc 41",
@@ -133,20 +153,11 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc"
     },
     {
-     "id": "152625909",
-     "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
-     "title": "tênis asics gel nyc azul celeste 39",
-     "brand": "asics",
-     "price": 305,
-     "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
-    },
-    {
      "id": "146070195",
      "path": "tenis-asics-gel-nyc-41-146070195",
      "title": "tênis asics gel nyc 41",
      "brand": "asics",
-     "price": 333,
+     "price": 323,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc"
     },
@@ -178,6 +189,15 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc"
     },
     {
+     "id": "154566358",
+     "path": "tenis-asics-gel-nyc-azul-40-154566358",
+     "title": "tênis asics gel nyc azul 40",
+     "brand": "asics",
+     "price": 388,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc"
+    },
+    {
      "id": "151092850",
      "path": "tenis-asics-nyc-gel-original-azul-151092850",
      "title": "tênis asics nyc gel original azul",
@@ -206,7 +226,7 @@
     }
    ],
    "new_ids": [
-    "154539627"
+    "154566358"
    ],
    "primeira_execucao": false
   },
@@ -217,7 +237,7 @@
      "path": "kit-raquetes-de-pingue-pongue-artengo-pongori-138403733",
      "title": "kit raquetes de pingue-pongue artengo pongori",
      "brand": "artengo",
-     "price": 40,
+     "price": 36,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDk3OTQyMC9iMTdlYjM5NWNhMmI4MjkwNmJiMDlhOWY2NzRkNGI1YS5qcGc"
     },
@@ -282,6 +302,15 @@
   "rtm": {
    "items": [
     {
+     "id": "154582555",
+     "path": "bone-rock-the-mountain-154582555",
+     "title": "boné rock the mountain",
+     "brand": "rock the mountain",
+     "price": 35,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMDY1NTY1My8wZDE0ODE4NTM5MGRjNDlmYWYwODQ4M2YzNmFkMWI0MS5qcGc"
+    },
+    {
      "id": "154467157",
      "path": "copo-rock-the-mountain-festival-154467157",
      "title": "copo rock the mountain festival",
@@ -318,12 +347,41 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154582555"
+   ],
    "primeira_execucao": false
   }
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154575333",
+   "tipo": "novo",
+   "titulo": "tênis asics gel-1130 bege e cinza 40",
+   "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc",
+   "quando": "2026-11-10T15:28:22-03:00",
+   "detalhe": "Novo em “asics”: R$ 332"
+  },
+  {
+   "id": "154566358",
+   "tipo": "novo",
+   "titulo": "tênis asics gel nyc azul 40",
+   "path": "tenis-asics-gel-nyc-azul-40-154566358",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc",
+   "quando": "2026-11-10T15:28:22-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 388"
+  },
+  {
+   "id": "154582555",
+   "tipo": "novo",
+   "titulo": "boné rock the mountain",
+   "path": "bone-rock-the-mountain-154582555",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMDY1NTY1My8wZDE0ODE4NTM5MGRjNDlmYWYwODQ4M2YzNmFkMWI0MS5qcGc",
+   "quando": "2026-11-10T15:28:22-03:00",
+   "detalhe": "Novo em “rtm”: R$ 35"
+  },
   {
    "id": "154539627",
    "tipo": "novo",
