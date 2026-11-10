@@ -48,5 +48,15 @@
   "preco_min": null,
   "preco_max": null,
   "ativo": true
+ },
+ {
+  "nome": "palestina",
+  "item": "palestina fc",
+  "marca": null,
+  "cor": null,
+  "tamanho": null,
+  "preco_min": null,
+  "preco_max": null,
+  "ativo": true
  }
 ]
