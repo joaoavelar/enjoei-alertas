@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-10T20:59:58-03:00",
+ "atualizado": "2026-11-11T15:23:16-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -119,7 +119,7 @@
      "path": "tenis-asics-gel-nyc-preto-41-vai-com-2-cadarco-sacola-e-chaveiro-154364144",
      "title": "tênis asics gel nyc preto 41 vai com 2 cadarço, sacola e chaveiro",
      "brand": "asics",
-     "price": 235,
+     "price": 227,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc"
     },
@@ -278,7 +278,7 @@
      "path": "kit-2-raquetes-ping-pong-artengo-fr-620-com-bolinhas-153693896",
      "title": "kit 2 raquetes ping pong artengo fr 620 com bolinhas",
      "brand": "artengo",
-     "price": 99,
+     "price": 96,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDY2Njc3MS9iNTc5ODIxMmE1MjQxNGI2Y2FmZDA3NjAxZDZjZTQwOS5qcGc"
     },
@@ -329,7 +329,7 @@
      "path": "casaco-moletom-rock-the-moutain-rtm-153737444",
      "title": "casaco / moletom - rock the moutain rtm",
      "brand": "festival rock the mountain",
-     "price": 234,
+     "price": 226,
      "size": "M",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMjY5NDI3OS9kZWI4ZmI0YWUwZDFhZDkzZDBjMGM0YTA2NjczODk5Yi5qcGc"
     },
@@ -349,7 +349,7 @@
   "palestina": {
    "items": [],
    "new_ids": [],
-   "primeira_execucao": true
+   "primeira_execucao": false
   }
  },
  "erros": {},
