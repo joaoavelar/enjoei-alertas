@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-10T18:31:34-03:00",
+ "atualizado": "2026-11-10T20:59:58-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -49,9 +49,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvYjFjYTFkMDVjZTM4OGNhNTQzOWIwOTRiMzA3YmM4NjguanBn"
     }
    ],
-   "new_ids": [
-    "154612990"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "asics": {
@@ -347,6 +345,11 @@
    ],
    "new_ids": [],
    "primeira_execucao": false
+  },
+  "palestina": {
+   "items": [],
+   "new_ids": [],
+   "primeira_execucao": true
   }
  },
  "erros": {},
