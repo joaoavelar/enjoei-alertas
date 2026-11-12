@@ -24,6 +24,8 @@ const ICONS = {
   check: '<path d="M20 6L9 17l-5-5"/>',
   edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
   trash: '<path d="M3 6h18M19 6l-1 14H6L5 6M8 6V4h8v2"/>',
+  down: '<path d="M6 9l6 6 6-6"/>',
+  up: '<path d="M18 15l-6-6-6 6"/>',
 };
 const ic = (n, s = 20) => {
   const w = document.createElement('span');
@@ -180,6 +182,10 @@ const salvarVistos = () => localStorage.setItem('enjoei.vistos', JSON.stringify(
 const evVistos = new Set((() => { try { return JSON.parse(localStorage.getItem('enjoei.ev.vistos') || '[]'); } catch { return []; } })());
 const salvarEvVistos = () => { try { localStorage.setItem('enjoei.ev.vistos', JSON.stringify([...evVistos].slice(-1000))); } catch {} };
 const chaveEv = e => `${e.tipo}|${e.id}|${e.quando}`;
+const recolhidos = new Set((() => { try { return JSON.parse(localStorage.getItem('enjoei.recolhidos') || '[]'); } catch { return []; } })());
+const salvarRecolhidos = () => { try { localStorage.setItem('enjoei.recolhidos', JSON.stringify([...recolhidos])); } catch {} };
+function alternarRecolhido(nome) { recolhidos.has(nome) ? recolhidos.delete(nome) : recolhidos.add(nome); salvarRecolhidos(); desenhar(); }
+function recolherTodos(fechar) { recolhidos.clear(); if (fechar) S.alerts.forEach(a => recolhidos.add(a.nome)); salvarRecolhidos(); desenhar(); }
 // uma novidade conta como vista se foi dispensada aqui ou, sendo "novo", se o anúncio já foi visto nas buscas
 const evVisto = e => evVistos.has(chaveEv(e)) || (e.tipo === 'novo' && vistos.has(e.id));
 const eventosValidos = () => { const desc = descartadosIds(); return (S.results.eventos || []).filter(e => !(e.tipo === 'novo' && desc.has(e.id))); };
@@ -497,24 +503,27 @@ function secaoAlerta(a) {
     novosSet = new Set(r.new_ids.filter(id => !vistos.has(id)));
   }
   const nNovos = itens.filter(p => novosSet.has(p.id)).length;
-  const aberto = expandidos.has(a.nome), visiveis = aberto ? itens : itens.slice(0, 12);
-  return h('section', {class: 'alerta' + (ativo ? '' : ' pausado')},
+  const aberto = expandidos.has(a.nome), visiveis = aberto ? itens : itens.slice(0, 12), fechado = recolhidos.has(a.nome);
+  return h('section', {class: 'alerta' + (ativo ? '' : ' pausado') + (fechado ? ' fechado' : '')},
     h('div', {class: 'alerta-cab'},
-      h('div', {}, h('h3', {}, a.nome),
-        h('div', {class: 'chips'}, filtros.map(f => h('span', {class: 'chip'}, f)),
+      h('div', {class: 'alerta-tit', role: 'button', tabindex: '0', 'aria-expanded': String(!fechado), title: fechado ? 'Abrir' : 'Minimizar',
+        onclick: () => alternarRecolhido(a.nome), onkeydown: ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); alternarRecolhido(a.nome); } }},
+        h('h3', {}, ic(fechado ? 'down' : 'up', 18), a.nome),
+        h('div', {class: 'chips'}, !fechado && filtros.map(f => h('span', {class: 'chip'}, f)),
           ativo && r && h('span', {class: 'chip'}, `${itens.length} anúncios`),
           nNovos > 0 && h('span', {class: 'chip novo'}, `${nNovos} novos`),
           !ativo && h('span', {class: 'chip'}, 'pausado'))),
-      h('div', {class: 'acoes'},
+      !fechado && h('div', {class: 'acoes'},
+        h('button', {class: 'btn mini', 'aria-expanded': String(!fechado), onclick: () => alternarRecolhido(a.nome)}, ic(fechado ? 'down' : 'up', 14), fechado ? 'Abrir' : 'Minimizar'),
         nNovos > 0 && h('button', {class: 'btn mini', onclick: () => marcarVistos(a.nome)}, ic('check', 14), 'Vistos'),
         h('button', {class: 'btn mini', onclick: () => alternarAlerta(a.nome)}, ativo ? 'Pausar' : 'Retomar'),
         h('button', {class: 'btn mini', onclick: () => editarAlerta(a)}, ic('edit', 14), 'Editar'),
         h('button', {class: 'btn mini perigo', onclick: () => excluirAlerta(a.nome)}, ic('trash', 14)))),
-    ativo && !r && h('div', {class: 'vazio', style: 'margin:0 14px 14px'},
+    !fechado && ativo && !r && h('div', {class: 'vazio', style: 'margin:0 14px 14px'},
       erro ? h('span', {}, h('b', {}, 'Erro na busca'), erro) : h('span', {}, h('b', {}, 'Aguardando a primeira busca…'), 'Ela roda sozinha em instantes.')),
-    ativo && r && !itens.length && h('div', {class: 'vazio', style: 'margin:0 14px 14px'}, h('b', {}, 'Nenhum anúncio encontrado'), 'Tente relaxar os filtros.'),
-    visiveis.length > 0 && h('div', {class: 'grade'}, visiveis.map(p => cartaoItem(p, {novo: novosSet.has(p.id), seguindo: seguindo.has(p.id)}))),
-    itens.length > 12 && h('div', {class: 'mais'}, h('button', {class: 'btn', onclick: () => { aberto ? expandidos.delete(a.nome) : expandidos.add(a.nome); desenhar(); }},
+    !fechado && ativo && r && !itens.length && h('div', {class: 'vazio', style: 'margin:0 14px 14px'}, h('b', {}, 'Nenhum anúncio encontrado'), 'Tente relaxar os filtros.'),
+    !fechado && visiveis.length > 0 && h('div', {class: 'grade'}, visiveis.map(p => cartaoItem(p, {novo: novosSet.has(p.id), seguindo: seguindo.has(p.id)}))),
+    !fechado && itens.length > 12 && h('div', {class: 'mais'}, h('button', {class: 'btn', onclick: () => { aberto ? expandidos.delete(a.nome) : expandidos.add(a.nome); desenhar(); }},
       aberto ? 'Mostrar menos' : `Ver todos (${itens.length})`)));
 }
 
@@ -522,6 +531,10 @@ function telaBuscas() {
   return h('div', {},
     h('div', {class: 'tit-sec'}, h('div', {}, h('h2', {}, 'Buscas'), h('div', {class: 'sub'}, 'Sempre do menor para o maior preço')),
       h('button', {class: 'btn pri', onclick: novoAlerta}, ic('plus', 16), 'Novo alerta')),
+    S.alerts.length > 1 && h('div', {style: 'display:flex;justify-content:flex-end;margin:-4px 0 10px'},
+      S.alerts.every(a => recolhidos.has(a.nome))
+        ? h('button', {class: 'btn mini fantasma', onclick: () => recolherTodos(false)}, ic('down', 14), 'Abrir todos')
+        : h('button', {class: 'btn mini fantasma', onclick: () => recolherTodos(true)}, ic('up', 14), 'Minimizar todos')),
     S.alerts.length ? S.alerts.map(secaoAlerta)
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum alerta ainda'), 'Toque em “Novo alerta” e diga o que você procura.'),
     S.discarded.length > 0 && h('details', {class: 'cartao'}, h('summary', {style: 'cursor:pointer;font-weight:700'}, `Descartados (${S.discarded.length})`),
@@ -544,7 +557,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '9';
+const APP_VERSAO = '10';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
