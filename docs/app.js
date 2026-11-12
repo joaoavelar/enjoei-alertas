@@ -65,7 +65,8 @@ const idb = (modo, fn) => new Promise((ok, err) => {
   r.onerror = () => err(r.error);
   r.onsuccess = () => { const tx = r.result.transaction('cfg', modo), q = fn(tx.objectStore('cfg')); tx.oncomplete = () => ok(q && q.result); tx.onerror = () => err(tx.error); };
 });
-const persistir = async () => { try { return await navigator.storage?.persist?.(); } catch { return false; } };
+// pede armazenamento permanente sem esperar: alguns navegadores demoram ou nunca respondem
+const persistir = () => { try { navigator.storage?.persist?.()?.catch?.(() => {}); } catch {} };
 async function salvarCfg(c) {
   try { localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch {}
   try { await idb('readwrite', s => s.put(c, 'gh')); } catch {}
@@ -121,13 +122,14 @@ const Store = {
       try {
         const r = await this.gh(`${name}?ref=${encodeURIComponent(c.branch || 'main')}`, {headers: {Accept: 'application/vnd.github.raw+json'}});
         this.ghFalhou = false;
+        if (r.status === 401) { this.tokenRecusado = true; throw new TypeError('token recusado'); }
+        this.tokenRecusado = false;
         if (r.status === 404) return def;
-        if (r.status === 401) throw new Error('Token do GitHub inválido ou expirado. Atualize em Ajustes.');
         if (!r.ok) throw new Error(`GitHub: ${r.status}`);
         return JSON.parse(await r.text());
       } catch (e) {
         if (!(e instanceof TypeError)) throw e;
-        this.ghFalhou = true;       // falha de rede: segue para a cópia publicada no site
+        if (!this.tokenRecusado) this.ghFalhou = true;   // falha de rede ou token recusado: usa a cópia publicada no site
       }
     }
     const r = await fetch(`data/${name}?t=${Date.now()}`, {cache: 'no-store'});
@@ -155,7 +157,7 @@ const Store = {
         message: `app: atualiza ${name}`, branch, sha, content: b64(JSON.stringify(data, null, 1))})});
       if (r.ok) return;
       if (r.status !== 409 && r.status !== 422) {
-        throw new Error(r.status === 401 || r.status === 403 ? 'Token sem permissão (precisa de Contents: Read and write).' : `GitHub: ${r.status}`);
+        throw new Error(r.status === 401 ? 'Não salvou: o token do GitHub expirou ou é inválido. Crie um novo e atualize em Ajustes.' : r.status === 403 ? 'Token sem permissão (precisa de Contents: Read and write).' : `GitHub: ${r.status}`);
       }
       await sleep(600);
     }
@@ -196,6 +198,7 @@ async function carregar(silencioso = false) {
     S = {alerts, watch, discarded, wstate, results};
     ultimoLoad = Date.now();
     carregado = true;
+    if (Store.tokenRecusado && !silencioso) toast('O token do GitHub expirou ou é inválido. Dá para ver tudo, mas para editar crie um token novo.', {erro: true, ms: 14000, acao: {label: 'Atualizar', fn: () => { location.hash = 'ajustes'; }}});
   } catch (e) {
     if (!silencioso) toast('Não consegui carregar os dados: ' + e.message, {erro: true});
   }
@@ -541,7 +544,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '8';
+const APP_VERSAO = '9';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
@@ -579,6 +582,7 @@ function telaAjustes() {
   return h('div', {},
     h('div', {class: 'tit-sec'}, h('h2', {}, 'Ajustes'), h('span', {class: 'sub'}, `versão ${APP_VERSAO}`)),
     h('div', {class: 'cartao'}, h('h3', {}, 'Conexão'), h('p', {}, h('b', {style: 'color:var(--txt)'}, modo[0]), ' — ', modo[1]),
+      Store.tokenRecusado && h('p', {style: 'color:var(--verm);font-weight:600'}, 'O GitHub recusou o token salvo neste aparelho (expirou, foi apagado ou está incorreto). Crie um token novo, cole abaixo e toque em “Salvar e conectar”.'),
       Store.mode !== 'local' && h('form', {onsubmit: async ev => {
         ev.preventDefault();
         await salvarCfg({repo: repo.value.trim(), branch: branch.value.trim() || 'main', token: token.value.trim()});
@@ -644,7 +648,7 @@ function desenhar() {
 function textoStatus() {
   const at = S.results.atualizado;
   return (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) +
-    (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '');
+    (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '') + (Store.tokenRecusado ? ' · token expirado' : '');
 }
 
 function rota() {
