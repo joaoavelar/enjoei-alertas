@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-12T00:56:11-03:00",
+ "atualizado": "2026-11-12T00:56:25-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -347,7 +347,413 @@
    "primeira_execucao": false
   },
   "palestina": {
-   "items": [],
+   "items": [
+    {
+     "id": "137672906",
+     "path": "livro-a-palestina-no-tempo-de-jesus-137672906",
+     "title": "livro a palestina no tempo de jesus",
+     "brand": "livro",
+     "price": 10,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTYwNDY0MC84NjVmZjE0YTE4ZmUwODdjMzE5YWYzZGEyOWUyNzEwMy5qcGc"
+    },
+    {
+     "id": "58194798",
+     "path": "sonhando-a-palestina-randa-ghazy-58194798",
+     "title": "sonhando a palestina - randa ghazy",
+     "brand": "editora record",
+     "price": 12,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDU4ODgwNC9kYTQxODdhZGJhMGZiYmUzYzZkNjE2ZmQ5NzdmYzA1Ny5qcGc"
+    },
+    {
+     "id": "135955795",
+     "path": "terror-e-esperanca-na-palestina-135955795",
+     "title": "terror e esperança na palestina",
+     "brand": "casa amarela",
+     "price": 14,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMjc2NzU0OC8wMjZkZGMwNmNmZWVjN2ExMWVlNDZkOTJjZWVmY2VkNy5qcGc"
+    },
+    {
+     "id": "128335593",
+     "path": "sharon-e-minha-sogra-diarios-de-guerra-de-ramallah-palestina-128335593",
+     "title": "sharon e minha sogra: diários de guerra de ramallah, palestina",
+     "brand": "francis",
+     "price": 15,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85OTY4MTAzL2E5ZmYyMjVhZWIwOTQ2OWE2NTJhMThmZTUzODcxODUzLmpwZw"
+    },
+    {
+     "id": "151023772",
+     "path": "livro-israel-x-palestina-james-l-gelvin-151023772",
+     "title": "livro israel x palestina james l. gelvin",
+     "brand": "edipro",
+     "price": 16,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDc1MjA5OS9hYTY4ZGM0M2EyMTE0N2U0MGNlZmEyMjY2Y2FjNjdhOS5qcGc"
+    },
+    {
+     "id": "138988378",
+     "path": "livro-a-questao-jerusalem-138988378",
+     "title": "livro a questão jerusalém",
+     "brand": "delegação especial palestina no brasil",
+     "price": 17,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzQxMDkxNS8yYjA0MTA4MTQ3MDEyN2I2Y2I1MWViNWRlYjgzZGRiNi5qcGc"
+    },
+    {
+     "id": "144230447",
+     "path": "sao-4-livros-pocket-do-3-reich-ao-novo-nazismo-o-anarquismo-oriente-medio-israel-e-palestina-144230447",
+     "title": "são 4 livros pocket. do 3º reich ao novo nazismo o anarquismo oriente medio israel e palestina",
+     "brand": "sintese universitaria",
+     "price": 17,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDEzNjAxNS9hMzg3YzVhMGI2MTVlMmVjNjc1M2NkN2E5ZjhkZTEyYy5qcGc"
+    },
+    {
+     "id": "151910158",
+     "path": "livro-oriente-medio-e-a-questao-palestina-151910158",
+     "title": "livro oriente médio e a questão palestina",
+     "brand": "moderna",
+     "price": 21,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTcxOTg5Ni85MjY0NjM4MGQ3MmMzMzljNzE3MDQ5MDFmYjg3MzZmYS5qcGc"
+    },
+    {
+     "id": "96886893",
+     "path": "oriente-medio-e-a-questao-palestina-nelson-bacic-olic-beatriz-canepa-96886893",
+     "title": "oriente médio e a questão palestina- nelson bacic olic, beatriz canepa",
+     "brand": "moderna",
+     "price": 21,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83MzA0NDczLzdhZGQ3NTExZTk1ZmUyOTA4OWUzYWY4NjA2OWI0N2QwLmpwZw"
+    },
+    {
+     "id": "130406657",
+     "path": "broche-palestina-bandeira-retangular-real-classico-arabe-130406657",
+     "title": "broche palestina bandeira retangular real clássico árabe",
+     "brand": "palestina",
+     "price": 24,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODA0NTcvMWI3YTNhNmVkNzA4NWEzZGY5Yjc5Y2NkNWExOWM3MjAuanBn"
+    },
+    {
+     "id": "152042678",
+     "path": "livro-la-partenza-del-crociato-per-la-palestina-visconti-152042678",
+     "title": "livro la partenza del crociato per la palestina visconti",
+     "brand": "sem  marca",
+     "price": 24,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTY2NzcwNi9iMjhmZWMxMTBiZTlhYzIwODg0NmEwNDZmODUzYzE2MC5qcGc"
+    },
+    {
+     "id": "103075319",
+     "path": "em-busca-de-fatima-uma-historia-palestina-103075319",
+     "title": "em busca de fátima: uma história palestina",
+     "brand": "record",
+     "price": 25,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTE2OTg4Ny9mNDgwMDEyNjJjZjM0NGVlMDFjMjMyODFiMDkwYjdlOS5qcGc"
+    },
+    {
+     "id": "98648457",
+     "path": "pin-broche-palestina-bandeira-diplomatico-pais-arabe-estado-free-palestine-98648457",
+     "title": "pin broche palestina bandeira diplomático país árabe estado free palestine",
+     "brand": "palestina",
+     "price": 26,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODA0NTcvYmE3N2U4MDBkNTczYjYyOTgyNDFlOWMyMTBkMWEzZGEuanBn"
+    },
+    {
+     "id": "145981613",
+     "path": "livro-homens-notaveis-historias-da-palestina-nos-tempos-de-jesus-raro-espiritismo-145981613",
+     "title": "livro: homens notáveis- histórias da palestina nos tempos de jesus - raro espiritismo",
+     "brand": "boa nova",
+     "price": 28,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTA4OTc2MS9jNWM0MGZmODVmODNkMTZjOWNhMzk2NDM3NGQ2YjkzZS5qcGc"
+    },
+    {
+     "id": "151124782",
+     "path": "livro-a-questao-jerusalem-delegacao-especial-palestina-no-brasil-151124782",
+     "title": "livro a questão jerusalém delegação especial palestina no brasil",
+     "brand": "delegação especial palestina no brasil",
+     "price": 29,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzkxODc3Ni9jYzNhNzY3M2Q0NTI0YzBmNDJmMzZjMmE3ODNmOTAzNC5qcGc"
+    },
+    {
+     "id": "147364147",
+     "path": "livros-terror-e-esperanca-na-palestina-e-pecar-e-perdoar-147364147",
+     "title": "livros terror e esperança na palestina e pecar e perdoar",
+     "brand": "harper collins",
+     "price": 30,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMjc2NzU0OC9mZTUzMTIyMTc3YmVkZjU5NWZiOGM2NTY2ZjVlMmY4Yy5qcGc"
+    },
+    {
+     "id": "141205306",
+     "path": "ima-de-geladeira-belem-palestina-141205306",
+     "title": "ímã de geladeira belém palestina",
+     "brand": "sem  marca",
+     "price": 32,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85Nzg4NjE3LzAzMTEyOTEyMjk3YjdkOTg4OTk4YjkwNDA1MmRkYzRjLmpwZw"
+    },
+    {
+     "id": "147874699",
+     "path": "livro-terror-e-esperanca-na-palestina-hl318-147874699",
+     "title": "livro terror e esperança na palestina//hl318",
+     "brand": "casa amarela",
+     "price": 39,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xNDI1NTIyNS9kNDg3ZjE5MmY2ZTFjMzg2NWRkMzQyZmY4MmNlMWRiZS5qcGc"
+    },
+    {
+     "id": "141581930",
+     "path": "moeda-de-20-mil-ano-1933-palestina-141581930",
+     "title": "moeda de 20 mil - ano 1933 - palestina",
+     "brand": "skny",
+     "price": 42,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMzI3MjI4NC84Y2YxNDE0MGJjOTRiNGQ5Y2U5ZGMzMTU3YWU2YTk0Ny5qcGc"
+    },
+    {
+     "id": "148918873",
+     "path": "brevissima-historia-do-conflito-israel-palestina-148918873",
+     "title": "brevíssima história do conflito israel-palestina",
+     "brand": "elefante",
+     "price": 45,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy81MDQ2Mzg5LzFmMzdkYjY1NzFiZWZhOGJmMTlkMmI0MTgwZTg0Y2ZmLmpwZw"
+    },
+    {
+     "id": "149465816",
+     "path": "lp-coral-palestina-da-catedral-de-apucarana-pr-mestre-onde-estas-149465816",
+     "title": "lp  coral palestina da catedral de apucarana - pr - mestre onde estas",
+     "brand": "sem  marca",
+     "price": 50,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDczMzE1NS81YWU0NjM4OTU0NzBjODFkZmYxMjliZDIzYjNkNGJjYy5qcGc"
+    },
+    {
+     "id": "105648114",
+     "path": "palestina-uma-agulha-e-as-saudades-autor-raimundo-girao-105648114",
+     "title": "palestina, uma agulha e as saudades autor: raimundo girão",
+     "brand": "sem  marca",
+     "price": 50,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNTMzNTgwMC8xN2RmNjEzMWEyMTMzZGE5MzFiMmJmZjMzNzFlOTMxMS5qcGc"
+    },
+    {
+     "id": "137562806",
+     "path": "camiseta-from-palestina-gg-137562806",
+     "title": "camiseta from palestina gg",
+     "brand": "sem  marca",
+     "price": 54,
+     "size": "GG",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NzgxMzU4Lzc1YWNjOWI1YThiZmMwYjc5OThiNzM0ZDc0M2QyMTdhLmpwZw"
+    },
+    {
+     "id": "144913789",
+     "path": "camiseta-palestina-livre-branca-144913789",
+     "title": "camiseta palestina livre branca",
+     "brand": "sem  marca",
+     "price": 60,
+     "size": "Único",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODIxNTA0OC83NTg5ZmFkYjBkMTE5M2NhMjRlMDI0YzQ0MWJjZjI4Ny5qcGc"
+    },
+    {
+     "id": "152916496",
+     "path": "moeda-palestina-1-mil-1927-mandato-britanico-152916496",
+     "title": "moeda palestina 1 mil 1927 mandato britânico",
+     "brand": "sem  marca",
+     "price": 60,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83MjM0MjQ3LzJiZGEzMWQ0NDA5Zjg0MjdiMGNiYzM3YjIwODkwOWRkLmpwZw"
+    },
+    {
+     "id": "147598800",
+     "path": "caneca-porcelana-palestina-livre-147598800",
+     "title": "caneca porcelana palestina livre",
+     "brand": "sem  marca",
+     "price": 60,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODIxNTA0OC9mMWZlYzRkN2IzZWI0MjMxODI5ZDZiZTNmOTc3ZDhlYi5qcGc"
+    },
+    {
+     "id": "145626734",
+     "path": "camiseta-futebol-marrocos-palestina-145626734",
+     "title": "camiseta futebol marrocos palestina",
+     "brand": "sem  marca",
+     "price": 65,
+     "size": "M",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTkwNTU3NC9hNGUxYjIyNDlmOWQ4ZDQxMTg5YjcxZDY4YmZiMzBmOC5qcGc"
+    },
+    {
+     "id": "150198396",
+     "path": "lenco-cachecol-pashmina-xadrez-azul-e-preto-rei-de-gales-colorido-quadrado-punk-rock-palestino-150198396",
+     "title": "lenço cachecol pashmina xadrez azul e preto rei de gales colorido quadrado punk rock palestino",
+     "brand": "palestina",
+     "price": 72,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xODM2MjU5Mi85YjU1ZGIxNWMzNDlmYjQxMGU0Nzc3NmMyNDA3YjRlOS5qcGc"
+    },
+    {
+     "id": "138815205",
+     "path": "livro-a-questao-jerusalem-138815205",
+     "title": "livro a questão jerusalém",
+     "brand": "delegação especial palestina no brasil",
+     "price": 80,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMzUzNDg3NC80ZTIyNDgxYzY3ODVmNTlhNTc4NzQwYTlmZmZjZjEzNC5qcGc"
+    },
+    {
+     "id": "154477387",
+     "path": "livro-palestina-edicao-especial-joe-sacco-154477387",
+     "title": "livro palestina edição especial joe sacco",
+     "brand": "conrad editora",
+     "price": 90,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDM0NDk1MC85ZTZhYzMxMGVlNDVjMmMxYWRhNTEzZGJjZjNhYzhkZC5qcGc"
+    },
+    {
+     "id": "151687450",
+     "path": "livro-palestina-joe-sacco-edicao-especial-151687450",
+     "title": "livro palestina joe sacco edição especial",
+     "brand": "cortez",
+     "price": 90,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzg0ODgyNi80MjE3YjEyMmMxNTQ1ODI2OWRmOTFhYTdhNTI2MTNiYy5qcGc"
+    },
+    {
+     "id": "154299878",
+     "path": "livro-palestina-joe-sacco-capa-dura-154299878",
+     "title": "livro palestina joe sacco. capa dura",
+     "brand": "veneta",
+     "price": 97,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzI5MjE3L2NhMGRlN2RhMTc0ZTRhNDgzYTY4MzU5ODc5NDM5MmRjLmpwZw"
+    },
+    {
+     "id": "98876969",
+     "path": "revista-trip-92-pietra-ferrari-palestina-judeus-gisele-bundchen-98876969",
+     "title": "revista trip 92 pietra ferrari palestina judeus gisele bundchen",
+     "brand": "trip",
+     "price": 99,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82NjQxMzMxLzdkOGQxODJjOWNiZGFkMmMxYmQ3M2I5ZWUyOGQwNmUzLmpwZw"
+    },
+    {
+     "id": "91881745",
+     "path": "palestina-tela-em-acrilico-tecnica-mista-91881745",
+     "title": "palestina, tela em acrílico, tecnica mista",
+     "brand": "sem  marca",
+     "price": 119,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83Mzc0OTM2LzBjNzE4ZDkwY2FhY2U4Mjc1MTc2M2U4ODgwYzI1Y2I0LmpwZw"
+    },
+    {
+     "id": "147574394",
+     "path": "livro-palestina-joe-sacco-hq-147574394",
+     "title": "livro palestina joe sacco hq",
+     "brand": "veneta",
+     "price": 120,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcwODk4MC85MmIxZDJhMTNkZDIyY2FkNzViNzA4MDA0MWYyZDdhOS5qcGc"
+    },
+    {
+     "id": "127180366",
+     "path": "livro-palestina-joe-sacco-hq-quadrinhos-portugues-127180366",
+     "title": "livro palestina joe sacco hq quadrinhos português",
+     "brand": "veneta",
+     "price": 140,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMDcxMTU1NC82MDQ0ZThkYzMyYTBjZTU0ZDAyZmRmOWVjMWNkYmFjNC5qcGc"
+    },
+    {
+     "id": "147135641",
+     "path": "hq-palestina-edicao-especial-capa-dura-joe-sacco-conrad-2011-147135641",
+     "title": "hq palestina edição especial capa dura - joe sacco (conrad 2011)",
+     "brand": "conrad",
+     "price": 190,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zODA0NDk2My8xNWJiMjQ0NDk2NDE3NWYzNGJhYTJlMDM1YmJjNTY2Yi5qcGc"
+    },
+    {
+     "id": "153009802",
+     "path": "camiseta-viso-sport-palestina-153009802",
+     "title": "camiseta viso sport palestina",
+     "brand": "viso club",
+     "price": 199,
+     "size": "M",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy81MjczNjEwLzAyOTVkYzYyY2JmNTRlZTdmY2UzZGJiMGZlMDY5MzBlLmpwZw"
+    },
+    {
+     "id": "153009020",
+     "path": "camiseta-viso-sport-palestina-153009020",
+     "title": "camiseta viso sport palestina",
+     "brand": "viso club",
+     "price": 199,
+     "size": "G",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy81MjczNjEwLzdhNzViYmRiMWQ5YjM2YmE2MTY1MDRiZGQ1MWQxNDkyLmpwZw"
+    },
+    {
+     "id": "153013282",
+     "path": "camiseta-viso-sport-palestina-153013282",
+     "title": "camiseta viso sport palestina",
+     "brand": "viso club",
+     "price": 199,
+     "size": "P",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy81MjczNjEwL2ViMjA4ZGU5ZjU1MWJmZDU3YWE4ZTczNjMyMjRhZDM5LmpwZw"
+    },
+    {
+     "id": "145187479",
+     "path": "colecao-de-luxo-de-gibis-palestina-joe-sacco-145187479",
+     "title": "coleção de luxo de gibis palestina joe sacco",
+     "brand": "conrad editora do brasil",
+     "price": 200,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zOTcwMzAzNC85YzRmMDE3YWQyNjlkMzU2MjUyNTZlNzY0NTk0MmFmOC5qcGc"
+    },
+    {
+     "id": "134237048",
+     "path": "livro-imagem-e-realidade-do-conflito-israel-palestina-norman-finkelstein-134237048",
+     "title": "livro imagem e realidade do conflito israel/palestina - norman finkelstein",
+     "brand": "editora record",
+     "price": 290,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xOTY1NDIwNC9kYWRiOWYxYzJjZDdmMTViMWNmZmY0NjE0NTU1YzNiYi5qcGc"
+    },
+    {
+     "id": "154511745",
+     "path": "camisa-palestina-preta-g-154511745",
+     "title": "camisa palestina preta g",
+     "brand": "sem  marca",
+     "price": 300,
+     "size": "G",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80Mzc2MDM0My83NzBmOTFmYTU3MmUwYWZhMjI1ODRkMmI5ZWZhZTc1Ni5qcGc"
+    },
+    {
+     "id": "152992004",
+     "path": "livro-palestina-joe-sacco-152992004",
+     "title": "livro palestina joe sacco",
+     "brand": "veneta",
+     "price": 300,
+     "size": "",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTc1MTE3NS9hMDMyMjBiZWVmZGY3MDkzODk2YWFhOGIyYTEyZDgwOS5qcGc"
+    },
+    {
+     "id": "106640816",
+     "path": "vestido-lurex-brilho-elastano-fundo-preto-com-brilhos-em-marsala-e-pontos-de-luz-106640816",
+     "title": "vestido lurex,brilho elastano fundo preto com brilhos em marsala e pontos de luz",
+     "brand": "importado da palestina",
+     "price": 622,
+     "size": "P",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMzIxODAwOC9mZWEzYmNmMmI2YTM2NGRmNTFlMDljMDYyMDA2YWJiNC5qcGc"
+    }
+   ],
    "new_ids": [],
    "primeira_execucao": true
   }
