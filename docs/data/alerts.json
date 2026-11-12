@@ -51,8 +51,8 @@
  },
  {
   "nome": "palestina",
-  "item": "palestina fc",
-  "marca": null,
+  "item": null,
+  "marca": "Palestina, palestina fc",
   "cor": null,
   "tamanho": null,
   "preco_min": null,
