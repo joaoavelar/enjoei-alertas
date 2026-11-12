@@ -175,6 +175,17 @@ let carregado = false, tab = 'inicio', ultimoLoad = 0, esperando = false;
 const expandidos = new Set();
 const vistos = new Set(JSON.parse(localStorage.getItem('enjoei.vistos') || '[]'));
 const salvarVistos = () => localStorage.setItem('enjoei.vistos', JSON.stringify([...vistos].slice(-3000)));
+const evVistos = new Set((() => { try { return JSON.parse(localStorage.getItem('enjoei.ev.vistos') || '[]'); } catch { return []; } })());
+const salvarEvVistos = () => { try { localStorage.setItem('enjoei.ev.vistos', JSON.stringify([...evVistos].slice(-1000))); } catch {} };
+const chaveEv = e => `${e.tipo}|${e.id}|${e.quando}`;
+// uma novidade conta como vista se foi dispensada aqui ou, sendo "novo", se o anúncio já foi visto nas buscas
+const evVisto = e => evVistos.has(chaveEv(e)) || (e.tipo === 'novo' && vistos.has(e.id));
+const eventosValidos = () => { const desc = descartadosIds(); return (S.results.eventos || []).filter(e => !(e.tipo === 'novo' && desc.has(e.id))); };
+function marcarEvento(e, redesenhar = true) {
+  evVistos.add(chaveEv(e)); salvarEvVistos();
+  if (e.tipo === 'novo') { vistos.add(e.id); salvarVistos(); }
+  if (redesenhar) desenhar();
+}
 const descartadosIds = () => new Set(S.discarded.map(d => d.id));
 
 async function carregar(silencioso = false) {
@@ -329,6 +340,7 @@ function marcarVistos(nome) {
   const nomes = nome ? [nome] : S.alerts.map(a => a.nome);
   for (const n of nomes) for (const id of S.results.alertas[n]?.new_ids || []) vistos.add(id);
   salvarVistos();
+  if (!nome) { for (const e of S.results.eventos || []) evVistos.add(chaveEv(e)); salvarEvVistos(); }
   desenhar();
 }
 
@@ -450,20 +462,25 @@ function tudoNovo() {
 function telaInicio() {
   const novos = Object.values(tudoNovo()).reduce((n, l) => n + l.length, 0);
   const ativos = S.alerts.filter(a => a.ativo !== false).length;
-  const desc = descartadosIds();
-  const eventos = (S.results.eventos || []).filter(e => !(e.tipo === 'novo' && desc.has(e.id))).slice(0, 30);
+  const todos = eventosValidos(), pendentes = todos.filter(e => !evVisto(e)), jaVistos = todos.filter(evVisto).slice(0, 30);
+  const linha = (e, comBotao) => h('div', {class: 'evento' + (comBotao ? '' : ' visto')},
+    h('a', {class: 'lk', href: itemUrl(e.path), target: '_blank', rel: 'noopener', onclick: () => comBotao && setTimeout(() => marcarEvento(e), 400)},
+      h('div', {class: 'foto', style: e.photo ? `background-image:url(${foto(e.photo)})` : ''}),
+      h('div', {class: 'tx'}, h('span', {class: 'tag ' + e.tipo}, TAGS[e.tipo] || e.tipo.toUpperCase()),
+        h('div', {class: 'tt'}, e.titulo), h('div', {class: 'sub'}, `${e.detalhe} · ${ago(e.quando)}`))),
+    comBotao && h('button', {class: 'ib', title: 'Marcar como visto', 'aria-label': 'Marcar como visto', style: 'flex:none;width:40px', onclick: () => marcarEvento(e)}, ic('check', 18)));
   return h('div', {},
     h('div', {class: 'stats'},
       h('div', {class: 'stat'}, h('b', {}, novos), h('span', {}, 'novos para ver')),
       h('div', {class: 'stat'}, h('b', {}, ativos), h('span', {}, ativos === 1 ? 'busca ativa' : 'buscas ativas')),
       h('div', {class: 'stat'}, h('b', {}, S.watch.length), h('span', {}, 'acompanhando'))),
-    h('div', {class: 'tit-sec'}, h('h2', {}, 'Novidades'), novos > 0 && h('button', {class: 'btn mini', onclick: () => marcarVistos()}, ic('check', 14), 'Marcar tudo como visto')),
-    eventos.length ? eventos.map(e => h('a', {class: 'evento', href: itemUrl(e.path), target: '_blank', rel: 'noopener'},
-      h('div', {class: 'foto', style: e.photo ? `background-image:url(${foto(e.photo)})` : ''}),
-      h('div', {class: 'tx'}, h('span', {class: 'tag ' + e.tipo}, TAGS[e.tipo] || e.tipo.toUpperCase()),
-        h('div', {class: 'tt'}, e.titulo), h('div', {class: 'sub'}, `${e.detalhe} · ${ago(e.quando)}`))))
-      : h('div', {class: 'vazio'}, h('b', {}, 'Nada de novo por enquanto'),
-        S.alerts.length ? 'Quando aparecer anúncio novo, queda de preço, venda ou remoção, ele aparece aqui.' : 'Crie seu primeiro alerta na aba Buscas.'));
+    h('div', {class: 'tit-sec'}, h('h2', {}, pendentes.length ? `Novidades (${pendentes.length})` : 'Novidades'),
+      (pendentes.length > 0 || novos > 0) && h('button', {class: 'btn mini', onclick: () => marcarVistos()}, ic('check', 14), 'Marcar tudo como visto')),
+    pendentes.length ? pendentes.map(e => linha(e, true))
+      : h('div', {class: 'vazio'}, h('b', {}, todos.length ? 'Tudo em dia' : 'Nada de novo por enquanto'),
+        S.alerts.length ? 'Quando aparecer anúncio novo, queda de preço, venda ou remoção, ele aparece aqui.' : 'Crie seu primeiro alerta na aba Buscas.'),
+    jaVistos.length > 0 && h('details', {style: 'margin-top:18px'}, h('summary', {style: 'cursor:pointer;font-weight:600;color:var(--mut)'}, `Já vistos (${jaVistos.length})`),
+      h('div', {style: 'margin-top:10px'}, jaVistos.map(e => linha(e, false)))));
 }
 
 function secaoAlerta(a) {
@@ -524,7 +541,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '7';
+const APP_VERSAO = '8';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
@@ -609,8 +626,10 @@ const ABAS = [['inicio', 'Início', 'home'], ['buscas', 'Buscas', 'search'], ['a
 
 function desenhar() {
   const totalNovos = Object.values(tudoNovo()).reduce((n, l) => n + l.length, 0);
+  const nEv = eventosValidos().filter(e => !evVisto(e)).length;
   $('#abas').replaceChildren(...ABAS.map(([id, nome, icone]) => h('button', {class: 'aba' + (tab === id ? ' ativa' : ''), onclick: () => { location.hash = id; }},
-    ic(icone, 22), nome, id === 'buscas' && totalNovos > 0 && h('span', {class: 'pt'}, totalNovos > 99 ? '99+' : totalNovos))));
+    ic(icone, 22), nome, id === 'buscas' && totalNovos > 0 && h('span', {class: 'pt'}, totalNovos > 99 ? '99+' : totalNovos),
+    id === 'inicio' && nEv > 0 && h('span', {class: 'pt'}, nEv > 99 ? '99+' : nEv))));
   const main = $('#conteudo');
   if (!carregado) { main.replaceChildren(h('div', {class: 'esq'}), h('div', {class: 'esq'})); }
   else {
