@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-12T12:15:24-03:00",
+ "atualizado": "2026-11-12T15:41:47-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -55,15 +55,6 @@
   "asics": {
    "items": [
     {
-     "id": "153984511",
-     "path": "tenis-asics-gel-1130-cinza-40-153984511",
-     "title": "tênis asics gel 1130 cinza 40",
-     "brand": "asics",
-     "price": 332,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
-    },
-    {
      "id": "154575333",
      "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
      "title": "tênis asics gel-1130 bege e cinza 40",
@@ -71,6 +62,15 @@
      "price": 332,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
+    },
+    {
+     "id": "153984511",
+     "path": "tenis-asics-gel-1130-cinza-40-153984511",
+     "title": "tênis asics gel 1130 cinza 40",
+     "brand": "asics",
+     "price": 332,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
     },
     {
      "id": "147298110",
