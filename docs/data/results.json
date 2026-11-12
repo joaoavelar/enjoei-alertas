@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-12T08:09:55-03:00",
+ "atualizado": "2026-11-12T12:15:01-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -142,15 +142,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc"
     },
     {
-     "id": "152175664",
-     "path": "asics-gel-nyc-41-152175664",
-     "title": "asics gel nyc 41",
-     "brand": "asics",
-     "price": 300,
-     "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc"
-    },
-    {
      "id": "152625909",
      "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
      "title": "tênis asics gel nyc azul celeste 39",
@@ -158,6 +149,15 @@
      "price": 300,
      "size": "39",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
+    },
+    {
+     "id": "152175664",
+     "path": "asics-gel-nyc-41-152175664",
+     "title": "asics gel nyc 41",
+     "brand": "asics",
+     "price": 300,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc"
     },
     {
      "id": "146070195",
@@ -214,6 +214,15 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc"
     },
     {
+     "id": "154722468",
+     "path": "tenis-asics-gel-nyc-branco-n40-novo-154722468",
+     "title": "tênis asics gel nyc branco n40 - novo",
+     "brand": "asics",
+     "price": 400,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjE5Njk1MS9iMmNiMGQ0MmY1NTJmN2E0NzU5ODEwOTY1MzVkZDMyMC5qcGc"
+    },
+    {
      "id": "152472803",
      "path": "asics-gel-nyc-graphite-grey-black-152472803",
      "title": "asics gel-nyc graphite grey black",
@@ -232,7 +241,9 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154722468"
+   ],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -354,6 +365,15 @@
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154722468",
+   "tipo": "novo",
+   "titulo": "tênis asics gel nyc branco n40 - novo",
+   "path": "tenis-asics-gel-nyc-branco-n40-novo-154722468",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjE5Njk1MS9iMmNiMGQ0MmY1NTJmN2E0NzU5ODEwOTY1MzVkZDMyMC5qcGc",
+   "quando": "2026-11-12T12:15:01-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 400"
+  },
   {
    "id": "154612990",
    "tipo": "novo",
