@@ -524,7 +524,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '6';
+const APP_VERSAO = '7';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
@@ -560,7 +560,7 @@ function telaAjustes() {
   const branch = h('input', {value: c.branch || 'main', autocomplete: 'off', 'aria-label': 'Branch'});
   const token = h('input', {type: 'password', value: c.token || '', placeholder: 'github_pat_…', autocomplete: 'off', 'aria-label': 'Token'});
   return h('div', {},
-    h('div', {class: 'tit-sec'}, h('h2', {}, 'Ajustes')),
+    h('div', {class: 'tit-sec'}, h('h2', {}, 'Ajustes'), h('span', {class: 'sub'}, `versão ${APP_VERSAO}`)),
     h('div', {class: 'cartao'}, h('h3', {}, 'Conexão'), h('p', {}, h('b', {style: 'color:var(--txt)'}, modo[0]), ' — ', modo[1]),
       Store.mode !== 'local' && h('form', {onsubmit: async ev => {
         ev.preventDefault();
@@ -577,6 +577,9 @@ function telaAjustes() {
           h('li', {}, 'Em “Repository access”, escolha “Only select repositories” e marque só o repositório do app.'),
           h('li', {}, 'Em Permissions → Repository permissions, deixe ', h('b', {}, 'Contents: Read and write'), '.'),
           h('li', {}, 'Copie o token e cole acima. Ele fica salvo neste aparelho.'))),
+      Store.mode !== 'github' && Store.mode !== 'local' && h('div', {style: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--linha)'},
+        h('b', {}, 'Conectar outro aparelho ou navegador'),
+        h('p', {}, 'Este aparelho ainda não está conectado. Se você tem um link de acesso, abra-o aqui. Se não, preencha o repositório e o token acima e toque em “Salvar e conectar”: depois disso aparece aqui o botão “Copiar link de acesso” para conectar os outros aparelhos.')),
       Store.mode === 'github' && h('div', {style: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--linha)'},
         h('b', {}, 'Conectar outro aparelho ou navegador'),
         h('p', {}, 'Abra este link no outro aparelho e ele já fica conectado, sem digitar nada. Também serve para criar um favorito ou atalho que sempre abre conectado.'),
