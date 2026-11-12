@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-12T12:15:01-03:00",
+ "atualizado": "2026-11-12T12:15:24-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -241,9 +241,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [
-    "154722468"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "artengo ping": {
