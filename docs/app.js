@@ -56,6 +56,42 @@ function toast(msg, {erro = false, acao = null, ms = 5000} = {}) {
 // ---------- armazenamento (servidor local ou GitHub) ----------
 const GH_KEY = 'enjoei.gh';
 const ghCfg = () => { try { return JSON.parse(localStorage.getItem(GH_KEY)) || null; } catch { return null; } };
+
+// A conexão fica em dois lugares (localStorage e IndexedDB) e o app pede armazenamento persistente,
+// para o navegador não apagar. Se um dos dois sumir, ela é restaurada do outro.
+const idb = (modo, fn) => new Promise((ok, err) => {
+  const r = indexedDB.open('enjoei', 1);
+  r.onupgradeneeded = () => r.result.createObjectStore('cfg');
+  r.onerror = () => err(r.error);
+  r.onsuccess = () => { const tx = r.result.transaction('cfg', modo), q = fn(tx.objectStore('cfg')); tx.oncomplete = () => ok(q && q.result); tx.onerror = () => err(tx.error); };
+});
+const persistir = async () => { try { return await navigator.storage?.persist?.(); } catch { return false; } };
+async function salvarCfg(c) {
+  try { localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch {}
+  try { await idb('readwrite', s => s.put(c, 'gh')); } catch {}
+  await persistir();
+}
+async function apagarCfg() {
+  try { localStorage.removeItem(GH_KEY); } catch {}
+  try { await idb('readwrite', s => s.delete('gh')); } catch {}
+}
+const b64url = s => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const deB64url = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), ch => ch.charCodeAt(0)));
+const linkAcesso = c => `${location.origin}${location.pathname}#conectar=${b64url(JSON.stringify({repo: c.repo, branch: c.branch || 'main', token: c.token}))}`;
+async function recuperarCfg() {
+  // 1) link de acesso (#conectar=...): conecta este aparelho e tira o token da barra de endereço
+  const m = location.hash.match(/conectar=([A-Za-z0-9_-]+)/);
+  if (m) {
+    try { const c = JSON.parse(deB64url(m[1])); if (c && c.repo && c.token) { await salvarCfg(c); toast('Aparelho conectado ao GitHub.'); } }
+    catch { toast('Link de acesso inválido.', {erro: true}); }
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  // 2) se o navegador apagou o localStorage, restaura da cópia no IndexedDB
+  if (!ghCfg()) {
+    try { const c = await idb('readonly', s => s.get('gh')); if (c && c.token) localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch {}
+  }
+  if (ghCfg()) await persistir();
+}
 const guessRepo = () => {
   const m = location.hostname.match(/^(.+)\.github\.io$/), p = location.pathname.split('/')[1];
   return m && p ? `${m[1]}/${p}` : '';
@@ -488,13 +524,16 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '5';
+const APP_VERSAO = '6';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
     `Versão do app: ${APP_VERSAO}`, `Modo: ${Store.mode}`, `Endereço: ${location.href}`,
     `Repositório: ${c?.repo || '(não configurado)'}`,
     `Token salvo: ${c?.token ? `sim, ${c.token.length} caracteres${/^[\x21-\x7e]+$/.test(c.token) ? '' : ', COM CARACTERES INVÁLIDOS'}` : 'não'}`];
+  let copia = 'não'; try { copia = (await idb('readonly', s => s.get('gh')))?.token ? 'sim' : 'não'; } catch { copia = 'indisponível'; }
+  let persist = 'desconhecido'; try { persist = (await navigator.storage?.persisted?.()) ? 'sim' : 'não'; } catch {}
+  linhas.push(`Cópia de segurança: ${copia}`, `Armazenamento persistente: ${persist}`);
   const mostra = () => { box.textContent = linhas.join('\n'); };
   mostra();
   const testa = async (nome, url, opts = {}) => {
@@ -525,21 +564,30 @@ function telaAjustes() {
     h('div', {class: 'cartao'}, h('h3', {}, 'Conexão'), h('p', {}, h('b', {style: 'color:var(--txt)'}, modo[0]), ' — ', modo[1]),
       Store.mode !== 'local' && h('form', {onsubmit: async ev => {
         ev.preventDefault();
-        localStorage.setItem(GH_KEY, JSON.stringify({repo: repo.value.trim(), branch: branch.value.trim() || 'main', token: token.value.trim()}));
+        await salvarCfg({repo: repo.value.trim(), branch: branch.value.trim() || 'main', token: token.value.trim()});
         await Store.detect(); await carregar();
         toast(Store.mode === 'github' ? 'Conectado ao GitHub.' : 'Preencha o repositório e o token.', {erro: Store.mode !== 'github'});
       }},
         h('div', {class: 'campos'}, h('label', {class: 'cheio'}, 'Repositório (usuário/nome)', repo), h('label', {}, 'Branch', branch), h('label', {}, 'Token de acesso', token)),
         h('div', {class: 'folha-bt', style: 'justify-content:flex-start'},
           h('button', {class: 'btn pri'}, 'Salvar e conectar'),
-          ghCfg() && h('button', {type: 'button', class: 'btn perigo', onclick: async () => { localStorage.removeItem(GH_KEY); await Store.detect(); await carregar(); }}, 'Desconectar'))),
+          ghCfg() && h('button', {type: 'button', class: 'btn perigo', onclick: async () => { if (!confirm('Desconectar este aparelho do GitHub?')) return; await apagarCfg(); await Store.detect(); await carregar(); }}, 'Desconectar'))),
       Store.mode !== 'local' && h('details', {style: 'margin-top:12px'}, h('summary', {style: 'cursor:pointer;font-weight:600'}, 'Como criar o token'),
         h('ol', {}, h('li', {}, 'GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.'),
           h('li', {}, 'Em “Repository access”, escolha “Only select repositories” e marque só o repositório do app.'),
           h('li', {}, 'Em Permissions → Repository permissions, deixe ', h('b', {}, 'Contents: Read and write'), '.'),
-          h('li', {}, 'Copie o token e cole acima. Ele fica salvo só neste aparelho.')))),
-    h('div', {class: 'cartao'}, h('h3', {}, 'Aviso por e-mail (Outlook)'),
-      h('p', {}, 'Todo dia às 8h o GitHub verifica tudo e envia um resumo por e-mail: anúncios novos, queda de preço, preço-alvo, vendidos e removidos. Se não houver novidade, não envia nada.'),
+          h('li', {}, 'Copie o token e cole acima. Ele fica salvo neste aparelho.'))),
+      Store.mode === 'github' && h('div', {style: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--linha)'},
+        h('b', {}, 'Conectar outro aparelho ou navegador'),
+        h('p', {}, 'Abra este link no outro aparelho e ele já fica conectado, sem digitar nada. Também serve para criar um favorito ou atalho que sempre abre conectado.'),
+        h('p', {style: 'color:var(--verm)'}, 'O link contém seu token: não compartilhe com ninguém.'),
+        h('button', {class: 'btn', onclick: async () => {
+          const l = linkAcesso(ghCfg());
+          try { await navigator.clipboard.writeText(l); toast('Link copiado. Mande só para você mesmo.'); }
+          catch { prompt('Copie o link:', l); }
+        }}, 'Copiar link de acesso'))),
+    h('div', {class: 'cartao'}, h('h3', {}, 'Aviso por e-mail'),
+      h('p', {}, 'A verificação roda uma vez por dia no GitHub (o horário costuma atrasar). Com o e-mail configurado, ela envia um resumo das novidades; sem ele, as novidades aparecem só aqui no app.'),
       h('p', {}, 'Configuração (uma vez): no repositório, Settings → Secrets and variables → Actions, crie ', h('code', {}, 'SMTP_USER'), ' (seu e-mail Outlook/Hotmail) e ',
         h('code', {}, 'SMTP_PASSWORD'), ' (senha de app da conta Microsoft).')),
     h('div', {class: 'cartao'}, h('h3', {}, 'Instalar no celular'),
@@ -568,10 +616,17 @@ function desenhar() {
     window.scrollTo(0, y);
   }
   const at = S.results.atualizado;
-  $('#status').textContent = (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) + (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '');
+  $('#status').textContent = textoStatus();
+}
+
+function textoStatus() {
+  const at = S.results.atualizado;
+  return (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) +
+    (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '');
 }
 
 function rota() {
+  if (location.hash.includes('conectar=')) { recuperarCfg().then(() => Store.detect()).then(() => carregar()); return; }
   const t = location.hash.slice(1);
   tab = ABAS.some(a => a[0] === t) ? t : 'inicio';
   desenhar();
@@ -585,7 +640,7 @@ window.addEventListener('hashchange', rota);
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden && Date.now() - ultimoLoad > 60_000) carregar(true);
 });
-setInterval(() => { if (!document.hidden) { $('#status').textContent = S.results.atualizado ? `Atualizado ${ago(S.results.atualizado)}` : ''; } }, 60_000);
+setInterval(() => { if (!document.hidden) $('#status').textContent = textoStatus(); }, 60_000);
 
 // Só registra no site publicado: em endereços locais o service worker ocuparia a porta de outros apps.
 if ('serviceWorker' in navigator) {
@@ -596,6 +651,7 @@ if ('serviceWorker' in navigator) {
 (async () => {
   tab = ABAS.some(a => a[0] === location.hash.slice(1)) ? location.hash.slice(1) : 'inicio';
   desenhar();
+  await recuperarCfg();
   await Store.detect();
   await carregar();
 })();
