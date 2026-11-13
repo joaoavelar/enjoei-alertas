@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-12T15:41:47-03:00",
+ "atualizado": "2026-11-13T15:22:29-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -11,15 +11,6 @@
      "price": 250,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn"
-    },
-    {
-     "id": "154612990",
-     "path": "mochila-galapagos-pelican-2-0-30l-laranja-e-preta-154612990",
-     "title": "mochila galapagos pelican 2.0 30l laranja e preta",
-     "brand": "galapagos",
-     "price": 299,
-     "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMjUxMTY3OS83Y2YyMzcxYjA5MTNmYjIzYTdiZWQwMzRlMzQxNjEwMi5qcGc"
     },
     {
      "id": "152182943",
@@ -55,6 +46,15 @@
   "asics": {
    "items": [
     {
+     "id": "153984511",
+     "path": "tenis-asics-gel-1130-cinza-40-153984511",
+     "title": "tênis asics gel 1130 cinza 40",
+     "brand": "asics",
+     "price": 322,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
+    },
+    {
      "id": "154575333",
      "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
      "title": "tênis asics gel-1130 bege e cinza 40",
@@ -62,15 +62,6 @@
      "price": 332,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
-    },
-    {
-     "id": "153984511",
-     "path": "tenis-asics-gel-1130-cinza-40-153984511",
-     "title": "tênis asics gel 1130 cinza 40",
-     "brand": "asics",
-     "price": 332,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
     },
     {
      "id": "147298110",
@@ -142,15 +133,6 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc"
     },
     {
-     "id": "152625909",
-     "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
-     "title": "tênis asics gel nyc azul celeste 39",
-     "brand": "asics",
-     "price": 300,
-     "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
-    },
-    {
      "id": "152175664",
      "path": "asics-gel-nyc-41-152175664",
      "title": "asics gel nyc 41",
@@ -167,6 +149,24 @@
      "price": 323,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc"
+    },
+    {
+     "id": "152625909",
+     "path": "tenis-asics-gel-nyc-azul-celeste-39-152625909",
+     "title": "tênis asics gel nyc azul celeste 39",
+     "brand": "asics",
+     "price": 325,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
+    },
+    {
+     "id": "154764685",
+     "path": "tenis-asics-gel-nyc-arctic-sky-39-5-154764685",
+     "title": "tênis asics gel-nyc arctic sky 39,5",
+     "brand": "asics",
+     "price": 339,
+     "size": "39",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83ZTM1ZDMyMmQyYmEzNjcwYzhhNDE4MWI1ZDhkOTRhZi5qcGc"
     },
     {
      "id": "153216501",
@@ -241,7 +241,9 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "154764685"
+   ],
    "primeira_execucao": false
   },
   "artengo ping": {
@@ -363,6 +365,15 @@
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "154764685",
+   "tipo": "novo",
+   "titulo": "tênis asics gel-nyc arctic sky 39,5",
+   "path": "tenis-asics-gel-nyc-arctic-sky-39-5-154764685",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83ZTM1ZDMyMmQyYmEzNjcwYzhhNDE4MWI1ZDhkOTRhZi5qcGc",
+   "quando": "2026-11-13T15:22:29-03:00",
+   "detalhe": "Novo em “asics 2”: R$ 339"
+  },
   {
    "id": "154722468",
    "tipo": "novo",
