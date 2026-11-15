@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-14T13:51:08-03:00",
+ "atualizado": "2026-11-15T14:33:33-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -59,7 +59,7 @@
      "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
      "title": "tênis asics gel-1130 bege e cinza 40",
      "brand": "asics",
-     "price": 332,
+     "price": 322,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
     },
@@ -146,7 +146,7 @@
      "path": "tenis-asics-gel-nyc-41-146070195",
      "title": "tênis asics gel nyc 41",
      "brand": "asics",
-     "price": 323,
+     "price": 313,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc"
     },
@@ -221,15 +221,6 @@
      "price": 400,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
-    },
-    {
-     "id": "149732924",
-     "path": "tenis-asics-gel-nyc-azul-40-149732924",
-     "title": "tênis asics gel nyc azul 40",
-     "brand": "asics",
-     "price": 400,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjkwNzI1Mi85NTZlMjhmOGNhYWNjNGYxMjk4MDQwYzUyM2NiNzYzNy5qcGc"
     },
     {
      "id": "154722468",
