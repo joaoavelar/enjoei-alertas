@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-15T14:33:33-03:00",
+ "atualizado": "2026-11-16T15:14:40-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -46,6 +46,15 @@
   "asics": {
    "items": [
     {
+     "id": "154575333",
+     "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
+     "title": "tênis asics gel-1130 bege e cinza 40",
+     "brand": "asics",
+     "price": 322,
+     "size": "40",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
+    },
+    {
      "id": "153984511",
      "path": "tenis-asics-gel-1130-cinza-40-153984511",
      "title": "tênis asics gel 1130 cinza 40",
@@ -55,13 +64,13 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
     },
     {
-     "id": "154575333",
-     "path": "tenis-asics-gel-1130-bege-e-cinza-40-154575333",
-     "title": "tênis asics gel-1130 bege e cinza 40",
+     "id": "150463954",
+     "path": "tenis-asics-gel-1130-150463954",
+     "title": "tênis asics gel 1130",
      "brand": "asics",
-     "price": 322,
-     "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
+     "price": 350,
+     "size": "41",
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODc1OTg0LzNiOTQ5YWYwYTc3NTgyMGE0YTA4YWUzZGQ3NDVlNjg2LmpwZw"
     },
     {
      "id": "147298110",
@@ -73,26 +82,19 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
     }
    ],
-   "new_ids": [],
+   "new_ids": [
+    "150463954"
+   ],
    "primeira_execucao": false
   },
   "asics 2": {
    "items": [
     {
-     "id": "153138003",
-     "path": "tenis-asics-gel-nyc-preto-e-cinza-41-153138003",
-     "title": "tênis asics gel-nyc preto e cinza 41",
-     "brand": "asics",
-     "price": 200,
-     "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzYzMjE2MS9iYTk1ZmI2YzU3ZDY0MzU0Y2VhM2NmYzc3MjlhMjQ4ZC5qcGc"
-    },
-    {
      "id": "154314794",
      "path": "tenis-asics-gel-nyc-cinza-154314794",
      "title": "tênis asics gel-nyc cinza",
      "brand": "asics",
-     "price": 215,
+     "price": 209,
      "size": "40",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI0NzQwOS85MzdhZTFjMzQ4MjEwYmRjMGI2MzAyMTNiMTc4ZjhkMS5qcGc"
     },
@@ -110,7 +112,7 @@
      "path": "tenis-asics-gel-nyc-preto-41-vai-com-2-cadarco-sacola-e-chaveiro-154364144",
      "title": "tênis asics gel nyc preto 41 vai com 2 cadarço, sacola e chaveiro",
      "brand": "asics",
-     "price": 227,
+     "price": 220,
      "size": "41",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc"
     },
@@ -278,7 +280,7 @@
      "path": "kit-2-raquetes-ping-pong-artengo-fr-620-com-bolinhas-153693896",
      "title": "kit 2 raquetes ping pong artengo fr 620 com bolinhas",
      "brand": "artengo",
-     "price": 96,
+     "price": 93,
      "size": "",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDY2Njc3MS9iNTc5ODIxMmE1MjQxNGI2Y2FmZDA3NjAxZDZjZTQwOS5qcGc"
     },
@@ -329,7 +331,7 @@
      "path": "casaco-moletom-rock-the-moutain-rtm-153737444",
      "title": "casaco / moletom - rock the moutain rtm",
      "brand": "festival rock the mountain",
-     "price": 226,
+     "price": 219,
      "size": "M",
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMjY5NDI3OS9kZWI4ZmI0YWUwZDFhZDkzZDBjMGM0YTA2NjczODk5Yi5qcGc"
     },
@@ -354,6 +356,15 @@
  },
  "erros": {},
  "eventos": [
+  {
+   "id": "150463954",
+   "tipo": "novo",
+   "titulo": "tênis asics gel 1130",
+   "path": "tenis-asics-gel-1130-150463954",
+   "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODc1OTg0LzNiOTQ5YWYwYTc3NTgyMGE0YTA4YWUzZGQ3NDVlNjg2LmpwZw",
+   "quando": "2026-11-16T15:14:40-03:00",
+   "detalhe": "Novo em “asics”: R$ 350"
+  },
   {
    "id": "154764685",
    "tipo": "novo",
