@@ -109,7 +109,11 @@ def matches(alert, p):
     if not all(w in texto for w in palavras):
         return False
     quer = {t.strip() for t in re.split(r"[,/;]", norm(alert.get("tamanho"))) if t.strip()}
-    return not quer or norm(p.get("size")) in quer
+    if quer and norm(p.get("size")) not in quer:
+        return False
+    # palavras a excluir (separadas por vírgula; cada uma pode ter mais de uma palavra)
+    fora = [t.strip() for t in re.split(r"[,;]", norm(alert.get("excluir"))) if t.strip()]
+    return not any(f in texto for f in fora)
 
 
 def fetch_all(params):
@@ -130,25 +134,70 @@ def price_key(p):
     return (p["price"] is None, p["price"] or 0)
 
 
-def search(alert):
+def busca_params(alert):
     term = " ".join(x for x in [alert.get("item"), alert.get("marca"), alert.get("cor")] if x)
-    since = datetime.now(BRT) - timedelta(days=LOOKBACK_DAYS)
     params = {"operation_name": "searchProducts", "query_id": QUERY_ID,
               "search_context": "products_search_default", "term": term, "first": PAGE}
     if alert.get("preco_min") is not None:
         params["price_min"] = alert["preco_min"]
     if alert.get("preco_max") is not None:
         params["price_max"] = alert["preco_max"]
+    return params
+
+
+def desde(dias):
+    return (datetime.now(BRT) - timedelta(days=dias)).strftime("%Y-%m-%dT%H:%M:%S-03:00")
+
+
+def search(alert):
+    params = busca_params(alert)
     # 1) publicados nos últimos dias (garante achar os novos em buscas amplas)
     # 2) lista geral por relevância (mostra também os que já existiam)
-    recent = fetch_all({**params, "last_published_at": since.strftime("%Y-%m-%dT%H:%M:%S-03:00")})
+    recent = fetch_all({**params, "last_published_at": desde(LOOKBACK_DAYS)})
+    ids_recentes = {p["id"] for p in recent}
     geral = fetch_all(dict(params))
     vistos, items = set(), []
     for p in recent + geral:
         if p["id"] not in vistos and matches(alert, p):
             vistos.add(p["id"])
+            p["_recente"] = p["id"] in ids_recentes
             items.append(p)
     return sorted(items, key=price_key)
+
+
+# ---------- há quanto tempo o anúncio está no ar ----------
+# O Enjoei não informa a data de publicação. Estimamos com o filtro de data da busca:
+# na primeira vez que vemos um anúncio, descobrimos a faixa (até 2, 7 ou 30 dias, ou mais),
+# e depois somamos os dias desde então.
+FAIXAS = (7, 30)
+
+
+def classificar_idade(alert, ids):
+    params, faixa, restantes, ant = busca_params(alert), {}, set(ids), LOOKBACK_DAYS
+    for dias in FAIXAS:
+        if not restantes:
+            break
+        achados = {p["id"] for p in fetch_all({**params, "last_published_at": desde(dias)})}
+        for i in restantes & achados:
+            faixa[i] = (ant, dias)
+        restantes -= achados
+        ant = dias
+    for i in restantes:
+        faixa[i] = (FAIXAS[-1], None)
+    return faixa
+
+
+def aplicar_idades(alert, items, idades, agora):
+    desconhecidos = [p["id"] for p in items if p["id"] not in idades and not p.get("_recente")]
+    faixas = classificar_idade(alert, desconhecidos) if desconhecidos else {}
+    for p in items:
+        if p["id"] not in idades:
+            mn, mx = (0, LOOKBACK_DAYS) if p.get("_recente") else faixas.get(p["id"], (FAIXAS[-1], None))
+            idades[p["id"]] = {"desde": agora.isoformat(timespec="seconds"), "min": mn, "max": mx}
+        r = idades[p["id"]]
+        d = max(0, (agora - datetime.fromisoformat(r["desde"])).days)
+        p["idade"] = [r["min"] + d, None if r["max"] is None else r["max"] + d]
+        p.pop("_recente", None)
 
 
 # ---------- anúncios acompanhados ----------
@@ -238,6 +287,7 @@ def check(simulate=0, send=True):
     watch = load("watch.json", [])
     wstate = load("watchstate.json", {})
     antes = load("results.json", {})
+    idades, agora, ids_atuais = load("idades.json", {}), datetime.now(BRT), set()
     results = {"atualizado": now_iso(), "alertas": {}, "erros": {}, "eventos": []}
     novos_por_alerta = {}
 
@@ -247,6 +297,8 @@ def check(simulate=0, send=True):
         key, sig = a["nome"], alert_sig(a)
         try:
             items = [p for p in search(a) if p["id"] not in discarded]
+            aplicar_idades(a, items, idades, agora)
+            ids_atuais.update(p["id"] for p in items)
         except Exception as e:
             results["erros"][key] = str(e)[:200]
             print(f"[{key}] ERRO: {e}")
@@ -276,6 +328,7 @@ def check(simulate=0, send=True):
     results["eventos"] = (eventos + antes.get("eventos", []))[:KEEP_EVENTS]
 
     save("seen.json", seen)
+    save("idades.json", {k: v for k, v in idades.items() if k in ids_atuais})
     save("watchstate.json", wstate)
     save("results.json", results)
 

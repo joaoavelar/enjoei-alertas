@@ -265,7 +265,8 @@ function limparAlerta(a) {
   const nome = (a.nome || a.item || '').trim();
   if (!nome) throw new Error('Informe o nome ou o item.');
   const o = {nome, item: (a.item || '').trim() || null, marca: (a.marca || '').trim() || null, cor: (a.cor || '').trim() || null,
-    tamanho: (a.tamanho || '').trim() || null, preco_min: num(a.preco_min), preco_max: num(a.preco_max), ativo: a.ativo !== false};
+    tamanho: (a.tamanho || '').trim() || null, preco_min: num(a.preco_min), preco_max: num(a.preco_max),
+    excluir: (a.excluir || '').trim() || null, ativo: a.ativo !== false};
   if (!o.item && !o.marca && !o.cor) o.item = nome;
   return o;
 }
@@ -385,6 +386,7 @@ const CAMPOS_ALERTA = [
   {nome: 'item', rotulo: 'Item', dica: 'tênis'}, {nome: 'marca', rotulo: 'Marca', dica: 'opcional'},
   {nome: 'cor', rotulo: 'Cor', dica: 'opcional'}, {nome: 'tamanho', rotulo: 'Tamanho', dica: 'M ou 38, 39'},
   {nome: 'preco_min', rotulo: 'Preço mínimo (R$)', num: true}, {nome: 'preco_max', rotulo: 'Preço máximo (R$)', num: true},
+  {nome: 'excluir', rotulo: 'Excluir anúncios com as palavras', dica: 'ex.: infantil, kit, réplica', cheio: true},
 ];
 const novoAlerta = () => folha('Novo alerta', CAMPOS_ALERTA, {ok: 'Criar alerta', onOk: v => salvarAlerta(v, null)});
 const editarAlerta = a => folha('Editar alerta', CAMPOS_ALERTA, {valores: a, onOk: v => salvarAlerta({...v, ativo: a.ativo}, a.nome)});
@@ -392,13 +394,24 @@ const pedirAlvo = w => folha('Preço-alvo', [{nome: 'alvo', rotulo: 'Avisar quan
   {valores: {alvo: w.alvo ?? ''}, onOk: v => definirAlvo(w.id, num(v.alvo))});
 
 // ---------- componentes ----------
+// O Enjoei não informa a data de publicação: a idade é uma faixa estimada pelo robô.
+function textoIdade(i) {
+  if (!Array.isArray(i)) return '';
+  const [a, b] = i;
+  if (b == null) return `no ar há mais de ${a} dias`;
+  if (b <= 2) return 'no ar há até 2 dias';
+  if (a === b) return `no ar há ${a} dias`;
+  return `no ar há ${a}–${b} dias`;
+}
+
 function cartaoItem(p, {novo = false, seguindo = false} = {}) {
-  const meta = [p.brand, p.size && 'tam. ' + p.size].filter(Boolean).join(' · ');
+  const meta = [p.brand, p.size && 'tam. ' + p.size].filter(Boolean).join(' · '), idade = textoIdade(p.idade);
   return h('div', {class: 'item' + (novo ? ' novo' : '')},
     novo && h('span', {class: 'selo'}, 'NOVO'),
     h('a', {class: 'corpo', href: itemUrl(p.path), target: '_blank', rel: 'noopener'},
       p.photo ? h('img', {class: 'foto', loading: 'lazy', alt: '', src: foto(p.photo)}) : h('div', {class: 'foto'}),
       h('div', {class: 'info'}, h('div', {class: 'titulo'}, p.title), meta && h('div', {class: 'meta'}, meta),
+        idade && h('div', {class: 'meta idade', title: 'Estimativa: o Enjoei não informa a data exata de publicação'}, idade),
         h('div', {class: 'preco'}, brl(p.price)))),
     h('div', {class: 'item-acoes'},
       h('button', {class: 'ib' + (seguindo ? ' on' : ''), title: seguindo ? 'Acompanhando' : 'Acompanhar preço', 'aria-label': 'Acompanhar',
@@ -495,7 +508,7 @@ function telaInicio() {
 function secaoAlerta(a) {
   const ativo = a.ativo !== false, r = S.results.alertas[a.nome], erro = S.results.erros?.[a.nome];
   const desc = descartadosIds(), seguindo = new Set(S.watch.map(w => w.id));
-  const filtros = [a.item, a.marca, a.cor, a.tamanho && 'tam. ' + a.tamanho,
+  const filtros = [a.item, a.marca, a.cor, a.tamanho && 'tam. ' + a.tamanho, a.excluir && 'sem: ' + a.excluir,
     (a.preco_min != null || a.preco_max != null) && [a.preco_min != null && 'de ' + brl(a.preco_min), a.preco_max != null && 'até ' + brl(a.preco_max)].filter(Boolean).join(' ')].filter(Boolean);
   let itens = [], novosSet = new Set();
   if (r && ativo) {
@@ -557,7 +570,7 @@ function telaAcomp() {
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
 }
 
-const APP_VERSAO = '10';
+const APP_VERSAO = '11';
 
 async function diagnostico(box) {
   const c = ghCfg(), linhas = [
