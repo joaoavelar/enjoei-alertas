@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-16T15:14:40-03:00",
+ "atualizado": "2026-11-16T15:15:09-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -82,9 +82,7 @@
      "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
     }
    ],
-   "new_ids": [
-    "150463954"
-   ],
+   "new_ids": [],
    "primeira_execucao": false
   },
   "asics 2": {
