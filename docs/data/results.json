@@ -1,5 +1,5 @@
 {
- "atualizado": "2026-11-16T15:32:17-03:00",
+ "atualizado": "2026-11-16T15:43:24-03:00",
  "alertas": {
   "teste": {
    "items": [
@@ -10,7 +10,11 @@
      "brand": "galapagos",
      "price": 250,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy82MzUwMDAvZTIxNWM3ZDY4Y2JmNmEzZWFmOTIyMDdkODZmM2Q2ZWMuanBn",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "152182943",
@@ -19,7 +23,11 @@
      "brand": "galapagos",
      "price": 460,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85MDYxODg3LzJjNmVjZjA0NzZiOTMwN2VhMTA4MDYzOTFmNWQyNDZmLmpwZw"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85MDYxODg3LzJjNmVjZjA0NzZiOTMwN2VhMTA4MDYzOTFmNWQyNDZmLmpwZw",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "152565589",
@@ -28,7 +36,11 @@
      "brand": "galapagos",
      "price": 1200,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvZWYyM2RiNGViZjQ0YjNhMzdiZDc3YTFkY2IyMmY1MTIuanBn"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvZWYyM2RiNGViZjQ0YjNhMzdiZDc3YTFkY2IyMmY1MTIuanBn",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "149385000",
@@ -37,7 +49,11 @@
      "brand": "galapagos",
      "price": 1500,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvYjFjYTFkMDVjZTM4OGNhNTQzOWIwOTRiMzA3YmM4NjguanBn"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy84MTk1NTYvYjFjYTFkMDVjZTM4OGNhNTQzOWIwOTRiMzA3YmM4NjguanBn",
+     "idade": [
+      30,
+      null
+     ]
     }
    ],
    "new_ids": [],
@@ -52,7 +68,11 @@
      "brand": "asics",
      "price": 322,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjIzNDY0NS8xMjU3NzEwYjAxMDg0ODgwMDgzNWY4MTIyZmMxNTVhZS5qcGc",
+     "idade": [
+      2,
+      7
+     ]
     },
     {
      "id": "153984511",
@@ -61,7 +81,11 @@
      "brand": "asics",
      "price": 322,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MzY5MTU4NC83NzRjMjdjYTY5YTU2OWM4MzZiMDVkNjI4Y2M4MWNiYy5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "150463954",
@@ -70,7 +94,11 @@
      "brand": "asics",
      "price": 350,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODc1OTg0LzNiOTQ5YWYwYTc3NTgyMGE0YTA4YWUzZGQ3NDVlNjg2LmpwZw"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy83ODc1OTg0LzNiOTQ5YWYwYTc3NTgyMGE0YTA4YWUzZGQ3NDVlNjg2LmpwZw",
+     "idade": [
+      0,
+      2
+     ]
     },
     {
      "id": "147298110",
@@ -79,7 +107,11 @@
      "brand": "asics",
      "price": 365,
      "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8xMTI5MjE5LzI0NGZlOWI1OGIzMjRiNjNhNDQ4ODY1M2RhMDBhOGRkLmpwZw",
+     "idade": [
+      30,
+      null
+     ]
     }
    ],
    "new_ids": [],
@@ -94,7 +126,11 @@
      "brand": "asics",
      "price": 209,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI0NzQwOS85MzdhZTFjMzQ4MjEwYmRjMGI2MzAyMTNiMTc4ZjhkMS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI0NzQwOS85MzdhZTFjMzQ4MjEwYmRjMGI2MzAyMTNiMTc4ZjhkMS5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "153680388",
@@ -103,7 +139,11 @@
      "brand": "asics",
      "price": 216,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTY2NDg0Ny8yMzNiYTYzZWNkYWJiZGVhYzJjNjE1MjVlMzQxNzY2Ny5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yOTY2NDg0Ny8yMzNiYTYzZWNkYWJiZGVhYzJjNjE1MjVlMzQxNzY2Ny5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "154364144",
@@ -112,7 +152,11 @@
      "brand": "asics",
      "price": 220,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjU3Mjg1Ni82YTcyNmY5MjNkOThiODMwNzdjZWUwMWQwNDAxNDA3Yi5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "148659160",
@@ -121,7 +165,11 @@
      "brand": "asics",
      "price": 250,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTAyNTkwNC9mODFkN2IyMjMwMzdjZTJkZDc3NzYxOTllYmQ4MTg4NC5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MTAyNTkwNC9mODFkN2IyMjMwMzdjZTJkZDc3NzYxOTllYmQ4MTg4NC5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "154539627",
@@ -130,7 +178,11 @@
      "brand": "asics",
      "price": 270,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDQwODAwMy8wYjQxZTE5OWQ4MzdiOWM5MzIyZDkwODViYmEwMjNlNC5qcGc",
+     "idade": [
+      2,
+      7
+     ]
     },
     {
      "id": "152175664",
@@ -139,7 +191,11 @@
      "brand": "asics",
      "price": 300,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNzI1ODM4OC8zODI1ZGMxZDFjMmUyOTU5ODU5NTM2NjNmMjg5M2U2My5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "146070195",
@@ -148,7 +204,11 @@
      "brand": "asics",
      "price": 313,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjY0MDMwMS9mODE3ODVhNjlhYzNiMzVjNjBiODQ1NWQyZWM0M2I4OS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "152625909",
@@ -157,7 +217,11 @@
      "brand": "asics",
      "price": 325,
      "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83YWY1NDUwZDk1MDQ3MDkyODE5NzFjZmRmZWEwZGNmMy5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "154764685",
@@ -166,7 +230,11 @@
      "brand": "asics",
      "price": 339,
      "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83ZTM1ZDMyMmQyYmEzNjcwYzhhNDE4MWI1ZDhkOTRhZi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDg5NzIzNi83ZTM1ZDMyMmQyYmEzNjcwYzhhNDE4MWI1ZDhkOTRhZi5qcGc",
+     "idade": [
+      2,
+      7
+     ]
     },
     {
      "id": "153216501",
@@ -175,7 +243,11 @@
      "brand": "asics",
      "price": 349,
      "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDQ5ODUzMS83MzIyYTQxZGE3ODg2NWIzMWMyYzI5MTVjYWVkYzllZS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDQ5ODUzMS83MzIyYTQxZGE3ODg2NWIzMWMyYzI5MTVjYWVkYzllZS5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "153577420",
@@ -184,7 +256,11 @@
      "brand": "asics",
      "price": 350,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjUxNTI5OC8zMjlhNzk4NDkwYTQ0YzgzZWFmYjM4OTI3MzhlOTA4Mi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjUxNTI5OC8zMjlhNzk4NDkwYTQ0YzgzZWFmYjM4OTI3MzhlOTA4Mi5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "152471318",
@@ -193,7 +269,11 @@
      "brand": "asics",
      "price": 383,
      "size": "39",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMjg5MDQzNC8xYjExODJhN2YwZGM1YzY2MDFjNDMzOGJjY2JmOTA5ZS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "154566358",
@@ -202,7 +282,11 @@
      "brand": "asics",
      "price": 388,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjcxMjkzMi9hZTk1MzU4YmFhNTBhNWVmN2IyNGZjMDc1YWEzOTE2OS5qcGc",
+     "idade": [
+      2,
+      7
+     ]
     },
     {
      "id": "151092850",
@@ -211,7 +295,11 @@
      "brand": "asics",
      "price": 398,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MjA4NDg2NC9iNzAyOThmMzM2OTgzNGI0MzA0YzY5MzhkNTUwY2E0YS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "152472803",
@@ -220,7 +308,11 @@
      "brand": "asics",
      "price": 400,
      "size": "41",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDY1Njc0NC8xOTgxZjUzMDFkNmQxMzUxYTk0MzZmMDU1MTc2NmI2Yy5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "154722468",
@@ -229,7 +321,11 @@
      "brand": "asics",
      "price": 400,
      "size": "40",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjE5Njk1MS9iMmNiMGQ0MmY1NTJmN2E0NzU5ODEwOTY1MzVkZDMyMC5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjE5Njk1MS9iMmNiMGQ0MmY1NTJmN2E0NzU5ODEwOTY1MzVkZDMyMC5qcGc",
+     "idade": [
+      2,
+      7
+     ]
     }
    ],
    "new_ids": [],
@@ -244,7 +340,11 @@
      "brand": "artengo",
      "price": 36,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDk3OTQyMC9iMTdlYjM5NWNhMmI4MjkwNmJiMDlhOWY2NzRkNGI1YS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDk3OTQyMC9iMTdlYjM5NWNhMmI4MjkwNmJiMDlhOWY2NzRkNGI1YS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "137103113",
@@ -253,7 +353,11 @@
      "brand": "artengo",
      "price": 60,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDA2NjY2OC81YTI2MjJhNDYwNmNiNjU3NTYxZDZhZGRjZjcyMzlkMi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDA2NjY2OC81YTI2MjJhNDYwNmNiNjU3NTYxZDZhZGRjZjcyMzlkMi5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "132647049",
@@ -262,7 +366,11 @@
      "brand": "artengo",
      "price": 70,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDkyMzkwMy9mNjI5YmYzYzg4YWJlZWRmZmU5YzY4MzRiYTkxMTAyNy5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy80MDkyMzkwMy9mNjI5YmYzYzg4YWJlZWRmZmU5YzY4MzRiYTkxMTAyNy5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "128594736",
@@ -271,7 +379,11 @@
      "brand": "artengo",
      "price": 70,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yODg4ODU1NS82YzI0OGVkZWEwODQ3MWZjMTYwOTQxZjRhN2UyNDFhOS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yODg4ODU1NS82YzI0OGVkZWEwODQ3MWZjMTYwOTQxZjRhN2UyNDFhOS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "153693896",
@@ -280,7 +392,11 @@
      "brand": "artengo",
      "price": 93,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDY2Njc3MS9iNTc5ODIxMmE1MjQxNGI2Y2FmZDA3NjAxZDZjZTQwOS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNDY2Njc3MS9iNTc5ODIxMmE1MjQxNGI2Y2FmZDA3NjAxZDZjZTQwOS5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "91006805",
@@ -289,7 +405,11 @@
      "brand": "artengo",
      "price": 120,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDYxOTg3My80N2ZjMDNhYjVlNGQ5NmY3ZjNmNzUzZDk2NTBiNDljYS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDYxOTg3My80N2ZjMDNhYjVlNGQ5NmY3ZjNmNzUzZDk2NTBiNDljYS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "151516824",
@@ -298,7 +418,11 @@
      "brand": "artengo",
      "price": 150,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDQzMzA1OS80MDdhNGYyNGQ1MjBmMGIxNWM3ZmQwZGQ3NzZlZDI5NS5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDQzMzA1OS80MDdhNGYyNGQ1MjBmMGIxNWM3ZmQwZGQ3NzZlZDI5NS5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     }
    ],
    "new_ids": [],
@@ -313,7 +437,11 @@
      "brand": "sem  marca",
      "price": 39,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NjQwOS8xNWM3N2M5NDUyZWE0MDM1MThhOTQ3NWEwOTVjZGE1Mi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy85NjQwOS8xNWM3N2M5NDUyZWE0MDM1MThhOTQ3NWEwOTVjZGE1Mi5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "145108335",
@@ -322,7 +450,11 @@
      "brand": "rock the mountain",
      "price": 98,
      "size": "G",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDYwMDU0My8yY2VkYjcwNGY4ODRmMWI1MGY3NTJkMDgyOWY4ODM5Ni5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zMDYwMDU0My8yY2VkYjcwNGY4ODRmMWI1MGY3NTJkMDgyOWY4ODM5Ni5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     },
     {
      "id": "153737444",
@@ -331,7 +463,11 @@
      "brand": "festival rock the mountain",
      "price": 219,
      "size": "M",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMjY5NDI3OS9kZWI4ZmI0YWUwZDFhZDkzZDBjMGM0YTA2NjczODk5Yi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMjY5NDI3OS9kZWI4ZmI0YWUwZDFhZDkzZDBjMGM0YTA2NjczODk5Yi5qcGc",
+     "idade": [
+      7,
+      30
+     ]
     },
     {
      "id": "152975639",
@@ -340,7 +476,11 @@
      "brand": "prado.rio",
      "price": 290,
      "size": "",
-     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc"
+     "photo": "czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDI3ODMxMC82Y2ZmZjQyMTRlZmZjYjFjY2I4ZDYwNGY5OGM1NWNjYi5qcGc",
+     "idade": [
+      30,
+      null
+     ]
     }
    ],
    "new_ids": [],
