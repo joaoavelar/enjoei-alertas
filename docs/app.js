@@ -1,5 +1,10 @@
 'use strict';
-/* Alertas Enjoei — app (PWA). Dados em data/*.json; escreve via servidor local ou API do GitHub. */
+/* Alertas Enjoei — app (PWA) com login. Dados de cada pessoa no Supabase; um robô no GitHub faz as buscas. */
+
+const SUPA_URL = 'https://rfhaghhpvpafuvjfnuju.supabase.co';
+const SUPA_KEY = 'sb_publishable_Ahf0vPqdV2NQRpQQ9p_8xA_xf4BiQ0V';   // chave pública (vai no app por natureza)
+const VAPID_PUBLICA = 'BJW_JpFid6g-76elJ7GlrZU9ZXHBZJ3U2eInkvJydHxqj6wqFmbB9EbQ2dHU_EDInh5-CBQwku-aHW2lC0s0CG4';
+const APP_VERSAO = '12';
 
 // ---------- utilidades ----------
 const $ = s => document.querySelector(s);
@@ -26,6 +31,7 @@ const ICONS = {
   trash: '<path d="M3 6h18M19 6l-1 14H6L5 6M8 6V4h8v2"/>',
   down: '<path d="M6 9l6 6 6-6"/>',
   up: '<path d="M18 15l-6-6-6 6"/>',
+  bell: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',
 };
 const ic = (n, s = 20) => {
   const w = document.createElement('span');
@@ -37,6 +43,7 @@ const brl = v => v == null ? '—' : 'R$ ' + Number(v).toLocaleString('pt-BR', {
 const foto = id => id ? `https://photos.enjoei.com.br/public/300x300/${id}` : '';
 const itemUrl = p => 'https://www.enjoei.com.br/p/' + encodeURI(p || '');
 const num = v => { v = String(v ?? '').trim().replace(',', '.'); return v === '' || isNaN(v) ? null : Number(v); };
+const txt = v => { v = String(v ?? '').trim(); return v === '' ? null : v; };
 const ago = iso => {
   if (!iso) return '';
   const s = (Date.now() - new Date(iso)) / 1000;
@@ -46,7 +53,6 @@ const ago = iso => {
   const d = Math.round(s / 86400);
   return d === 1 ? 'ontem' : `há ${d} dias`;
 };
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 function toast(msg, {erro = false, acao = null, ms = 5000} = {}) {
   const t = h('div', {class: 'toast' + (erro ? ' erro' : '')}, h('span', {}, msg),
@@ -55,303 +61,201 @@ function toast(msg, {erro = false, acao = null, ms = 5000} = {}) {
   setTimeout(() => t.remove(), ms);
 }
 
-// ---------- armazenamento (servidor local ou GitHub) ----------
-const GH_KEY = 'enjoei.gh';
-const ghCfg = () => { try { return JSON.parse(localStorage.getItem(GH_KEY)) || null; } catch { return null; } };
+// mensagens do banco em português simples
+function msgErro(e) {
+  const m = (e && (e.message || e.error_description || e.msg)) || String(e);
+  if (/Limite atingido/.test(m)) return m;
+  if (/duplicate key|unique/i.test(m)) return 'Já existe um item com esse nome.';
+  if (/coalesce|check constraint.*alerts/i.test(m)) return 'Informe ao menos item, marca ou cor.';
+  if (/Cadastros temporariamente encerrados|saving new user/i.test(m)) return 'Novos cadastros estão temporariamente encerrados.';
+  if (/rate limit|too many|security purposes/i.test(m)) return 'Muitas tentativas. Aguarde um minuto e tente de novo.';
+  if (/Token has expired|invalid/i.test(m) && /otp|token/i.test(m)) return 'Código inválido ou vencido. Peça um novo.';
+  if (/Failed to fetch|NetworkError|Load failed/i.test(m)) return 'Sem conexão com o servidor. Verifique a internet.';
+  return m;
+}
 
-// A conexão fica em dois lugares (localStorage e IndexedDB) e o app pede armazenamento persistente,
-// para o navegador não apagar. Se um dos dois sumir, ela é restaurada do outro.
-const idb = (modo, fn) => new Promise((ok, err) => {
-  const r = indexedDB.open('enjoei', 1);
-  r.onupgradeneeded = () => r.result.createObjectStore('cfg');
-  r.onerror = () => err(r.error);
-  r.onsuccess = () => { const tx = r.result.transaction('cfg', modo), q = fn(tx.objectStore('cfg')); tx.oncomplete = () => ok(q && q.result); tx.onerror = () => err(tx.error); };
+// ---------- Supabase ----------
+const sb = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
+  auth: {persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'enjoei.sessao'},
 });
-// pede armazenamento permanente sem esperar: alguns navegadores demoram ou nunca respondem
-const persistir = () => { try { navigator.storage?.persist?.()?.catch?.(() => {}); } catch {} };
-async function salvarCfg(c) {
-  try { localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch {}
-  try { await idb('readwrite', s => s.put(c, 'gh')); } catch {}
-  await persistir();
+async function q(promessa) {   // executa e lança erro legível
+  const {data, error} = await promessa;
+  if (error) throw new Error(msgErro(error));
+  return data;
 }
-async function apagarCfg() {
-  try { localStorage.removeItem(GH_KEY); } catch {}
-  try { await idb('readwrite', s => s.delete('gh')); } catch {}
-}
-const b64url = s => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-const deB64url = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), ch => ch.charCodeAt(0)));
-const linkAcesso = c => `${location.origin}${location.pathname}#conectar=${b64url(JSON.stringify({repo: c.repo, branch: c.branch || 'main', token: c.token}))}`;
-async function recuperarCfg() {
-  // 1) link de acesso (#conectar=...): conecta este aparelho e tira o token da barra de endereço
-  const m = location.hash.match(/conectar=([A-Za-z0-9_-]+)/);
-  if (m) {
-    try { const c = JSON.parse(deB64url(m[1])); if (c && c.repo && c.token) { await salvarCfg(c); toast('Aparelho conectado ao GitHub.'); } }
-    catch { toast('Link de acesso inválido.', {erro: true}); }
-    history.replaceState(null, '', location.pathname + location.search);
-  }
-  // 2) se o navegador apagou o localStorage, restaura da cópia no IndexedDB
-  if (!ghCfg()) {
-    try { const c = await idb('readonly', s => s.get('gh')); if (c && c.token) localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch {}
-  }
-  if (ghCfg()) await persistir();
-}
-const guessRepo = () => {
-  const m = location.hostname.match(/^(.+)\.github\.io$/), p = location.pathname.split('/')[1];
-  return m && p ? `${m[1]}/${p}` : '';
-};
-const b64 = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
-let fila = Promise.resolve();
-
-const Store = {
-  mode: 'readonly',
-  async detect() {
-    try {
-      const r = await fetch('api/status', {cache: 'no-store'});
-      if (r.ok && 'running' in await r.json()) return (this.mode = 'local');
-    } catch { /* sem servidor local */ }
-    return (this.mode = ghCfg()?.token ? 'github' : 'readonly');
-  },
-  gh(path, opts = {}) {
-    const c = ghCfg();
-    return fetch(`https://api.github.com/repos/${c.repo}/contents/docs/data/${path}`, {
-      ...opts, cache: 'no-store',
-      headers: {Authorization: `Bearer ${c.token}`, 'X-GitHub-Api-Version': '2022-11-28', ...(opts.headers || {})},
-    });
-  },
-  async read(name, def) {
-    if (this.mode === 'github') {
-      const c = ghCfg();
-      try {
-        const r = await this.gh(`${name}?ref=${encodeURIComponent(c.branch || 'main')}`, {headers: {Accept: 'application/vnd.github.raw+json'}});
-        this.ghFalhou = false;
-        if (r.status === 401) { this.tokenRecusado = true; throw new TypeError('token recusado'); }
-        this.tokenRecusado = false;
-        if (r.status === 404) return def;
-        if (!r.ok) throw new Error(`GitHub: ${r.status}`);
-        return JSON.parse(await r.text());
-      } catch (e) {
-        if (!(e instanceof TypeError)) throw e;
-        if (!this.tokenRecusado) this.ghFalhou = true;   // falha de rede ou token recusado: usa a cópia publicada no site
-      }
-    }
-    const r = await fetch(`data/${name}?t=${Date.now()}`, {cache: 'no-store'});
-    if (r.status === 404) return def;
-    if (!r.ok) throw new Error(`Falha ao ler ${name}`);
-    return r.json();
-  },
-  write(name, data) {   // serializa as gravações para não dar conflito de versão
-    const op = fila.then(() => this._write(name, data));
-    fila = op.catch(() => {});
-    return op;
-  },
-  async _write(name, data) {
-    if (this.mode === 'readonly') throw new Error('Somente leitura: configure o acesso em Ajustes.');
-    if (this.mode === 'local') {
-      const r = await fetch(`data/${name}`, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});
-      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).erro || 'Falha ao salvar');
-      return;
-    }
-    const c = ghCfg(), branch = c.branch || 'main';
-    for (let tentativa = 0; tentativa < 3; tentativa++) {
-      const g = await this.gh(`${name}?ref=${encodeURIComponent(branch)}`);
-      const sha = g.ok ? (await g.json()).sha : undefined;
-      const r = await this.gh(name, {method: 'PUT', body: JSON.stringify({
-        message: `app: atualiza ${name}`, branch, sha, content: b64(JSON.stringify(data, null, 1))})});
-      if (r.ok) return;
-      if (r.status !== 409 && r.status !== 422) {
-        throw new Error(r.status === 401 ? 'Não salvou: o token do GitHub expirou ou é inválido. Crie um novo e atualize em Ajustes.' : r.status === 403 ? 'Token sem permissão (precisa de Contents: Read and write).' : `GitHub: ${r.status}`);
-      }
-      await sleep(600);
-    }
-    throw new Error('Conflito ao salvar. Tente de novo.');
-  },
-  async run() {
-    if (this.mode === 'local') {
-      const r = await fetch('api/run', {method: 'POST'});
-      if (!r.ok) throw new Error('Falha ao iniciar');
-    } else await this.write('run.json', {ts: new Date().toISOString()});   // o push dispara o workflow
-  },
-};
 
 // ---------- estado ----------
-let S = {alerts: [], watch: [], discarded: [], wstate: {}, results: {alertas: {}, erros: {}, eventos: []}};
-let carregado = false, tab = 'inicio', ultimoLoad = 0, esperando = false;
+let usuario = null, carregado = false, tab = 'inicio', ultimoLoad = 0, canal = null;
+let S = {alerts: [], results: {}, watch: [], discarded: [], events: [], vistos: new Set(), settings: null};
 const expandidos = new Set();
-const vistos = new Set(JSON.parse(localStorage.getItem('enjoei.vistos') || '[]'));
-const salvarVistos = () => localStorage.setItem('enjoei.vistos', JSON.stringify([...vistos].slice(-3000)));
-const evVistos = new Set((() => { try { return JSON.parse(localStorage.getItem('enjoei.ev.vistos') || '[]'); } catch { return []; } })());
-const salvarEvVistos = () => { try { localStorage.setItem('enjoei.ev.vistos', JSON.stringify([...evVistos].slice(-1000))); } catch {} };
-const chaveEv = e => `${e.tipo}|${e.id}|${e.quando}`;
-const recolhidos = new Set((() => { try { return JSON.parse(localStorage.getItem('enjoei.recolhidos') || '[]'); } catch { return []; } })());
-const salvarRecolhidos = () => { try { localStorage.setItem('enjoei.recolhidos', JSON.stringify([...recolhidos])); } catch {} };
-function alternarRecolhido(nome) { recolhidos.has(nome) ? recolhidos.delete(nome) : recolhidos.add(nome); salvarRecolhidos(); desenhar(); }
-function recolherTodos(fechar) { recolhidos.clear(); if (fechar) S.alerts.forEach(a => recolhidos.add(a.nome)); salvarRecolhidos(); desenhar(); }
-// uma novidade conta como vista se foi dispensada aqui ou, sendo "novo", se o anúncio já foi visto nas buscas
-const evVisto = e => evVistos.has(chaveEv(e)) || (e.tipo === 'novo' && vistos.has(e.id));
-const eventosValidos = () => { const desc = descartadosIds(); return (S.results.eventos || []).filter(e => !(e.tipo === 'novo' && desc.has(e.id))); };
-function marcarEvento(e, redesenhar = true) {
-  evVistos.add(chaveEv(e)); salvarEvVistos();
-  if (e.tipo === 'novo') { vistos.add(e.id); salvarVistos(); }
-  if (redesenhar) desenhar();
-}
-const descartadosIds = () => new Set(S.discarded.map(d => d.id));
+const descartadosIds = () => new Set(S.discarded.map(d => d.product_id));
 
 async function carregar(silencioso = false) {
   try {
-    const [alerts, watch, discarded, wstate, results] = await Promise.all([
-      Store.read('alerts.json', []), Store.read('watch.json', []), Store.read('discarded.json', []),
-      Store.read('watchstate.json', {}), Store.read('results.json', {alertas: {}, erros: {}, eventos: []})]);
-    S = {alerts, watch, discarded, wstate, results};
+    const [alerts, results, watch, discarded, events, vistos, settings] = await Promise.all([
+      q(sb.from('alerts').select('*').order('criado_em')),
+      q(sb.from('alert_results').select('alert_id,items,new_ids,primeira_execucao,erro,verificado_em')),
+      q(sb.from('watch').select('*').order('criado_em')),
+      q(sb.from('discarded').select('*').order('criado_em', {ascending: false})),
+      q(sb.from('events').select('*').order('quando', {ascending: false}).limit(100)),
+      q(sb.from('item_vistos').select('product_id')),
+      q(sb.from('settings').select('*').maybeSingle()),
+    ]);
+    S = {alerts, results: Object.fromEntries(results.map(r => [r.alert_id, r])), watch, discarded, events,
+      vistos: new Set(vistos.map(v => v.product_id)), settings};
     ultimoLoad = Date.now();
     carregado = true;
-    if (Store.tokenRecusado && !silencioso) toast('O token do GitHub expirou ou é inválido. Dá para ver tudo, mas para editar crie um token novo.', {erro: true, ms: 14000, acao: {label: 'Atualizar', fn: () => { location.hash = 'ajustes'; }}});
   } catch (e) {
     if (!silencioso) toast('Não consegui carregar os dados: ' + e.message, {erro: true});
   }
   desenhar();
 }
 
+// atualiza sozinho quando o robô grava algo novo para este usuário
+function ouvirMudancas() {
+  if (canal) sb.removeChannel(canal);
+  let pendente = null;
+  const recarregar = () => { clearTimeout(pendente); pendente = setTimeout(() => carregar(true), 800); };
+  canal = sb.channel('mudancas-' + usuario.id);
+  for (const t of ['alert_results', 'events', 'watch']) {
+    canal.on('postgres_changes', {event: '*', schema: 'public', table: t, filter: `user_id=eq.${usuario.id}`}, recarregar);
+  }
+  canal.subscribe();
+}
+
 // ---------- ações ----------
-async function gravar(nome, dados, {esperar = true} = {}) {
-  try {
-    await Store.write(nome, dados);
-    if (esperar) aguardarResultado();
-    return true;
-  } catch (e) {
-    toast(Store.mode === 'readonly' ? 'Não salvou: este aparelho ainda não está conectado ao GitHub.' : e.message,
-      {erro: true, ms: 12000, acao: Store.mode === 'readonly' ? {label: 'Conectar', fn: () => { location.hash = 'ajustes'; }} : null});
-    await carregar(true);
-    return false;
-  }
+async function agir(fn, okMsg) {
+  try { const r = await fn(); if (okMsg) toast(okMsg); return r ?? true; }
+  catch (e) { toast(msgErro(e), {erro: true, ms: 8000}); await carregar(true); return false; }
 }
-
-async function aguardarResultado() {
-  if (esperando) return;
-  esperando = true;
-  const base = S.results.atualizado;
-  const faixa = $('#faixa');
-  faixa.hidden = false;
-  faixa.textContent = Store.mode === 'github' ? 'Buscando no Enjoei… leva cerca de 1 minuto.' : 'Buscando no Enjoei…';
-  $('#btn-rodar').classList.add('gira');
-  const limite = Date.now() + 4 * 60 * 1000;
-  try {
-    while (Date.now() < limite) {
-      await sleep(Store.mode === 'local' ? 2500 : 6000);
-      let r;
-      try { r = await Store.read('results.json', null); } catch { continue; }
-      if (r && r.atualizado !== base) {
-        S.results = r;
-        const [wstate] = await Promise.all([Store.read('watchstate.json', {})]);
-        S.wstate = wstate;
-        toast('Atualizado!');
-        return;
-      }
-    }
-    toast('A verificação está demorando. Atualize em instantes.', {erro: true});
-  } finally {
-    esperando = false;
-    faixa.hidden = true;
-    $('#btn-rodar').classList.remove('gira');
-    desenhar();
-  }
+async function pedirVerificacao(silencioso = false) {
+  await q(sb.from('settings').update({pedido_verificacao: new Date().toISOString()}).eq('user_id', usuario.id));
+  if (!silencioso) toast('Pedido enviado. A busca roda em alguns minutos e o app atualiza sozinho.', {ms: 7000});
 }
-
-async function rodarAgora() {
-  try { await Store.run(); aguardarResultado(); }
-  catch (e) { toast(e.message, {erro: true}); }
-}
+const rodarAgora = () => agir(() => pedirVerificacao());
 
 function limparAlerta(a) {
   const nome = (a.nome || a.item || '').trim();
   if (!nome) throw new Error('Informe o nome ou o item.');
-  const o = {nome, item: (a.item || '').trim() || null, marca: (a.marca || '').trim() || null, cor: (a.cor || '').trim() || null,
-    tamanho: (a.tamanho || '').trim() || null, preco_min: num(a.preco_min), preco_max: num(a.preco_max),
-    excluir: (a.excluir || '').trim() || null, ativo: a.ativo !== false};
+  const o = {nome, item: txt(a.item), marca: txt(a.marca), cor: txt(a.cor), tamanho: txt(a.tamanho),
+    preco_min: num(a.preco_min), preco_max: num(a.preco_max), excluir: txt(a.excluir)};
   if (!o.item && !o.marca && !o.cor) o.item = nome;
   return o;
 }
-
 async function salvarAlerta(dados, original) {
-  const novo = limparAlerta(dados);
-  if (S.alerts.some(a => a.nome === novo.nome && a.nome !== original)) throw new Error('Já existe um alerta com esse nome.');
-  const lista = original ? S.alerts.map(a => a.nome === original ? novo : a) : [...S.alerts, novo];
-  S.alerts = lista;
-  delete S.results.alertas[original || novo.nome];
+  const a = limparAlerta(dados);
+  if (original) await q(sb.from('alerts').update(a).eq('id', original.id));
+  else await q(sb.from('alerts').insert(a));
+  await pedirVerificacao(true);
+  await carregar(true);
+  toast(original ? 'Alerta atualizado. A busca roda em alguns minutos.' : 'Alerta criado. A primeira busca roda em alguns minutos.', {ms: 7000});
+}
+const alternarAlerta = a => agir(async () => {
+  await q(sb.from('alerts').update({ativo: !a.ativo}).eq('id', a.id));
+  if (!a.ativo) await pedirVerificacao(true);
+  await carregar(true);
+});
+async function excluirAlerta(a) {
+  if (!confirm(`Excluir o alerta "${a.nome}"?`)) return;
+  await agir(async () => { await q(sb.from('alerts').delete().eq('id', a.id)); await carregar(true); });
+}
+function alternarRecolhido(a) {
+  a.recolhido = !a.recolhido;
   desenhar();
-  if (await gravar('alerts.json', lista)) toast(original ? 'Alerta atualizado.' : 'Alerta criado — buscando anúncios…');
+  sb.from('alerts').update({recolhido: a.recolhido}).eq('id', a.id).then(({error}) => error && toast(msgErro(error), {erro: true}));
 }
-
-async function alternarAlerta(nome) {
-  S.alerts = S.alerts.map(a => a.nome === nome ? {...a, ativo: a.ativo === false} : a);
+function recolherTodos(fechar) {
+  S.alerts.forEach(a => { a.recolhido = fechar; });
   desenhar();
-  await gravar('alerts.json', S.alerts);
+  sb.from('alerts').update({recolhido: fechar}).eq('user_id', usuario.id).then(({error}) => error && toast(msgErro(error), {erro: true}));
 }
 
-async function excluirAlerta(nome) {
-  if (!confirm(`Excluir o alerta "${nome}"?`)) return;
-  S.alerts = S.alerts.filter(a => a.nome !== nome);
-  delete S.results.alertas[nome];
-  desenhar();
-  await gravar('alerts.json', S.alerts, {esperar: false});
-}
-
-function idDoLink(txt) {
-  const m = String(txt).trim().match(/(\d{5,})\s*(?:[?#].*)?$/);
-  return m ? m[1] : null;
-}
-
+const idDoLink = t => { const m = String(t).trim().match(/(\d{5,})\s*(?:[?#].*)?$/); return m ? m[1] : null; };
 async function acompanhar(p) {
-  if (S.watch.some(w => w.id === p.id)) return;
-  S.watch = [...S.watch, {id: p.id, path: p.path || '', title: p.title || '', photo: p.photo || '', alvo: null, added: new Date().toISOString()}];
-  if (p.price != null && !S.wstate[p.id]) {
-    S.wstate[p.id] = {price: p.price, first_price: p.price, state: 'published', history: [], title: p.title, photo: p.photo, path: p.path, alvo_notificado: false};
-  }
-  desenhar();
-  if (await gravar('watch.json', S.watch)) toast('Acompanhando preço e disponibilidade.');
+  if (S.watch.some(w => w.product_id === p.id)) return;
+  await agir(async () => {
+    await q(sb.from('watch').insert({product_id: p.id, path: p.path || null, title: p.title || null, photo: p.photo || null}));
+    await pedirVerificacao(true);
+    await carregar(true);
+  }, 'Acompanhando preço e disponibilidade.');
 }
-
-async function acompanharLink(txt) {
-  const id = idDoLink(txt);
+async function acompanharLink(t) {
+  const id = idDoLink(t);
   if (!id) throw new Error('Não achei o número do anúncio nesse link.');
-  const m = String(txt).match(/\/p\/([^?#\s]+)/);
-  const path = m ? m[1] : '';
-  const title = path ? path.replace(/-?\d{5,}$/, '').replace(/-/g, ' ') : `anúncio ${id}`;
-  await acompanhar({id, path, title, photo: '', price: null});
+  const m = String(t).match(/\/p\/([^?#\s]+)/), path = m ? m[1] : '';
+  await acompanhar({id, path, title: path ? path.replace(/-?\d{5,}$/, '').replace(/-/g, ' ') : `anúncio ${id}`, photo: ''});
 }
-
-async function pararAcompanhar(id) {
-  S.watch = S.watch.filter(w => w.id !== id);
-  desenhar();
-  await gravar('watch.json', S.watch, {esperar: false});
+const pararAcompanhar = w => agir(async () => { await q(sb.from('watch').delete().eq('product_id', w.product_id).eq('user_id', usuario.id)); await carregar(true); });
+async function definirAlvo(w, valor) {
+  await q(sb.from('watch').update({alvo: valor}).eq('product_id', w.product_id).eq('user_id', usuario.id));
+  await pedirVerificacao(true);
+  await carregar(true);
+  if (valor != null) toast(`Aviso quando chegar a ${brl(valor)} ou menos.`);
 }
-
-async function definirAlvo(id, valor) {
-  S.watch = S.watch.map(w => w.id === id ? {...w, alvo: valor} : w);
-  desenhar();
-  if (await gravar('watch.json', S.watch) && valor != null) toast(`Aviso quando chegar a ${brl(valor)} ou menos.`);
-}
-
 async function descartar(p) {
   if (descartadosIds().has(p.id)) return;
-  S.discarded = [...S.discarded, {id: p.id, title: p.title, photo: p.photo, price: p.price, path: p.path}];
+  S.discarded.unshift({product_id: p.id, title: p.title, photo: p.photo, price: p.price, path: p.path});
   desenhar();
-  if (await gravar('discarded.json', S.discarded, {esperar: false})) {
-    toast('Anúncio descartado.', {acao: {label: 'Desfazer', fn: () => restaurar(p.id)}});
-  }
+  const ok = await agir(() => q(sb.from('discarded').insert({product_id: p.id, title: p.title, photo: p.photo, price: p.price, path: p.path})));
+  if (ok) toast('Anúncio descartado.', {acao: {label: 'Desfazer', fn: () => restaurar(p.id)}});
 }
-
 async function restaurar(id) {
-  S.discarded = S.discarded.filter(d => d.id !== id);
+  S.discarded = S.discarded.filter(d => d.product_id !== id);
   desenhar();
-  await gravar('discarded.json', S.discarded, {esperar: false});
+  await agir(() => q(sb.from('discarded').delete().eq('product_id', id).eq('user_id', usuario.id)));
 }
 
-function marcarVistos(nome) {
-  const nomes = nome ? [nome] : S.alerts.map(a => a.nome);
-  for (const n of nomes) for (const id of S.results.alertas[n]?.new_ids || []) vistos.add(id);
-  salvarVistos();
-  if (!nome) { for (const e of S.results.eventos || []) evVistos.add(chaveEv(e)); salvarEvVistos(); }
+// "visto" sincronizado entre aparelhos
+async function marcarItensVistos(ids) {
+  const novos = [...new Set(ids)].filter(id => !S.vistos.has(id));
+  if (!novos.length) return;
+  novos.forEach(id => S.vistos.add(id));
+  await q(sb.from('item_vistos').upsert(novos.map(product_id => ({product_id})), {onConflict: 'user_id,product_id', ignoreDuplicates: true}));
+}
+async function marcarEvento(e) {
+  e.visto = true;
   desenhar();
+  await agir(async () => {
+    await q(sb.from('events').update({visto: true}).eq('id', e.id));
+    if (e.tipo === 'novo') await marcarItensVistos([e.product_id]);
+  });
+}
+async function marcarVistos(alerta) {
+  const lista = alerta ? [alerta] : S.alerts;
+  const ids = lista.flatMap(a => S.results[a.id]?.new_ids || []);
+  if (!alerta) S.events.forEach(e => { e.visto = true; });
+  desenhar();
+  await agir(async () => {
+    await marcarItensVistos(ids);
+    if (!alerta) await q(sb.from('events').update({visto: true}).eq('user_id', usuario.id).eq('visto', false));
+  });
+  desenhar();
+}
+
+// ---------- notificações push ----------
+const pushSuportado = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window && location.protocol === 'https:';
+const b64ParaBytes = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+async function inscricaoAtual() {
+  if (!pushSuportado()) return null;
+  const reg = await navigator.serviceWorker.ready;
+  return reg.pushManager.getSubscription();
+}
+async function ativarPush() {
+  if (!pushSuportado()) throw new Error(/iPhone|iPad/.test(navigator.userAgent)
+    ? 'No iPhone, instale o app na tela inicial (Compartilhar → Adicionar à Tela de Início) e ative por ele.'
+    : 'Este navegador não aceita notificações.');
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') throw new Error('Permissão de notificação negada. Libere nas configurações do navegador.');
+  const reg = await navigator.serviceWorker.ready;
+  const sub = (await reg.pushManager.getSubscription()) ||
+    await reg.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: b64ParaBytes(VAPID_PUBLICA)});
+  const j = sub.toJSON();
+  await q(sb.from('push_subs').upsert({endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth, aparelho: navigator.userAgent.slice(0, 200)}, {onConflict: 'endpoint'}));
+  if (!S.settings?.avisar_push) await q(sb.from('settings').update({avisar_push: true}).eq('user_id', usuario.id));
+}
+async function desativarPush() {
+  const sub = await inscricaoAtual();
+  if (sub) { await q(sb.from('push_subs').delete().eq('endpoint', sub.endpoint)); await sub.unsubscribe(); }
 }
 
 // ---------- folha (formulário em diálogo) ----------
@@ -366,21 +270,20 @@ function folha(titulo, campos, {ok = 'Salvar', valores = {}, onOk}) {
     inputs[c.nome] = i;
     grade.append(h('label', {class: c.cheio ? 'cheio' : ''}, c.rotulo, i));
   }
+  const bt = h('button', {type: 'submit', class: 'btn pri'}, ok);
   f.append(h('h2', {}, titulo), grade, erro, h('div', {class: 'folha-bt'},
-    h('button', {type: 'button', class: 'btn fantasma', onclick: () => d.close()}, 'Cancelar'),
-    h('button', {type: 'submit', class: 'btn pri'}, ok)));
+    h('button', {type: 'button', class: 'btn fantasma', onclick: () => d.close()}, 'Cancelar'), bt));
   f.onsubmit = async ev => {
     ev.preventDefault();
-    try {
-      await onOk(Object.fromEntries(Object.entries(inputs).map(([k, i]) => [k, i.value])));
-      d.close();
-    } catch (e) { erro.textContent = e.message; }
+    bt.disabled = true;
+    try { await onOk(Object.fromEntries(Object.entries(inputs).map(([k, i]) => [k, i.value]))); d.close(); }
+    catch (e) { erro.textContent = msgErro(e); }
+    finally { bt.disabled = false; }
   };
   d.addEventListener('click', e => { if (e.target === d) d.close(); }, {once: true});
   d.showModal();
   Object.values(inputs)[0]?.focus();
 }
-
 const CAMPOS_ALERTA = [
   {nome: 'nome', rotulo: 'Nome do alerta', dica: 'ex.: tênis nike 39', cheio: true},
   {nome: 'item', rotulo: 'Item', dica: 'tênis'}, {nome: 'marca', rotulo: 'Marca', dica: 'opcional'},
@@ -389,13 +292,12 @@ const CAMPOS_ALERTA = [
   {nome: 'excluir', rotulo: 'Excluir anúncios com as palavras', dica: 'ex.: infantil, kit, réplica', cheio: true},
 ];
 const novoAlerta = () => folha('Novo alerta', CAMPOS_ALERTA, {ok: 'Criar alerta', onOk: v => salvarAlerta(v, null)});
-const editarAlerta = a => folha('Editar alerta', CAMPOS_ALERTA, {valores: a, onOk: v => salvarAlerta({...v, ativo: a.ativo}, a.nome)});
+const editarAlerta = a => folha('Editar alerta', CAMPOS_ALERTA, {valores: a, onOk: v => salvarAlerta(v, a)});
 const pedirAlvo = w => folha('Preço-alvo', [{nome: 'alvo', rotulo: 'Avisar quando o preço chegar a (R$) ou menos', num: true, cheio: true, dica: 'deixe vazio para remover'}],
-  {valores: {alvo: w.alvo ?? ''}, onOk: v => definirAlvo(w.id, num(v.alvo))});
+  {valores: {alvo: w.alvo ?? ''}, onOk: v => definirAlvo(w, num(v.alvo))});
 
 // ---------- componentes ----------
-// O Enjoei não informa a data de publicação: a idade é uma faixa estimada pelo robô.
-function textoIdade(i) {
+function textoIdade(i) {   // estimativa: o Enjoei não informa a data exata de publicação
   if (!Array.isArray(i)) return '';
   const [a, b] = i;
   if (b == null) return `no ar há mais de ${a} dias`;
@@ -408,7 +310,7 @@ function cartaoItem(p, {novo = false, seguindo = false} = {}) {
   const meta = [p.brand, p.size && 'tam. ' + p.size].filter(Boolean).join(' · '), idade = textoIdade(p.idade);
   return h('div', {class: 'item' + (novo ? ' novo' : '')},
     novo && h('span', {class: 'selo'}, 'NOVO'),
-    h('a', {class: 'corpo', href: itemUrl(p.path), target: '_blank', rel: 'noopener'},
+    h('a', {class: 'corpo', href: itemUrl(p.path), target: '_blank', rel: 'noopener', onclick: () => novo && marcarItensVistos([p.id]).catch(() => {})},
       p.photo ? h('img', {class: 'foto', loading: 'lazy', alt: '', src: foto(p.photo)}) : h('div', {class: 'foto'}),
       h('div', {class: 'info'}, h('div', {class: 'titulo'}, p.title), meta && h('div', {class: 'meta'}, meta),
         idade && h('div', {class: 'meta idade', title: 'Estimativa: o Enjoei não informa a data exata de publicação'}, idade),
@@ -434,8 +336,8 @@ function spark(hist) {
 }
 
 function cartaoAcomp(w) {
-  const s = S.wstate[w.id] || {};
-  const titulo = s.title || w.title || `Anúncio ${w.id}`, path = s.path || w.path, ph = s.photo || w.photo;
+  const s = w.estado || {};
+  const titulo = s.title || w.title || `Anúncio ${w.product_id}`, path = s.path || w.path, ph = s.photo || w.photo;
   const vendido = s.state === 'sold', removido = s.state === 'removido', fora = vendido || removido || (s.state && s.state !== 'published');
   const atual = s.price, ini = s.first_price;
   const dif = atual != null && ini != null ? atual - ini : 0;
@@ -458,7 +360,7 @@ function cartaoAcomp(w) {
       h('span', {class: 'chip' + (noAlvo ? ' novo' : '')}, w.alvo != null ? `Alvo: ${brl(w.alvo)}` : 'Sem preço-alvo'),
       h('button', {class: 'btn mini', onclick: () => pedirAlvo(w)}, ic('edit', 14), w.alvo != null ? 'Alterar alvo' : 'Definir alvo'),
       h('span', {style: 'flex:1'}),
-      h('button', {class: 'btn mini fantasma perigo', onclick: () => pararAcompanhar(w.id)}, 'Parar')));
+      h('button', {class: 'btn mini fantasma perigo', onclick: () => pararAcompanhar(w)}, 'Parar')));
   if (vendido) c.prepend(h('span', {class: 'selo cinza'}, 'VENDIDO'));
   else if (removido) c.prepend(h('span', {class: 'selo cinza'}, 'REMOVIDO'));
   else if (fora) c.prepend(h('span', {class: 'selo cinza'}, 'INDISPONÍVEL'));
@@ -469,27 +371,28 @@ function cartaoAcomp(w) {
 }
 
 const TAGS = {novo: 'NOVO', queda: 'PREÇO CAIU', alvo: 'NO PREÇO-ALVO', alta: 'PREÇO SUBIU', vendido: 'VENDIDO', removido: 'REMOVIDO'};
+const evVisto = e => e.visto || (e.tipo === 'novo' && S.vistos.has(e.product_id));
+const eventosValidos = () => { const d = descartadosIds(); return S.events.filter(e => !(e.tipo === 'novo' && d.has(e.product_id))); };
 
-// ---------- telas ----------
 function tudoNovo() {
   const desc = descartadosIds(), out = {};
   for (const a of S.alerts) {
-    if (a.ativo === false) continue;
-    const r = S.results.alertas[a.nome];
-    out[a.nome] = (r?.new_ids || []).filter(id => !vistos.has(id) && !desc.has(id));
+    if (!a.ativo) continue;
+    out[a.id] = (S.results[a.id]?.new_ids || []).filter(id => !S.vistos.has(id) && !desc.has(id));
   }
   return out;
 }
 
+// ---------- telas ----------
 function telaInicio() {
   const novos = Object.values(tudoNovo()).reduce((n, l) => n + l.length, 0);
-  const ativos = S.alerts.filter(a => a.ativo !== false).length;
+  const ativos = S.alerts.filter(a => a.ativo).length;
   const todos = eventosValidos(), pendentes = todos.filter(e => !evVisto(e)), jaVistos = todos.filter(evVisto).slice(0, 30);
   const linha = (e, comBotao) => h('div', {class: 'evento' + (comBotao ? '' : ' visto')},
     h('a', {class: 'lk', href: itemUrl(e.path), target: '_blank', rel: 'noopener', onclick: () => comBotao && setTimeout(() => marcarEvento(e), 400)},
       h('div', {class: 'foto', style: e.photo ? `background-image:url(${foto(e.photo)})` : ''}),
       h('div', {class: 'tx'}, h('span', {class: 'tag ' + e.tipo}, TAGS[e.tipo] || e.tipo.toUpperCase()),
-        h('div', {class: 'tt'}, e.titulo), h('div', {class: 'sub'}, `${e.detalhe} · ${ago(e.quando)}`))),
+        h('div', {class: 'tt'}, e.titulo), h('div', {class: 'sub'}, `${e.detalhe || ''} · ${ago(e.quando)}`))),
     comBotao && h('button', {class: 'ib', title: 'Marcar como visto', 'aria-label': 'Marcar como visto', style: 'flex:none;width:40px', onclick: () => marcarEvento(e)}, ic('check', 18)));
   return h('div', {},
     h('div', {class: 'stats'},
@@ -506,37 +409,38 @@ function telaInicio() {
 }
 
 function secaoAlerta(a) {
-  const ativo = a.ativo !== false, r = S.results.alertas[a.nome], erro = S.results.erros?.[a.nome];
-  const desc = descartadosIds(), seguindo = new Set(S.watch.map(w => w.id));
+  const r = S.results[a.id], ativo = a.ativo, fechado = a.recolhido;
+  const desc = descartadosIds(), seguindo = new Set(S.watch.map(w => w.product_id));
   const filtros = [a.item, a.marca, a.cor, a.tamanho && 'tam. ' + a.tamanho, a.excluir && 'sem: ' + a.excluir,
     (a.preco_min != null || a.preco_max != null) && [a.preco_min != null && 'de ' + brl(a.preco_min), a.preco_max != null && 'até ' + brl(a.preco_max)].filter(Boolean).join(' ')].filter(Boolean);
   let itens = [], novosSet = new Set();
   if (r && ativo) {
-    itens = r.items.filter(p => !desc.has(p.id)).sort((x, y) => (x.price ?? 1e12) - (y.price ?? 1e12));
-    novosSet = new Set(r.new_ids.filter(id => !vistos.has(id)));
+    itens = (r.items || []).filter(p => !desc.has(p.id)).sort((x, y) => (x.price ?? 1e12) - (y.price ?? 1e12));
+    novosSet = new Set((r.new_ids || []).filter(id => !S.vistos.has(id)));
   }
   const nNovos = itens.filter(p => novosSet.has(p.id)).length;
-  const aberto = expandidos.has(a.nome), visiveis = aberto ? itens : itens.slice(0, 12), fechado = recolhidos.has(a.nome);
+  const aberto = expandidos.has(a.id), visiveis = aberto ? itens : itens.slice(0, 12);
   return h('section', {class: 'alerta' + (ativo ? '' : ' pausado') + (fechado ? ' fechado' : '')},
     h('div', {class: 'alerta-cab'},
       h('div', {class: 'alerta-tit', role: 'button', tabindex: '0', 'aria-expanded': String(!fechado), title: fechado ? 'Abrir' : 'Minimizar',
-        onclick: () => alternarRecolhido(a.nome), onkeydown: ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); alternarRecolhido(a.nome); } }},
+        onclick: () => alternarRecolhido(a), onkeydown: ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); alternarRecolhido(a); } }},
         h('h3', {}, ic(fechado ? 'down' : 'up', 18), a.nome),
         h('div', {class: 'chips'}, !fechado && filtros.map(f => h('span', {class: 'chip'}, f)),
           ativo && r && h('span', {class: 'chip'}, `${itens.length} anúncios`),
           nNovos > 0 && h('span', {class: 'chip novo'}, `${nNovos} novos`),
           !ativo && h('span', {class: 'chip'}, 'pausado'))),
       !fechado && h('div', {class: 'acoes'},
-        h('button', {class: 'btn mini', 'aria-expanded': String(!fechado), onclick: () => alternarRecolhido(a.nome)}, ic(fechado ? 'down' : 'up', 14), fechado ? 'Abrir' : 'Minimizar'),
-        nNovos > 0 && h('button', {class: 'btn mini', onclick: () => marcarVistos(a.nome)}, ic('check', 14), 'Vistos'),
-        h('button', {class: 'btn mini', onclick: () => alternarAlerta(a.nome)}, ativo ? 'Pausar' : 'Retomar'),
+        h('button', {class: 'btn mini', 'aria-expanded': 'true', onclick: () => alternarRecolhido(a)}, ic('up', 14), 'Minimizar'),
+        nNovos > 0 && h('button', {class: 'btn mini', onclick: () => marcarVistos(a)}, ic('check', 14), 'Vistos'),
+        h('button', {class: 'btn mini', onclick: () => alternarAlerta(a)}, ativo ? 'Pausar' : 'Retomar'),
         h('button', {class: 'btn mini', onclick: () => editarAlerta(a)}, ic('edit', 14), 'Editar'),
-        h('button', {class: 'btn mini perigo', onclick: () => excluirAlerta(a.nome)}, ic('trash', 14)))),
+        h('button', {class: 'btn mini perigo', 'aria-label': 'Excluir alerta', onclick: () => excluirAlerta(a)}, ic('trash', 14)))),
     !fechado && ativo && !r && h('div', {class: 'vazio', style: 'margin:0 14px 14px'},
-      erro ? h('span', {}, h('b', {}, 'Erro na busca'), erro) : h('span', {}, h('b', {}, 'Aguardando a primeira busca…'), 'Ela roda sozinha em instantes.')),
-    !fechado && ativo && r && !itens.length && h('div', {class: 'vazio', style: 'margin:0 14px 14px'}, h('b', {}, 'Nenhum anúncio encontrado'), 'Tente relaxar os filtros.'),
+      h('span', {}, h('b', {}, 'Aguardando a primeira busca…'), 'Ela roda sozinha em alguns minutos.')),
+    !fechado && ativo && r?.erro && h('div', {class: 'vazio', style: 'margin:0 14px 14px'}, h('b', {}, 'Erro na busca'), r.erro),
+    !fechado && ativo && r && !r.erro && !itens.length && h('div', {class: 'vazio', style: 'margin:0 14px 14px'}, h('b', {}, 'Nenhum anúncio encontrado'), 'Tente relaxar os filtros.'),
     !fechado && visiveis.length > 0 && h('div', {class: 'grade'}, visiveis.map(p => cartaoItem(p, {novo: novosSet.has(p.id), seguindo: seguindo.has(p.id)}))),
-    !fechado && itens.length > 12 && h('div', {class: 'mais'}, h('button', {class: 'btn', onclick: () => { aberto ? expandidos.delete(a.nome) : expandidos.add(a.nome); desenhar(); }},
+    !fechado && itens.length > 12 && h('div', {class: 'mais'}, h('button', {class: 'btn', onclick: () => { aberto ? expandidos.delete(a.id) : expandidos.add(a.id); desenhar(); }},
       aberto ? 'Mostrar menos' : `Ver todos (${itens.length})`)));
 }
 
@@ -545,7 +449,7 @@ function telaBuscas() {
     h('div', {class: 'tit-sec'}, h('div', {}, h('h2', {}, 'Buscas'), h('div', {class: 'sub'}, 'Sempre do menor para o maior preço')),
       h('button', {class: 'btn pri', onclick: novoAlerta}, ic('plus', 16), 'Novo alerta')),
     S.alerts.length > 1 && h('div', {style: 'display:flex;justify-content:flex-end;margin:-4px 0 10px'},
-      S.alerts.every(a => recolhidos.has(a.nome))
+      S.alerts.every(a => a.recolhido)
         ? h('button', {class: 'btn mini fantasma', onclick: () => recolherTodos(false)}, ic('down', 14), 'Abrir todos')
         : h('button', {class: 'btn mini fantasma', onclick: () => recolherTodos(true)}, ic('up', 14), 'Minimizar todos')),
     S.alerts.length ? S.alerts.map(secaoAlerta)
@@ -554,131 +458,148 @@ function telaBuscas() {
       S.discarded.map(d => h('div', {class: 'evento', style: 'box-shadow:none;border:1px solid var(--linha);margin-top:10px'},
         h('div', {class: 'foto', style: d.photo ? `background-image:url(${foto(d.photo)})` : ''}),
         h('div', {class: 'tx'}, h('div', {class: 'tt'}, d.title), h('div', {class: 'sub'}, brl(d.price))),
-        h('button', {class: 'btn mini', onclick: () => restaurar(d.id)}, 'Restaurar')))));
+        h('button', {class: 'btn mini', onclick: () => restaurar(d.product_id)}, 'Restaurar')))));
 }
 
 function telaAcomp() {
   const campo = h('input', {placeholder: 'Cole o link do anúncio (enjoei.com.br/p/...)', 'aria-label': 'Link do anúncio', autocomplete: 'off'});
-  const lista = [...S.watch].sort((a, b) => (S.wstate[a.id]?.price ?? 1e12) - (S.wstate[b.id]?.price ?? 1e12));
+  const lista = [...S.watch].sort((a, b) => (a.estado?.price ?? 1e12) - (b.estado?.price ?? 1e12));
   return h('div', {},
-    h('div', {class: 'tit-sec'}, h('div', {}, h('h2', {}, 'Acompanhando'), h('div', {class: 'sub'}, 'Preço, histórico e vendido/removido')) ),
+    h('div', {class: 'tit-sec'}, h('div', {}, h('h2', {}, 'Acompanhando'), h('div', {class: 'sub'}, 'Preço, histórico e vendido/removido'))),
     h('form', {class: 'form-linha', onsubmit: async ev => {
       ev.preventDefault();
-      try { await acompanharLink(campo.value); campo.value = ''; } catch (e) { toast(e.message, {erro: true}); }
+      try { await acompanharLink(campo.value); campo.value = ''; } catch (e) { toast(msgErro(e), {erro: true}); }
     }}, campo, h('button', {class: 'btn pri'}, 'Acompanhar')),
     lista.length ? h('div', {class: 'lista'}, lista.map(cartaoAcomp))
       : h('div', {class: 'vazio'}, h('b', {}, 'Nenhum anúncio acompanhado'), 'Cole um link acima ou toque no olho em um anúncio das buscas.'));
-}
-
-const APP_VERSAO = '11';
-
-async function diagnostico(box) {
-  const c = ghCfg(), linhas = [
-    `Versão do app: ${APP_VERSAO}`, `Modo: ${Store.mode}`, `Endereço: ${location.href}`,
-    `Repositório: ${c?.repo || '(não configurado)'}`,
-    `Token salvo: ${c?.token ? `sim, ${c.token.length} caracteres${/^[\x21-\x7e]+$/.test(c.token) ? '' : ', COM CARACTERES INVÁLIDOS'}` : 'não'}`];
-  let copia = 'não'; try { copia = (await idb('readonly', s => s.get('gh')))?.token ? 'sim' : 'não'; } catch { copia = 'indisponível'; }
-  let persist = 'desconhecido'; try { persist = (await navigator.storage?.persisted?.()) ? 'sim' : 'não'; } catch {}
-  linhas.push(`Cópia de segurança: ${copia}`, `Armazenamento persistente: ${persist}`);
-  const mostra = () => { box.textContent = linhas.join('\n'); };
-  mostra();
-  const testa = async (nome, url, opts = {}) => {
-    try { const r = await fetch(url, {cache: 'no-store', ...opts}); linhas.push(`${nome}: HTTP ${r.status}`); }
-    catch (e) { linhas.push(`${nome}: FALHOU (${e.message})`); }
-    mostra();
-  };
-  await testa('Site', `data/results.json?t=${Date.now()}`);
-  await testa('GitHub sem token', 'https://api.github.com/zen');
-  if (c?.token) await testa('GitHub com token', `https://api.github.com/repos/${c.repo}/contents/docs/data/alerts.json?ref=${encodeURIComponent(c.branch || 'main')}`,
-    {headers: {Authorization: `Bearer ${c.token}`, 'X-GitHub-Api-Version': '2022-11-28', Accept: 'application/vnd.github.raw+json'}});
-  linhas.push('Fim do teste.'); mostra();
 }
 
 let conviteInstalar = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); conviteInstalar = e; if (tab === 'ajustes') desenhar(); });
 
 function telaAjustes() {
-  const c = ghCfg() || {repo: guessRepo(), branch: 'main', token: ''};
-  const modo = {local: ['Servidor local (este computador)', 'Edição liberada. Os dados são salvos nesta máquina.'],
-    github: ['GitHub conectado', 'Edição liberada. Cada alteração é salva no repositório e a busca roda no GitHub.'],
-    readonly: ['Somente leitura', 'Você pode ver os resultados, mas para criar alertas é preciso conectar o GitHub abaixo.']}[Store.mode];
-  const repo = h('input', {value: c.repo, placeholder: 'seu-usuario/enjoei-alertas', autocomplete: 'off', 'aria-label': 'Repositório'});
-  const branch = h('input', {value: c.branch || 'main', autocomplete: 'off', 'aria-label': 'Branch'});
-  const token = h('input', {type: 'password', value: c.token || '', placeholder: 'github_pat_…', autocomplete: 'off', 'aria-label': 'Token'});
+  const st = S.settings || {};
+  const pushBox = h('div', {class: 'sub', id: 'push-estado'}, 'Verificando…');
+  const pushBt = h('button', {class: 'btn pri'}, 'Ativar notificações neste aparelho');
+  (async () => {
+    const sub = await inscricaoAtual().catch(() => null);
+    if (!pushSuportado()) { pushBox.textContent = /iPhone|iPad/.test(navigator.userAgent) ? 'No iPhone, as notificações funcionam com o app instalado na tela inicial (Compartilhar → Adicionar à Tela de Início).' : 'Este navegador não aceita notificações.'; pushBt.hidden = true; return; }
+    if (sub && Notification.permission === 'granted') {
+      pushBox.textContent = 'Notificações ativas neste aparelho.';
+      pushBt.textContent = 'Desativar neste aparelho'; pushBt.className = 'btn';
+      pushBt.onclick = async () => { pushBt.disabled = true; await agir(desativarPush, 'Notificações desativadas neste aparelho.'); desenhar(); };
+    } else {
+      pushBox.textContent = Notification.permission === 'denied' ? 'As notificações estão bloqueadas no navegador. Libere nas configurações do site.' : 'Desativadas neste aparelho.';
+      pushBt.onclick = async () => { pushBt.disabled = true; const ok = await agir(ativarPush, 'Notificações ativadas!'); pushBt.disabled = false; if (ok) { await carregar(true); } };
+    }
+  })();
+  const alterna = (campo, rotulo) => h('label', {style: 'flex-direction:row;align-items:center;gap:10px;font-size:15px;color:var(--txt);font-weight:500;margin-top:8px'},
+    h('input', {type: 'checkbox', style: 'width:auto', checked: st[campo] ? true : null, onchange: async ev => {
+      const v = ev.target.checked;
+      await agir(async () => { await q(sb.from('settings').update({[campo]: v}).eq('user_id', usuario.id)); S.settings[campo] = v; }, v ? 'Ativado.' : 'Desativado.');
+    }}), rotulo);
   return h('div', {},
     h('div', {class: 'tit-sec'}, h('h2', {}, 'Ajustes'), h('span', {class: 'sub'}, `versão ${APP_VERSAO}`)),
-    h('div', {class: 'cartao'}, h('h3', {}, 'Conexão'), h('p', {}, h('b', {style: 'color:var(--txt)'}, modo[0]), ' — ', modo[1]),
-      Store.tokenRecusado && h('p', {style: 'color:var(--verm);font-weight:600'}, 'O GitHub recusou o token salvo neste aparelho (expirou, foi apagado ou está incorreto). Crie um token novo, cole abaixo e toque em “Salvar e conectar”.'),
-      Store.mode !== 'local' && h('form', {onsubmit: async ev => {
-        ev.preventDefault();
-        await salvarCfg({repo: repo.value.trim(), branch: branch.value.trim() || 'main', token: token.value.trim()});
-        await Store.detect(); await carregar();
-        toast(Store.mode === 'github' ? 'Conectado ao GitHub.' : 'Preencha o repositório e o token.', {erro: Store.mode !== 'github'});
-      }},
-        h('div', {class: 'campos'}, h('label', {class: 'cheio'}, 'Repositório (usuário/nome)', repo), h('label', {}, 'Branch', branch), h('label', {}, 'Token de acesso', token)),
-        h('div', {class: 'folha-bt', style: 'justify-content:flex-start'},
-          h('button', {class: 'btn pri'}, 'Salvar e conectar'),
-          ghCfg() && h('button', {type: 'button', class: 'btn perigo', onclick: async () => { if (!confirm('Desconectar este aparelho do GitHub?')) return; await apagarCfg(); await Store.detect(); await carregar(); }}, 'Desconectar'))),
-      Store.mode !== 'local' && h('details', {style: 'margin-top:12px'}, h('summary', {style: 'cursor:pointer;font-weight:600'}, 'Como criar o token'),
-        h('ol', {}, h('li', {}, 'GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.'),
-          h('li', {}, 'Em “Repository access”, escolha “Only select repositories” e marque só o repositório do app.'),
-          h('li', {}, 'Em Permissions → Repository permissions, deixe ', h('b', {}, 'Contents: Read and write'), '.'),
-          h('li', {}, 'Copie o token e cole acima. Ele fica salvo neste aparelho.'))),
-      Store.mode !== 'github' && Store.mode !== 'local' && h('div', {style: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--linha)'},
-        h('b', {}, 'Conectar outro aparelho ou navegador'),
-        h('p', {}, 'Este aparelho ainda não está conectado. Se você tem um link de acesso, abra-o aqui. Se não, preencha o repositório e o token acima e toque em “Salvar e conectar”: depois disso aparece aqui o botão “Copiar link de acesso” para conectar os outros aparelhos.')),
-      Store.mode === 'github' && h('div', {style: 'margin-top:16px;padding-top:14px;border-top:1px solid var(--linha)'},
-        h('b', {}, 'Conectar outro aparelho ou navegador'),
-        h('p', {}, 'Abra este link no outro aparelho e ele já fica conectado, sem digitar nada. Também serve para criar um favorito ou atalho que sempre abre conectado.'),
-        h('p', {style: 'color:var(--verm)'}, 'O link contém seu token: não compartilhe com ninguém.'),
-        h('button', {class: 'btn', onclick: async () => {
-          const l = linkAcesso(ghCfg());
-          try { await navigator.clipboard.writeText(l); toast('Link copiado. Mande só para você mesmo.'); }
-          catch { prompt('Copie o link:', l); }
-        }}, 'Copiar link de acesso'))),
-    h('div', {class: 'cartao'}, h('h3', {}, 'Aviso por e-mail'),
-      h('p', {}, 'A verificação roda uma vez por dia no GitHub (o horário costuma atrasar). Com o e-mail configurado, ela envia um resumo das novidades; sem ele, as novidades aparecem só aqui no app.'),
-      h('p', {}, 'Configuração (uma vez): no repositório, Settings → Secrets and variables → Actions, crie ', h('code', {}, 'SMTP_USER'), ' (seu e-mail Outlook/Hotmail) e ',
-        h('code', {}, 'SMTP_PASSWORD'), ' (senha de app da conta Microsoft).')),
+    h('div', {class: 'cartao'}, h('h3', {}, 'Avisos'),
+      h('p', {}, 'Quando aparecer anúncio novo, queda de preço, preço-alvo, venda ou remoção, você recebe um aviso.'),
+      alterna('avisar_push', 'Notificação no celular ou computador'),
+      alterna('avisar_email', 'E-mail com o resumo'),
+      h('div', {style: 'margin-top:12px'}, pushBox, h('div', {style: 'margin-top:8px'}, pushBt)),
+      h('p', {}, 'A notificação precisa ser ativada em cada aparelho. A verificação roda a cada poucas horas, e você pode pedir uma agora pelo botão ', ic('refresh', 14), ' no topo.')),
     h('div', {class: 'cartao'}, h('h3', {}, 'Instalar no celular'),
       h('p', {}, 'Android (Chrome): menu ⋮ → “Instalar app”. iPhone (Safari): Compartilhar → “Adicionar à Tela de Início”.'),
       conviteInstalar && h('button', {class: 'btn pri', onclick: async () => { conviteInstalar.prompt(); conviteInstalar = null; desenhar(); }}, 'Instalar agora')),
-    h('div', {class: 'cartao'}, h('h3', {}, 'Dados'),
-      h('div', {class: 'folha-bt', style: 'justify-content:flex-start;margin:0'},
-        h('button', {class: 'btn', onclick: () => { marcarVistos(); toast('Tudo marcado como visto.'); }}, 'Marcar tudo como visto'),
+    h('div', {class: 'cartao'}, h('h3', {}, 'Conta'),
+      h('p', {}, 'Conectado como ', h('b', {style: 'color:var(--txt)'}, usuario?.email || '')),
+      h('div', {class: 'folha-bt', style: 'justify-content:flex-start;margin:0;flex-wrap:wrap'},
         h('button', {class: 'btn', onclick: () => carregar()}, 'Recarregar dados'),
-        h('button', {class: 'btn', onclick: () => diagnostico($('#diag'))}, 'Testar conexão')),
-      h('pre', {id: 'diag', style: 'white-space:pre-wrap;word-break:break-word;font-size:13px;margin:12px 0 0;color:var(--mut)'})));
+        h('button', {class: 'btn', onclick: sair}, 'Sair'),
+        h('a', {class: 'btn fantasma', href: 'privacidade.html'}, 'Privacidade'),
+        h('button', {class: 'btn perigo', onclick: excluirConta}, 'Excluir minha conta'))));
+}
+
+// ---------- login ----------
+function telaLogin(etapa = 'email', email = '') {
+  const main = $('#conteudo');
+  $('#abas').hidden = true; $('#btn-rodar').hidden = true; $('#status').textContent = '';
+  const erro = h('div', {class: 'sub', style: 'color:var(--verm);min-height:1.3em;margin-top:8px'});
+  if (etapa === 'email') {
+    const campo = h('input', {type: 'email', placeholder: 'seu@email.com', autocomplete: 'email', required: true, value: email, 'aria-label': 'E-mail'});
+    const aceite = h('input', {type: 'checkbox', style: 'width:auto', required: true});
+    const bt = h('button', {class: 'btn pri', style: 'width:100%;justify-content:center;margin-top:14px'}, 'Receber código por e-mail');
+    main.replaceChildren(h('div', {class: 'login'},
+      h('div', {class: 'logo-grande', 'aria-hidden': 'true'}),
+      h('h2', {}, 'Alertas para o seu garimpo'),
+      h('p', {class: 'sub'}, 'Diga o que procura e seja avisado quando aparecer anúncio novo, queda de preço ou peça vendida no Enjoei.'),
+      h('form', {onsubmit: async ev => {
+        ev.preventDefault(); erro.textContent = ''; bt.disabled = true;
+        const em = campo.value.trim().toLowerCase();
+        const {error} = await sb.auth.signInWithOtp({email: em, options: {shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname}});
+        bt.disabled = false;
+        if (error) { erro.textContent = msgErro(error); return; }
+        telaLogin('codigo', em);
+      }},
+        h('label', {}, 'E-mail', campo),
+        h('label', {style: 'flex-direction:row;align-items:flex-start;gap:8px;margin-top:12px;font-weight:500'}, aceite,
+          h('span', {}, 'Li e aceito a ', h('a', {href: 'privacidade.html', target: '_blank'}, 'política de privacidade'), '.')),
+        bt, erro),
+      h('p', {class: 'sub', style: 'margin-top:18px'}, 'Projeto independente, sem vínculo com o Enjoei.')));
+    campo.focus();
+  } else {
+    const campo = h('input', {inputmode: 'numeric', autocomplete: 'one-time-code', placeholder: '000000', maxlength: '10', 'aria-label': 'Código', style: 'font-size:24px;letter-spacing:.3em;text-align:center'});
+    const bt = h('button', {class: 'btn pri', style: 'width:100%;justify-content:center;margin-top:14px'}, 'Entrar');
+    main.replaceChildren(h('div', {class: 'login'},
+      h('div', {class: 'logo-grande', 'aria-hidden': 'true'}),
+      h('h2', {}, 'Confira seu e-mail'),
+      h('p', {class: 'sub'}, `Enviamos um código para ${email}. Digite abaixo, ou toque no link do e-mail neste mesmo aparelho.`),
+      h('form', {onsubmit: async ev => {
+        ev.preventDefault(); erro.textContent = ''; bt.disabled = true;
+        const {error} = await sb.auth.verifyOtp({email, token: campo.value.replace(/\D/g, ''), type: 'email'});
+        bt.disabled = false;
+        if (error) erro.textContent = msgErro(error);
+      }}, h('label', {}, 'Código', campo), bt, erro),
+      h('button', {class: 'btn fantasma', style: 'margin-top:10px', onclick: () => telaLogin('email', email)}, 'Usar outro e-mail')));
+    campo.focus();
+  }
+}
+async function sair() {
+  await desativarPush().catch(() => {});
+  await sb.auth.signOut();
+}
+async function excluirConta() {
+  if (!confirm('Excluir sua conta apaga todos os seus alertas, anúncios acompanhados e avisos. Não dá para desfazer. Continuar?')) return;
+  if (prompt('Para confirmar, digite EXCLUIR') !== 'EXCLUIR') return;
+  await agir(async () => {
+    await desativarPush().catch(() => {});
+    await q(sb.rpc('excluir_minha_conta'));
+    await sb.auth.signOut();
+  }, 'Conta excluída.');
 }
 
 // ---------- desenho ----------
 const ABAS = [['inicio', 'Início', 'home'], ['buscas', 'Buscas', 'search'], ['acompanhando', 'Acompanhando', 'eye'], ['ajustes', 'Ajustes', 'sliders']];
+const ultimaVerif = () => Object.values(S.results).map(r => r.verificado_em).sort().pop();
+const textoStatus = () => carregado ? (ultimaVerif() ? `Atualizado ${ago(ultimaVerif())}` : 'Aguardando a primeira busca') : '';
 
 function desenhar() {
+  if (!usuario) return;
+  $('#abas').hidden = false; $('#btn-rodar').hidden = false;
   const totalNovos = Object.values(tudoNovo()).reduce((n, l) => n + l.length, 0);
   const nEv = eventosValidos().filter(e => !evVisto(e)).length;
   $('#abas').replaceChildren(...ABAS.map(([id, nome, icone]) => h('button', {class: 'aba' + (tab === id ? ' ativa' : ''), onclick: () => { location.hash = id; }},
     ic(icone, 22), nome, id === 'buscas' && totalNovos > 0 && h('span', {class: 'pt'}, totalNovos > 99 ? '99+' : totalNovos),
     id === 'inicio' && nEv > 0 && h('span', {class: 'pt'}, nEv > 99 ? '99+' : nEv))));
   const main = $('#conteudo');
-  if (!carregado) { main.replaceChildren(h('div', {class: 'esq'}), h('div', {class: 'esq'})); }
+  if (!carregado) main.replaceChildren(h('div', {class: 'esq'}), h('div', {class: 'esq'}));
   else {
     const y = window.scrollY;
     main.replaceChildren({inicio: telaInicio, buscas: telaBuscas, acompanhando: telaAcomp, ajustes: telaAjustes}[tab]());
     window.scrollTo(0, y);
   }
-  const at = S.results.atualizado;
   $('#status').textContent = textoStatus();
 }
 
-function textoStatus() {
-  const at = S.results.atualizado;
-  return (at ? `Atualizado ${ago(at)}` : (carregado ? 'Sem verificação ainda' : '')) +
-    (carregado && Store.mode === 'readonly' ? ' · só leitura' : '') + (Store.ghFalhou ? ' · GitHub inacessível' : '') + (Store.tokenRecusado ? ' · token expirado' : '');
-}
-
 function rota() {
-  if (location.hash.includes('conectar=')) { recuperarCfg().then(() => Store.detect()).then(() => carregar()); return; }
   const t = location.hash.slice(1);
   tab = ABAS.some(a => a[0] === t) ? t : 'inicio';
   desenhar();
@@ -690,20 +611,23 @@ $('#btn-rodar').append(ic('refresh', 20));
 $('#btn-rodar').addEventListener('click', rodarAgora);
 window.addEventListener('hashchange', rota);
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && Date.now() - ultimoLoad > 60_000) carregar(true);
+  if (usuario && !document.hidden && Date.now() - ultimoLoad > 60_000) carregar(true);
 });
-setInterval(() => { if (!document.hidden) $('#status').textContent = textoStatus(); }, 60_000);
+setInterval(() => { if (usuario && !document.hidden) $('#status').textContent = textoStatus(); }, 60_000);
 
-// Só registra no site publicado: em endereços locais o service worker ocuparia a porta de outros apps.
 if ('serviceWorker' in navigator) {
   if (location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
   else navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
 }
 
-(async () => {
+sb.auth.onAuthStateChange((evento, sessao) => {
+  const novo = sessao?.user || null;
+  if (novo && novo.id === usuario?.id) { usuario = novo; return; }   // só renovação do token
+  usuario = novo;
+  carregado = false;
+  if (!usuario) { if (canal) sb.removeChannel(canal); canal = null; telaLogin(); return; }
+  if (location.hash.includes('access_token')) history.replaceState(null, '', location.pathname);
   tab = ABAS.some(a => a[0] === location.hash.slice(1)) ? location.hash.slice(1) : 'inicio';
   desenhar();
-  await recuperarCfg();
-  await Store.detect();
-  await carregar();
-})();
+  setTimeout(async () => { await carregar(); ouvirMudancas(); }, 0);
+});

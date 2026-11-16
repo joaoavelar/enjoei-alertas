@@ -1,5 +1,26 @@
 # Alertas Enjoei
 
+App (PWA) com login para qualquer pessoa: alertas de anúncios novos no Enjoei, queda de preço,
+preço-alvo, vendido/removido, dias no ar (estimado) e avisos por notificação e e-mail.
+
+## Como funciona (versão com login)
+
+- **App**: `docs/` publicado no GitHub Pages. Login por código enviado ao e-mail (Supabase Auth).
+- **Dados**: Supabase (projeto `enjoei-alertas`, São Paulo). Cada pessoa só acessa os próprios dados (RLS).
+- **Robô**: `robo.py`, rodando a cada 15 min no GitHub Actions (`.github/workflows/robo.yml`).
+  Cada alerta é verificado a cada 3 h, ou antes quando criado/editado ou pedido no app.
+  Buscas iguais de pessoas diferentes viram uma consulta só ao Enjoei.
+- **Avisos**: push (VAPID) e e-mail (Brevo).
+- **Limites**: 10 alertas e 50 anúncios acompanhados por conta; até 50 contas
+  (`worker_state.limite_usuarios` no banco).
+
+Secrets do GitHub: `SUPABASE_SECRET_KEY`, `VAPID_PRIVATE_KEY`, `BREVO_API_KEY`, `EMAIL_FROM`.
+
+---
+
+## Histórico: versão de um usuário só (sem login)
+
+
 Monitora o Enjoei e avisa de: **anúncios novos**, **queda de preço / preço-alvo**, **vendido** e **removido**.
 Funciona sem computador ligado (GitHub Actions + GitHub Pages) e instala como app no celular (PWA).
 

@@ -170,3 +170,9 @@ dialog[open]{display:flex;align-items:flex-end;justify-content:center}
 .esq{background:linear-gradient(90deg,var(--chip),var(--linha),var(--chip));background-size:200% 100%;animation:brilho 1.2s infinite;border-radius:14px;height:150px;margin-bottom:12px}
 @keyframes brilho{to{background-position:-200% 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* login */
+.login{max-width:420px;margin:24px auto 0;background:var(--card);border-radius:22px;box-shadow:var(--sombra);padding:26px 22px}
+.login h2{font-size:22px;margin:14px 0 6px}
+.login a{color:var(--rosa)}
+.logo-grande{width:64px;height:64px;border-radius:18px;background:url(icons/icon-192.png) center/cover}
